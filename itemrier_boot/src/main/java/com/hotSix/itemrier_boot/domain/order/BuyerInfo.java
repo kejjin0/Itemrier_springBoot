@@ -17,3 +17,4 @@ public class BuyerInfo {
 		this.phoneNum = phoneNum;
 	}
 }
+
