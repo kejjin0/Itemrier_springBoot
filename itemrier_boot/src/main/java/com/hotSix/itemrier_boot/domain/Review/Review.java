@@ -1,6 +1,5 @@
-package com.hotSix.itemrier_boot.domain.Review;
+package com.hotSix.itemrier_boot.domain.review;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,4 +40,3 @@ public class Review {
 		this.promise = promise;
 	}
 }
-
