@@ -40,9 +40,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.3.10.Final</version>
+			<groupId>org.hibernate.orm</groupId>
+        	<artifactId>hibernate-core</artifactId>
+        	<version>6.2.6.Final</version>
 		</dependency>
 
 		<dependency>
@@ -90,6 +90,29 @@
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+	
+		<dependency>
+	    	<groupId>org.javassist</groupId>
+	    	<artifactId>javassist</artifactId>
+	    	<version>3.23.1-GA</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -27,7 +27,7 @@ public class UserDto {
 
 	private String addDetail;
 	
-	public static UserDto toUserDto(UserEntity userEntity) {
+	public UserDto toUserDto(UserEntity userEntity) {
 		UserDto userDto = new UserDto();
 		userDto.setUserId(userEntity.getUserId());
         userDto.setEmail(userEntity.getEmail());
@@ -40,7 +40,7 @@ public class UserDto {
 		return userDto;
 	}
 
-	public static UserEntity toUserEntity(UserDto userDto) {
+	public UserEntity toUserEntity(UserDto userDto) {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setUserId(userDto.getUserId());
 		userEntity.setEmail(userDto.getEmail());

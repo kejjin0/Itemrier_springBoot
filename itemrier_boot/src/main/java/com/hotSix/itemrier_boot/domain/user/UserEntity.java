@@ -1,6 +1,6 @@
 package com.hotSix.itemrier_boot.domain.user;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter

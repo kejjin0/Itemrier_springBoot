@@ -2,8 +2,8 @@ package com.hotSix.itemrier_boot.domain.usedGoodsTransaction;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import com.hotSix.itemrier_boot.domain.lineItem.LineItem;
 

@@ -6,7 +6,12 @@ spring:
   devtools:
     livereload:
       enabled: 'true'
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true
         
-  
+
 server:
   port: 8080
