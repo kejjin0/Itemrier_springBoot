@@ -1,5 +1,6 @@
 package com.hotSix.itemrier_boot.domain.item;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -26,6 +27,7 @@ public class UsedGoods extends ItemInfo{
     private int sellerId; // 글 등록자 아이디
     @Column(name = "usedId2")
     private int buyerId; // 구매자 아이디
+    private LocalDateTime transactionDate;	// 거래 날짜
     private int catId; // 카테고리 아이디
     
     public UsedGoods() {}
