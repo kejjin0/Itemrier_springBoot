@@ -13,7 +13,7 @@ public class UserService {
 	
 	private final UserRepository userRepository;
 	
-	public void joinUser(UserDto userDto) {
+	public void insertUser(UserDto userDto) {
 		userRepository.save(userDto.toUserEntity(userDto));
 	}
 }
