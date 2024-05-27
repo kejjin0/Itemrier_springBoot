@@ -25,7 +25,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "ORDERS")
 @Getter
 @Setter
 @ToString
@@ -36,7 +36,7 @@ public abstract class Order {
 	private int orderId; // 주문 아이디
 
 	@OneToMany
-	@JoinColumn(name = "orderid")
+	@JoinColumn(name = "orderId")
 	private List<OrderItem> orderItems = new ArrayList<>();
 
 	@Column(nullable = false)

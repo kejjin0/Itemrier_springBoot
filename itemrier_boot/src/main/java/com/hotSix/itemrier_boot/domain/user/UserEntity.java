@@ -1,5 +1,9 @@
 package com.hotSix.itemrier_boot.domain.user;
 
+import java.util.List;
+
+import com.hotSix.itemrier_boot.domain.review.Review;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,4 +37,9 @@ public class UserEntity {
 	private String addStreet;
 
 	private String addDetail;
+	
+	// 리뷰 관련
+	@OneToMany
+	@JoinColumn(name = "userId")
+	private List<Review> reviews;
 }
