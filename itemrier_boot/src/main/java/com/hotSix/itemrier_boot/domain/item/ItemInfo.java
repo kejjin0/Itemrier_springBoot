@@ -1,6 +1,6 @@
 package com.hotSix.itemrier_boot.domain.item;
 
-import com.hotSix.itemrier_boot.domain.Category.Category;
+import com.hotSix.itemrier_boot.domain.category.Category;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 
 import jakarta.persistence.*;
