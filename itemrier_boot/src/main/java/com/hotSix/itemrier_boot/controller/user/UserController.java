@@ -19,11 +19,20 @@ public class UserController {
 	private final UserService userService;
 	private final BCryptPasswordEncoder encoder;
 	
-	@PostMapping("/join") 
-	public String join(@RequestBody UserDto userDto) {
+	@PostMapping("/register") 
+	public String registerUser(@RequestBody UserDto userDto) {
 		userDto.setPassword(encoder.encode(userDto.getPassword()));
 		
-		userService.joinUser(userDto);
+		userService.insertUser(userDto);
+		
+		return "joinFinish";
+	}
+	
+	@PostMapping("/change") 
+	public String changeUser(@RequestBody UserDto userDto) {
+		userDto.setPassword(encoder.encode(userDto.getPassword()));
+		
+		userService.insertUser(userDto);
 		
 		return "joinFinish";
 	}

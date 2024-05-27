@@ -1,48 +1,33 @@
 package com.hotSix.itemrier_boot.domain.item;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Getter @ToString
-public class GroupPurchase extends ItemInfo{
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GROUP_SEQ")
-    private int itemId; // 상품 고유 번호
-    // private int quantity; // 상품 수량
+@Getter 
+@ToString
+@Table(name = "GROUPPURCHASE")
+@DiscriminatorValue("groupPurchase")
+public class GroupPurchase extends ItemInfo {
+    @Column(nullable = false)
     private int minQuantity; // 최소수량
-    private int totalQuantity; // 최대수량
-    // private Date startTime; // 시작시간
-    private Date endTime; // 종료시간
-    private double discRate; // 할인율
-    @Column(name = "userId")
-    private int sellerId; // 글 등록자 아이디
-    @Column(name = "userId2")
-    private int buyerId; // 구매자 아이디
-    private int catId; // 카테고리 아이디
     
-    public GroupPurchase() {}
-
-    @Builder
-    public GroupPurchase(int itemId, int minQuantity, int totalQuantity, Date endTime, double discRate, int sellerId,
-            int buyerId, int catId) {
-        super();
-        this.itemId = itemId;
-        this.minQuantity = minQuantity;
-        this.totalQuantity = totalQuantity;
-        this.endTime = endTime;
-        this.discRate = discRate;
-        this.sellerId = sellerId;
-        this.buyerId = buyerId;
-        this.catId = catId;
-    }
+    @Column(nullable = false)
+    private int totalQuantity; // 최대수량(총수량)
+    
+    @Column(nullable = false)
+    private LocalDateTime startTime; // 시작시간(등록 날짜)
+    
+    @Column(nullable = false)
+    private LocalDateTime endTime; // 종료시간
+    
+    private double discRate; // 할인율
+    
+    private int buyerId; // 구매자 아이디
+    
+    private String fileName; // 이미지 파일 이름
+    
+    private String filePath; // 이미지 파일 경로
 }

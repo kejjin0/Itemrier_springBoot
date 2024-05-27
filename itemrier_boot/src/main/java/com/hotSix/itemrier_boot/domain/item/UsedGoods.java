@@ -1,47 +1,30 @@
 package com.hotSix.itemrier_boot.domain.item;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Getter @ToString
-public class UsedGoods extends ItemInfo{
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int itemId; // 상품 고유 번호
+@Getter 
+@ToString
+@Table(name = "USEDGOODS")
+@DiscriminatorValue("usedGoods")
+public class UsedGoods extends ItemInfo {
+    @Column(nullable = false)
     private String condition; // 상품 상태
-    private String contactType; // 연락수단
-    private Date registerDate; // 등록날짜
-    @Column(name = "usedId")
-    private int sellerId; // 글 등록자 아이디
-    @Column(name = "usedId2")
-    private int buyerId; // 구매자 아이디
-    private LocalDateTime transactionDate;	// 거래 날짜
-    private int catId; // 카테고리 아이디
     
-    public UsedGoods() {}
-
-    @Builder
-    public UsedGoods(int itemId, String condition, String contactType, Date registerDate, int sellerId, int buyerId,
-            int catId) {
-        super();
-        this.itemId = itemId;
-        this.condition = condition;
-        this.contactType = contactType;
-        this.registerDate = registerDate;
-        this.sellerId = sellerId;
-        this.buyerId = buyerId;
-        this.catId = catId;
-    }
+    @Column(nullable = false)
+    private String contactType; // 연락수단
+   
+    @Column(nullable = false)
+    private LocalDateTime registerDate; // 등록날짜
+    
+    private LocalDateTime transactionDate;	// 거래 날짜
+    
+    private int buyerId; // 구매자 아이디
+    
+    private String fileName; // 이미지 파일 이름
+    
+    private String filePath; // 이미지 파일 경로
 }
