@@ -26,8 +26,6 @@ public class Auction extends ItemInfo {
     
     @Column(nullable = false)
     private LocalDateTime endTime; // 종료시간
-    
-    private int winner; // 낙찰자 유저 아이디
-    
+        
     private int buyerId; // 구매자 아이디
 }
