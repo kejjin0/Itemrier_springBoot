@@ -27,7 +27,7 @@ public class Bid {
     private Auction item; // 입찰 상품
     
     @ManyToOne
-    @JoinColumn(name="userId", nullable = false)
+    @JoinColumn(name="user_Id", nullable = false)
     private UserEntity user; // 입찰한 사용자
     
     private int winner; // 낙찰자

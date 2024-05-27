@@ -2,11 +2,14 @@ package com.hotSix.itemrier_boot.domain.item;
 
 import java.time.LocalDateTime;
 
+import com.hotSix.itemrier_boot.dto.myPage.UsedGoodsDto;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Getter 
+@Setter
 @ToString
 @Table(name = "USEDGOODS")
 @DiscriminatorValue("usedGoods")
@@ -22,9 +25,19 @@ public class UsedGoods extends ItemInfo {
     
     private LocalDateTime transactionDate;	// 거래 날짜
     
-    private int buyerId; // 구매자 아이디
-    
     private String fileName; // 이미지 파일 이름
     
     private String filePath; // 이미지 파일 경로
+  
+  	public UsedGoodsDto toUsedGoodsDto(UsedGoods uesdGoods) {
+		  UsedGoodsDto usedGoodsDto = new UsedGoodsDto();
+		  usedGoodsDto.setItemId(uesdGoods.getItemId());
+      usedGoodsDto.setItemName(uesdGoods.getItemName());
+		  usedGoodsDto.setPrice(uesdGoods.getPrice());
+      usedGoodsDto.setStatus(uesdGoods.getStatus());
+      usedGoodsDto.setRegisterDate(uesdGoods.getRegisterDate());
+      usedGoodsDto.setSeller(uesdGoods.getSeller());
+      usedGoodsDto.setBuyer(uesdGoods.getBuyer());
+      return usedGoodsDto;
+	}
 }

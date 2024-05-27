@@ -8,6 +8,7 @@ import lombok.*;
 
 @Entity
 @Getter
+@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "ITEMINFO")
@@ -29,14 +30,14 @@ public abstract class ItemInfo {
 	private String status; // 거래 현황(판매 중, 판매 완료)
 	
 	@ManyToOne
-        @JoinColumn(name="userId", nullable = false)
+   @JoinColumn(name="user_Id", nullable = false)
 	private UserEntity seller; // 판매자
 	
 	@ManyToOne
-        @JoinColumn(name="userId2", nullable = false)
-	private UserEntity user; 
-	
+   @JoinColumn(name="user_Id", nullable = false)
+	private UserEntity buyer; 
+
 	@ManyToOne
-        @JoinColumn(name = "catId", nullable = false)
+  @JoinColumn(name = "catId", nullable = false)
 	private Category category; // 카테고리
 }
