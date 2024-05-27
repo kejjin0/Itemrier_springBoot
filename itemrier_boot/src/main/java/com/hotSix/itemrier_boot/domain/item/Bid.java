@@ -1,38 +1,34 @@
 package com.hotSix.itemrier_boot.domain.item;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.hotSix.itemrier_boot.domain.user.UserEntity;
 
-import lombok.Builder;
-import lombok.Setter;
-import lombok.Getter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Setter @Getter @ToString
+@Getter 
+@ToString
+@Table(name = "BID")
 public class Bid {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int bidId; // 입찰 아이디
-    private int amount; // 입찰 금액
-    private Timestamp bidTime; // 입찰 시간
-    private int itemId; // 입찰 상품
-    private int userId; // 입찰한 유저아이디
     
-    public Bid() {}
-
-    @Builder
-    public Bid(int bidId, int amount, Timestamp bidTime, int itemId, int userId) {
-        super();
-        this.bidId = bidId;
-        this.amount = amount;
-        this.bidTime = bidTime;
-        this.itemId = itemId;
-        this.userId = userId;
-    }
+    @Column(nullable = false)
+    private int amount; // 입찰 금액
+    
+    @Column(nullable = false)
+    private LocalDateTime bidTime; // 입찰 시간
+    
+    @ManyToOne
+    @JoinColumn(name = "itemId", nullable = false)
+    private Auction item; // 입찰 상품
+    
+    @ManyToOne
+    @JoinColumn(name="userId", nullable = false)
+    private UserEntity user; // 입찰한 사용자
+    
+    private int winner; // 낙찰자
 }
