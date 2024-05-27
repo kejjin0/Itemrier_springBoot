@@ -1,4 +1,4 @@
-package com.hotSix.itemrier_boot.domain.Category;
+package com.hotSix.itemrier_boot.domain.category;
 
 import jakarta.persistence.*;
 import lombok.*;
