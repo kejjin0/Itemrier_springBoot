@@ -10,13 +10,13 @@ import lombok.*;
 @ToString
 @Table(name = "AUCTION")
 public class Auction extends ItemInfo {
-	@Column(nullable = false)
+    @Column(nullable = false)
     private String condition; // 상품 상태
     
-	@Column(nullable = false)
+    @Column(nullable = false)
     private String contactType; // 연락 수단
     
-	@Column(nullable = false)
+    @Column(nullable = false)
     private int startPrice; // 시작가
     
     private int currentBid; // 현재 최고가
@@ -28,4 +28,8 @@ public class Auction extends ItemInfo {
     private LocalDateTime endTime; // 종료시간
         
     private int buyerId; // 구매자 아이디
+    
+    private String fileName; // 이미지 파일 이름
+    
+    private String filePath; // 이미지 파일 경로
 }
