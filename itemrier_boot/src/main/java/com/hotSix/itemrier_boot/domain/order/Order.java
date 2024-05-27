@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Embedded;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -31,20 +33,19 @@ import lombok.ToString;
 @AllArgsConstructor
 public abstract class Order {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orderId; // 주문 아이디
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "orderid")
 	private List<OrderItem> orderItems = new ArrayList<>();
 
 	@Column(nullable = false)
 	private int buyerId; // 구매자 아이디
 
-	@Column(nullable = false)
+	@Embedded
 	private BuyerInfo buyerInfo; // 구매자 정보(이름, 전화번호)
 
-	@Column(nullable = false)
+	@Embedded
 	private DeliveryInfo deliveryInfo; // 배송 정보
 
 	@Column(nullable = false)
@@ -62,10 +63,12 @@ public abstract class Order {
 	@Column(nullable = false)
 	private String pay_method; // 결제 수단
 
+	@Column(nullable = false)
 	private LocalDateTime orderDate; // 결제 시간
 
 	private int invoiceNumber; // 송장번호
 
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status; // 결제 상태 (주문 완료 or 취소)
 }

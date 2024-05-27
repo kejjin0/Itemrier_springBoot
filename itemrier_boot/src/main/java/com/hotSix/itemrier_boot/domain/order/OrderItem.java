@@ -4,11 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import jakarta.persistence.IdClass;
 import com.hotSix.itemrier_boot.domain.item.ItemInfo;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +22,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name="OrderItem")
+@IdClass(OrderItemPK.class)	
 @Getter 
 @Setter
 @ToString
@@ -26,11 +30,11 @@ import lombok.ToString;
 @AllArgsConstructor
 public class OrderItem {
 	@Id
-	private int orderId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int lineNum;
 	
-	@Id 
-	@Column(name="lineNum")
-	private int lineNumber;
+	@Id
+	private int orderId;
 	
 	@Column(nullable = false)
 	private String itemId;
