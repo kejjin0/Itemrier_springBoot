@@ -24,6 +24,5 @@ public class GroupPurchase extends ItemInfo {
     private LocalDateTime endTime; // 종료시간
     
     private double discRate; // 할인율
-    
-    private int buyerId; // 구매자 아이디
+   
 }
