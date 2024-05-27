@@ -14,14 +14,5 @@ public class DeliveryInfo {
 	private String deliveryLocation;
 	private String deliveryRequest;
 	
-	public DeliveryInfo(String zipCode, String addStreet, String addDetail, String deliveryLocation,
-			String deliveryRequest) {
-		super();
-		this.zipCode = zipCode;
-		this.addStreet = addStreet;
-		this.addDetail = addDetail;
-		this.deliveryLocation = deliveryLocation;
-		this.deliveryRequest = deliveryRequest;
-	}
 
 }
