@@ -1,6 +1,6 @@
 package com.hotSix.itemrier_boot.domain.item;
 
-import com.hotSix.itemrier_boot.domain.category.Category;
+import com.hotSix.itemrier_boot.domain.Category.Category;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 
 import jakarta.persistence.*;
@@ -25,18 +25,18 @@ public abstract class ItemInfo {
 	@Column(nullable = false)
 	private int price; // 가격
 	
-	@Column(nullable = false)
-	private String status; // 거래 현황
+	@Enumerated(EnumType.STRING)
+	private String status; // 거래 현황(판매 중, 판매 완료)
 	
 	@ManyToOne
-    @JoinColumn(name="userId", nullable = false)
+        @JoinColumn(name="userId", nullable = false)
 	private UserEntity seller; // 판매자
 	
 	@ManyToOne
-    @JoinColumn(name="userId2", nullable = false)
+        @JoinColumn(name="userId2", nullable = false)
 	private UserEntity user; 
 	
 	@ManyToOne
-    @JoinColumn(name = "catId", nullable = false)
+        @JoinColumn(name = "catId", nullable = false)
 	private Category category; // 카테고리
 }
