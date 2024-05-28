@@ -27,7 +27,7 @@ public abstract class ItemInfo {
 	private int price; // 가격
 	
 	@Enumerated(EnumType.STRING)
-	private String status; // 거래 현황(판매 중, 판매 완료)
+	private ItemStatus status; // 거래 현황(판매 중, 판매 완료)
 	
 	@ManyToOne
     @JoinColumn(name="userId", nullable = false)
