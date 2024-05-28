@@ -10,10 +10,10 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "@user_info")
+@Table(name = "UserInfo")
 public class UserEntity {
 	@Id
-    @Column(name = "user_id")
+    @Column(name = "userId")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 	

@@ -37,8 +37,8 @@ public class OrderItem {
 	@Id
 	private int orderId;
 	
-	@Column(nullable = false)
-	private String itemId;
+//	@Column(nullable = false)
+//	private String itemId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="itemId")

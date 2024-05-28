@@ -10,5 +10,7 @@ import com.hotSix.itemrier_boot.domain.user.UserEntity;
 
 public interface ItemRepository extends JpaRepository<ItemInfo, Integer> {
 
-	List<UsedGoods> findBySellerIdItemInfo(UserEntity seller);
+	List<ItemInfo> findBySeller(UserEntity seller);
+	
+	List<UsedGoods> findByItemIdIn(List<ItemInfo> itemInfo);
 }

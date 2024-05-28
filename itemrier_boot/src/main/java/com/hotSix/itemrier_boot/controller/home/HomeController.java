@@ -1,5 +1,5 @@
 //로그인 전, 후 홈페이지 
-package com.hotSix.itemrier_boot.controller;
+package com.hotSix.itemrier_boot.controller.home;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

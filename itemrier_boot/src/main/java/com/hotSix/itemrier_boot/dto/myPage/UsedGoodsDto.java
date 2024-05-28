@@ -2,6 +2,7 @@ package com.hotSix.itemrier_boot.dto.myPage;
 
 import java.time.LocalDateTime;
 
+import com.hotSix.itemrier_boot.domain.item.ItemStatus;
 import com.hotSix.itemrier_boot.domain.item.UsedGoods;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 
@@ -14,7 +15,7 @@ public class UsedGoodsDto {
 	private int itemId;
 	private String itemName;
 	private int price; // 가격
-	private String status;
+	private ItemStatus status;
 	private LocalDateTime registerDate;
 	private UserEntity seller;
 	private UserEntity buyer;
