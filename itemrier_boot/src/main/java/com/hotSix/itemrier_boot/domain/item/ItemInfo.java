@@ -30,11 +30,19 @@ public abstract class ItemInfo {
 	private String status; // 거래 현황(판매 중, 판매 완료)
 	
 	@ManyToOne
+<<<<<<< HEAD
     @JoinColumn(name="user_Id", nullable = false)
 	private UserEntity seller; // 판매자
 	
 	@ManyToOne
     @JoinColumn(name="user_Id")
+=======
+   @JoinColumn(name="userId", nullable = false)
+	private UserEntity seller; // 판매자
+	
+	@ManyToOne
+   @JoinColumn(name="userId2", nullable = false)
+>>>>>>> eunsu
 	private UserEntity buyer; 
 
 	@ManyToOne
