@@ -25,9 +25,7 @@ public class UsedGoods extends ItemInfo {
     
     private LocalDateTime transactionDate;	// 거래 날짜
     
-    private String fileName; // 이미지 파일 이름
-    
-    private String filePath; // 이미지 파일 경로
+    private String image; // 이미지 파일 이름
   
   	public UsedGoodsDto toUsedGoodsDto(UsedGoods uesdGoods) {
 		  UsedGoodsDto usedGoodsDto = new UsedGoodsDto();

@@ -29,7 +29,5 @@ public class Auction extends ItemInfo {
         
     private int buyerId; // 구매자 아이디
     
-    private String fileName; // 이미지 파일 이름
-    
-    private String filePath; // 이미지 파일 경로
+    private String image; // 이미지 파일 이름
 }
