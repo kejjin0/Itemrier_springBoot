@@ -34,7 +34,7 @@ public abstract class ItemInfo {
 	private UserEntity seller; // 판매자
 	
 	@ManyToOne
-    @JoinColumn(name="userId2", nullable = false)
+    @JoinColumn(name="userId2")
 	private UserEntity buyer; 
 
 	@ManyToOne
