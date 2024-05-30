@@ -8,6 +8,8 @@ spring:
       enabled: 'true'
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: create
   h2:
     console:
       enabled: true
