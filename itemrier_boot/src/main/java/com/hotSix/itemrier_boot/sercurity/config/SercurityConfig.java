@@ -21,7 +21,7 @@ public class SercurityConfig {
 				.httpBasic(AbstractHttpConfigurer::disable)
 				.formLogin(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests((authorize) -> authorize
-						.requestMatchers("/signup", "/", "/login").permitAll()
+						.requestMatchers("/**").permitAll()
 						.anyRequest().authenticated())
 				// 폼 로그인은 현재 사용하지 않음         
 //				.formLogin(formLogin -> formLogin

@@ -32,6 +32,8 @@ public class UserDto {
 		userDto.setUserId(userEntity.getUserId());
         userDto.setEmail(userEntity.getEmail());
         userDto.setPassword(userEntity.getPassword());
+        userDto.setName(userEntity.getName());
+        userDto.setPhoneNum(userEntity.getPhoneNum());
         userDto.setNickname(userEntity.getNickname());
         userDto.setZipcode(userEntity.getZipcode());
         userDto.setAddStreet(userEntity.getAddStreet());
@@ -45,6 +47,8 @@ public class UserDto {
 		userEntity.setUserId(userDto.getUserId());
 		userEntity.setEmail(userDto.getEmail());
 		userEntity.setPassword(userDto.getPassword());
+		userEntity.setName(userDto.getName());
+		userEntity.setPhoneNum(userDto.getPhoneNum());
 		userEntity.setNickname(userDto.getNickname());
 		userEntity.setZipcode(userDto.getZipcode());
 		userEntity.setAddStreet(userDto.getAddStreet());
