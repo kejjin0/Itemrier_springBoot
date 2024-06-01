@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor(force = true)
 @Data
 public class UserDto {
-    private Long userId;
+    private int userId;
 
 	private String email;
 

@@ -27,17 +27,18 @@ public class UsedGoods extends ItemInfo {
     
     private String image; // 이미지 파일 이름
     
-    private int buyerId;
+    private Integer buyerId;
   
   	public UsedGoodsDto toUsedGoodsDto(UsedGoods uesdGoods) {
-		  UsedGoodsDto usedGoodsDto = new UsedGoodsDto();
-		  usedGoodsDto.setItemId(uesdGoods.getItemId());
-      usedGoodsDto.setItemName(uesdGoods.getItemName());
-		  usedGoodsDto.setPrice(uesdGoods.getPrice());
-      usedGoodsDto.setStatus(uesdGoods.getStatus());
-      usedGoodsDto.setRegisterDate(uesdGoods.getRegisterDate());
-      usedGoodsDto.setSeller(uesdGoods.getSeller());
-      usedGoodsDto.setBuyer(uesdGoods.getBuyer());
-      return usedGoodsDto;
+  		UsedGoodsDto usedGoodsDto = new UsedGoodsDto();
+		usedGoodsDto.setItemId(uesdGoods.getItemId());
+		usedGoodsDto.setItemName(uesdGoods.getItemName());
+		usedGoodsDto.setPrice(uesdGoods.getPrice());
+		usedGoodsDto.setStatus(uesdGoods.getStatus());
+		usedGoodsDto.setRegisterDate(uesdGoods.getRegisterDate());
+		usedGoodsDto.setSeller(uesdGoods.getSeller());
+		usedGoodsDto.setBuyer(uesdGoods.getBuyer());
+		
+		return usedGoodsDto;
 	}
 }
