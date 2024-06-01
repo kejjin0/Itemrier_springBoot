@@ -1,23 +1,18 @@
 package com.hotSix.itemrier_boot.domain.order;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemPK {
+public class OrderItemPK implements Serializable{
 	private int lineNum;
-	private int orderId;
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OrderItemPK other = (OrderItemPK) obj;
-		if (lineNum != other.lineNum) return false;
-		if (orderId != other.orderId) return false;
-		return true;
-	}
+	private String orderId;
 }
