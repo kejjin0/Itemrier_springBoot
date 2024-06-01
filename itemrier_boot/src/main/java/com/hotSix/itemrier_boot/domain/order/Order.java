@@ -31,13 +31,13 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Order {
+public class Order {
 	@Id
-	private int orderId; // 주문 아이디
+	private String orderId; // 주문 아이디
 
 	@OneToMany
 	@JoinColumn(name = "orderId")
-	private List<OrderItem> orderItems = new ArrayList<>();
+	private List<OrderItem> orderItems;
 
 	@Column(nullable = false)
 	private int buyerId; // 구매자 아이디
