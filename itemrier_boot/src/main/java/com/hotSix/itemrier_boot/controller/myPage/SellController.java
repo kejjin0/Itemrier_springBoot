@@ -7,13 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hotSix.itemrier_boot.dto.myPage.UsedGoodsDto;
 import com.hotSix.itemrier_boot.service.myPage.SellService;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/mypage")
 public class SellController {
@@ -22,12 +23,12 @@ public class SellController {
 
 	//중고거래 판매,예약 상품내역
 	@GetMapping("/usedGoodsTransaction/inProgress")
-	public String getUsedGoodsInProgress(Model model) {
+	public List<UsedGoodsDto> getUsedGoodsInProgress(Model model) {
 		
-		List<UsedGoodsDto> userGoodsList = sellService.getUsedGoodsInProgress((long) 1);
+		List<UsedGoodsDto> userGoodsList = sellService.getUsedGoodsInProgress(202);
 		model.addAttribute(userGoodsList);
 		
-		return "usedGoodsInProgress.jsp";
+		return userGoodsList;
 	}
 	
 }

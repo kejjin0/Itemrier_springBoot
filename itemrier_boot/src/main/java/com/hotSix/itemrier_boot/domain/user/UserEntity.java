@@ -15,7 +15,7 @@ public class UserEntity {
 	@Id
     @Column(name = "userId")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+    private int userId;
 	
 	@Column(nullable = false)
 	private String email;
