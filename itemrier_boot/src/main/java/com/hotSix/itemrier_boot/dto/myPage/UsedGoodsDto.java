@@ -19,7 +19,7 @@ public class UsedGoodsDto {
 	private LocalDateTime registerDate;
 	private UserEntity seller;
 	private UserEntity buyer;
-	
+	private Integer buyerId;
 	
 	public UsedGoods toUsedGoods(UsedGoodsDto usedGoodsDto) {
 		UsedGoods uesdGoods = new UsedGoods();
@@ -30,7 +30,8 @@ public class UsedGoodsDto {
 		uesdGoods.setRegisterDate(usedGoodsDto.getRegisterDate());
 		uesdGoods.setSeller(usedGoodsDto.getSeller());
 		uesdGoods.setBuyer(usedGoodsDto.getBuyer());
-        
+		uesdGoods.setBuyerId(usedGoodsDto.getBuyerId());
+		
 		return uesdGoods;		
 	}
 }

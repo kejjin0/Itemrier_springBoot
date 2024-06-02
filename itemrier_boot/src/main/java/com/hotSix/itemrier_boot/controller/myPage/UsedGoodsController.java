@@ -32,11 +32,21 @@ public class UsedGoodsController {
 		return userGoodsList;
 	}
 	
-	//중고거래 판매,예약 상품내역
+	//중고거래 판매완료된 상품내역
 	@GetMapping("/usedGoodsTransaction/ended")
 	public List<UsedGoodsDto> getUsedGoodsEnded(Model model) {
 		Boolean status = false;
 		List<UsedGoodsDto> userGoodsList = usedGoodsService.getUsedGoodsStatusSearch(202, status);
+		System.out.println("usedGoods" + userGoodsList);
+		model.addAttribute(userGoodsList);
+		
+		return userGoodsList;
+	}
+	
+	
+	@GetMapping("/usedGoodsTransactionHistory")
+	public List<UsedGoodsDto> getUsedGoodsBuyHistory(Model model) {
+		List<UsedGoodsDto> userGoodsList = usedGoodsService.getUsedGoodsBuyHistory(952);
 		System.out.println("usedGoods" + userGoodsList);
 		model.addAttribute(userGoodsList);
 		

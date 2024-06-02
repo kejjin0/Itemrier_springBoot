@@ -38,7 +38,7 @@ public class UsedGoods extends ItemInfo {
 		usedGoodsDto.setRegisterDate(uesdGoods.getRegisterDate());
 		usedGoodsDto.setSeller(uesdGoods.getSeller());
 		usedGoodsDto.setBuyer(uesdGoods.getBuyer());
-		
+		usedGoodsDto.setBuyerId(uesdGoods.getBuyerId());
 		return usedGoodsDto;
 	}
 }

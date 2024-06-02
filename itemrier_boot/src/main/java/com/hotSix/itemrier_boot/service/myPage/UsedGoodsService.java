@@ -21,7 +21,7 @@ public class UsedGoodsService {
 	private final ItemRepository itemRepository;
 	private final UserRepository userRepository;
 	
-	public List<UsedGoodsDto> getUsedGoodsStatusSearch(int sellerId, Boolean status) {  // 중고 거래 판매 중 or 예약 중인 내역
+	public List<UsedGoodsDto> getUsedGoodsStatusSearch(int sellerId, Boolean status) {  // 중고 거래 판매 중 or 예약 중/판매완료된 내역 조회
 		List<UsedGoods> usedGoods;
 
 		UserEntity seller = userRepository.findByUserId(sellerId);
@@ -34,6 +34,21 @@ public class UsedGoodsService {
 			usedGoods = itemRepository.findBySellerAndStatus(seller, ItemStatus.Complete);
 			System.out.println("판매완료" + usedGoods);
 		}
+		
+        List<UsedGoodsDto> UsedGoodsDtoList = new ArrayList<>();
+        for (UsedGoods usedGood : usedGoods) {
+        	UsedGoodsDto postSearchDto = usedGood.toUsedGoodsDto(usedGood);
+        	UsedGoodsDtoList.add(postSearchDto);
+        }
+        
+        return UsedGoodsDtoList;
+	}
+	
+	public List<UsedGoodsDto> getUsedGoodsBuyHistory(int buyerId) {
+		List<UsedGoods> usedGoods;
+
+		usedGoods = itemRepository.findByBuyerId(buyerId);
+		System.out.println("구매내역조회" + usedGoods);
 		
         List<UsedGoodsDto> UsedGoodsDtoList = new ArrayList<>();
         for (UsedGoods usedGood : usedGoods) {
