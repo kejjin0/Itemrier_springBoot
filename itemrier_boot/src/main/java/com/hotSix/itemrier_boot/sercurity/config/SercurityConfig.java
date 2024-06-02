@@ -3,17 +3,19 @@ package com.hotSix.itemrier_boot.sercurity.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import com.hotSix.itemrier_boot.sercurity.handler.CustomAuthenticationSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 
 @Configuration
-@EnableWebMvc
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class SercurityConfig {
+
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -21,18 +23,27 @@ public class SercurityConfig {
 				.httpBasic(AbstractHttpConfigurer::disable)
 				.formLogin(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests((authorize) -> authorize
-						.requestMatchers("/**").permitAll()
-						.anyRequest().authenticated())
+						.requestMatchers("/myPage/**").authenticated()
+						.anyRequest().permitAll())
+				
 				// 폼 로그인은 현재 사용하지 않음         
-//				.formLogin(formLogin -> formLogin
-//						.loginPage("/login")
-//						.defaultSuccessUrl("/home"))
+				.formLogin(formLogin -> formLogin
+						.loginProcessingUrl("/user/login")
+						.usernameParameter("email")
+						.successHandler(new CustomAuthenticationSuccessHandler())
+						.permitAll())
+				
 				.logout((logout) -> logout
 						.logoutSuccessUrl("/login")
-						.invalidateHttpSession(true))
-				.sessionManagement(session -> session
-					.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+						.invalidateHttpSession(true)
+				
 		);
+		
 		return http.build();
 	}
+	
+
+
+		
+		
 }
