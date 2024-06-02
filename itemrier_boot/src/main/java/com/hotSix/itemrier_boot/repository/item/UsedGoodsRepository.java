@@ -9,7 +9,8 @@ import com.hotSix.itemrier_boot.domain.item.ItemStatus;
 import com.hotSix.itemrier_boot.domain.item.UsedGoods;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 
-public interface ItemRepository extends JpaRepository<ItemInfo, Integer> {
+public interface UsedGoodsRepository extends JpaRepository<ItemInfo, Integer> {
 
 	List<UsedGoods> findBySellerAndStatus(UserEntity seller, ItemStatus status);
+	List<UsedGoods> findByBuyerId(int buyerId);
 }
