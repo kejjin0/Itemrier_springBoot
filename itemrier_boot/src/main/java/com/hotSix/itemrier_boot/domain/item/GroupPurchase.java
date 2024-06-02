@@ -2,7 +2,7 @@ package com.hotSix.itemrier_boot.domain.item;
 
 import java.time.LocalDateTime;
 
-import com.hotSix.itemrier_boot.dto.myPage.GroupPurchaseDto;
+import com.hotSix.itemrier_boot.dto.item.GroupPurchaseDto;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.hotSix.itemrier_boot.dto.myPage;
+package com.hotSix.itemrier_boot.dto.item;
 
 
 import java.time.LocalDateTime;

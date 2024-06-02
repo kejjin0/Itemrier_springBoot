@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hotSix.itemrier_boot.domain.item.UsedGoods;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
-import com.hotSix.itemrier_boot.dto.myPage.UsedGoodsDto;
+import com.hotSix.itemrier_boot.dto.item.UsedGoodsDto;
 import com.hotSix.itemrier_boot.repository.item.UsedGoodsRepository;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
 import com.hotSix.itemrier_boot.domain.item.ItemStatus;

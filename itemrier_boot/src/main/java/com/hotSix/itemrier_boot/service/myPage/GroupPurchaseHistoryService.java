@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hotSix.itemrier_boot.domain.item.GroupPurchase;
 import com.hotSix.itemrier_boot.domain.item.ItemStatus;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
-import com.hotSix.itemrier_boot.dto.myPage.GroupPurchaseDto;
+import com.hotSix.itemrier_boot.dto.item.GroupPurchaseDto;
 import com.hotSix.itemrier_boot.repository.item.GroupPurchaseRepository;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
 
