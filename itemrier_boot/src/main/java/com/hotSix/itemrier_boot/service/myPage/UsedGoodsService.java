@@ -17,21 +17,31 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SellService {
+public class UsedGoodsService {
 	private final ItemRepository itemRepository;
 	private final UserRepository userRepository;
 	
-	public List<UsedGoodsDto> getUsedGoodsInProgress(int sellerId) {  //판매 중 or 예약 중인 내역
+	public List<UsedGoodsDto> getUsedGoodsStatusSearch(int sellerId, Boolean status) {  // 중고 거래 판매 중 or 예약 중인 내역
 		List<UsedGoods> usedGoods;
 
 		UserEntity seller = userRepository.findByUserId(sellerId);
-		usedGoods = itemRepository.findBySellerAndStatus(seller, ItemStatus.Available);
-
+		
+		if (status == true) {
+			usedGoods = itemRepository.findBySellerAndStatus(seller, ItemStatus.Available);
+			System.out.println("판매중" + usedGoods);
+		}
+		else {
+			usedGoods = itemRepository.findBySellerAndStatus(seller, ItemStatus.Complete);
+			System.out.println("판매완료" + usedGoods);
+		}
+		
         List<UsedGoodsDto> UsedGoodsDtoList = new ArrayList<>();
         for (UsedGoods usedGood : usedGoods) {
         	UsedGoodsDto postSearchDto = usedGood.toUsedGoodsDto(usedGood);
         	UsedGoodsDtoList.add(postSearchDto);
         }
+        
         return UsedGoodsDtoList;
 	}
+
 }
