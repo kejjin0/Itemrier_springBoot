@@ -5,11 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.hotSix.itemrier_boot.domain.item.ItemInfo;
 import com.hotSix.itemrier_boot.domain.item.UsedGoods;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 import com.hotSix.itemrier_boot.dto.myPage.UsedGoodsDto;
-import com.hotSix.itemrier_boot.repository.item.ItemRepository;
+import com.hotSix.itemrier_boot.repository.item.UsedGoodsRepository;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
 import com.hotSix.itemrier_boot.domain.item.ItemStatus;
 
@@ -18,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UsedGoodsService {
-	private final ItemRepository itemRepository;
+	private final UsedGoodsRepository usedGoodsRepository;
 	private final UserRepository userRepository;
 	
 	public List<UsedGoodsDto> getUsedGoodsStatusSearch(int sellerId, Boolean status) {  // 중고 거래 판매 중 or 예약 중/판매완료된 내역 조회
@@ -27,36 +26,36 @@ public class UsedGoodsService {
 		UserEntity seller = userRepository.findByUserId(sellerId);
 		
 		if (status == true) {
-			usedGoods = itemRepository.findBySellerAndStatus(seller, ItemStatus.Available);
+			usedGoods = usedGoodsRepository.findBySellerAndStatus(seller, ItemStatus.Available);
 			System.out.println("판매중" + usedGoods);
 		}
 		else {
-			usedGoods = itemRepository.findBySellerAndStatus(seller, ItemStatus.Complete);
+			usedGoods = usedGoodsRepository.findBySellerAndStatus(seller, ItemStatus.Complete);
 			System.out.println("판매완료" + usedGoods);
 		}
 		
-        List<UsedGoodsDto> UsedGoodsDtoList = new ArrayList<>();
+        List<UsedGoodsDto> usedGoodsDtoList = new ArrayList<>();
         for (UsedGoods usedGood : usedGoods) {
-        	UsedGoodsDto postSearchDto = usedGood.toUsedGoodsDto(usedGood);
-        	UsedGoodsDtoList.add(postSearchDto);
+        	UsedGoodsDto usedGoodsDto = usedGood.toUsedGoodsDto(usedGood);
+        	usedGoodsDtoList.add(usedGoodsDto);
         }
         
-        return UsedGoodsDtoList;
+        return usedGoodsDtoList;
 	}
 	
 	public List<UsedGoodsDto> getUsedGoodsBuyHistory(int buyerId) {
 		List<UsedGoods> usedGoods;
 
-		usedGoods = itemRepository.findByBuyerId(buyerId);
+		usedGoods = usedGoodsRepository.findByBuyerId(buyerId);
 		System.out.println("구매내역조회" + usedGoods);
 		
-        List<UsedGoodsDto> UsedGoodsDtoList = new ArrayList<>();
+        List<UsedGoodsDto> usedGoodsDtoList = new ArrayList<>();
         for (UsedGoods usedGood : usedGoods) {
-        	UsedGoodsDto postSearchDto = usedGood.toUsedGoodsDto(usedGood);
-        	UsedGoodsDtoList.add(postSearchDto);
+        	UsedGoodsDto usedGoodsDto = usedGood.toUsedGoodsDto(usedGood);
+        	usedGoodsDtoList.add(usedGoodsDto);
         }
         
-        return UsedGoodsDtoList;
+        return usedGoodsDtoList;
 	}
 
 }

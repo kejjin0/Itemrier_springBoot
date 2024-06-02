@@ -3,7 +3,6 @@ package com.hotSix.itemrier_boot.controller.myPage;
 import java.util.List;
 
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/mypage")
+@RequestMapping(value = "/myPage")
 public class UsedGoodsController {
 	
 	private final UsedGoodsService usedGoodsService;
@@ -43,7 +42,7 @@ public class UsedGoodsController {
 		return userGoodsList;
 	}
 	
-	
+	//구매내역 조회
 	@GetMapping("/usedGoodsTransactionHistory")
 	public List<UsedGoodsDto> getUsedGoodsBuyHistory(Model model) {
 		List<UsedGoodsDto> userGoodsList = usedGoodsService.getUsedGoodsBuyHistory(952);
