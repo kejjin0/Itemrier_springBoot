@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class GroupPurchaseService {
+public class GroupPurchaseHistoryService {
 	private final GroupPurchaseRepository groupPurchaseRepository;
 	private final UserRepository userRepository;
 	

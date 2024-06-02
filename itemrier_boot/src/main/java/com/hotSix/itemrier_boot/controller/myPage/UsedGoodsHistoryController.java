@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotSix.itemrier_boot.dto.myPage.UsedGoodsDto;
-import com.hotSix.itemrier_boot.service.myPage.UsedGoodsService;
+import com.hotSix.itemrier_boot.service.myPage.UsedGoodsHistoryService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/myPage")
-public class UsedGoodsController {
+public class UsedGoodsHistoryController {
 	
-	private final UsedGoodsService usedGoodsService;
+	private final UsedGoodsHistoryService usedGoodsService;
 
 	//중고거래 판매,예약 상품내역
 	@GetMapping("/usedGoodsTransaction/inProgress")

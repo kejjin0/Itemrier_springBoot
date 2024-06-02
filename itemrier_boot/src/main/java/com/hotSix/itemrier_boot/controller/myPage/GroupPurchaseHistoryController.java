@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotSix.itemrier_boot.dto.myPage.GroupPurchaseDto;
-import com.hotSix.itemrier_boot.service.myPage.GroupPurchaseService;
+import com.hotSix.itemrier_boot.service.myPage.GroupPurchaseHistoryService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/myPage")
-public class GroupPurchaseController {
+public class GroupPurchaseHistoryController {
 	
-	private final GroupPurchaseService groupPurchaseService;
+	private final GroupPurchaseHistoryService groupPurchaseService;
 	
 	//공동구매 판매 중인 상품내역
 	@GetMapping("/groupPurchase/inProgress")
