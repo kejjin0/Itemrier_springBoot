@@ -5,6 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "CATEGORY")
 public class Category {
 	@Id
