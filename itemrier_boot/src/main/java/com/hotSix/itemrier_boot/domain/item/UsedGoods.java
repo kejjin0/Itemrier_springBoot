@@ -2,6 +2,9 @@ package com.hotSix.itemrier_boot.domain.item;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.hotSix.itemrier_boot.dto.item.UsedGoodsDto;
 
 import jakarta.persistence.*;
@@ -21,6 +24,8 @@ public class UsedGoods extends ItemInfo {
     private String contactType; // 연락수단
    
     @Column(nullable = false)
+    @CreatedDate
+    @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime registerDate; // 등록날짜
     
     private LocalDateTime transactionDate;	// 거래 날짜
@@ -41,4 +46,16 @@ public class UsedGoods extends ItemInfo {
 		usedGoodsDto.setBuyerId(uesdGoods.getBuyerId());
 		return usedGoodsDto;
 	}
+  	
+  	public static UsedGoods toUpdateEntity(UsedGoodsDto usedGoodsDto) {
+  		UsedGoods usedGoods = new UsedGoods();
+  		usedGoods.setItemName(usedGoodsDto.getItemName());
+  		usedGoods.setDescription(usedGoodsDto.getDescription());
+		usedGoods.setPrice(usedGoodsDto.getPrice());
+		usedGoods.setCategory(usedGoodsDto.getCategory());
+		usedGoods.setCondition(usedGoodsDto.getCondition());
+		usedGoods.setContactType(usedGoodsDto.getContactType());
+		usedGoods.setImage(usedGoodsDto.getImage());
+		return usedGoods;
+  	}
 }
