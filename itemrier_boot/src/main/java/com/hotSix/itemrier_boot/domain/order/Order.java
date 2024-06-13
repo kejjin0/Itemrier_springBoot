@@ -35,7 +35,7 @@ public class Order {
 	@Id
 	private String orderId; // 주문 아이디
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL) 
 	@JoinColumn(name = "orderId")
 	private List<OrderItem> orderItems;
 
