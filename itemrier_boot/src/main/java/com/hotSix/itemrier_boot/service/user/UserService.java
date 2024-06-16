@@ -1,6 +1,8 @@
 package com.hotSix.itemrier_boot.service.user;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 import com.hotSix.itemrier_boot.dto.user.UserDto;
@@ -37,5 +41,13 @@ public class UserService implements UserDetailsService {
         }
 
         return null;
+    }
+    public Map<String, String> validateHandling(Errors errors) {
+        Map<String, String> validatorResult = new HashMap<>();
+        for(FieldError error : errors.getFieldErrors()){
+            String validKeyName = String.format("valid_%s", error.getField());
+            validatorResult.put(validKeyName, error.getDefaultMessage());
+        }
+        return validatorResult;
     }
 }

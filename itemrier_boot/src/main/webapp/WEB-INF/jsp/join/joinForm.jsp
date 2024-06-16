@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-    
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>회원가입</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script defer src="${pageContext.request.contextPath}/postCode.js"></script>
 </head>
 <style>
 .joinFormContainer {
@@ -42,7 +45,7 @@ input {
 	width: 200px;
 }
 
-.zipCodeBtn, .signBtn {}
+.zipCodeBtn, .signBtn {
   width: 120px;
   height: 30px;
   border-radius: 10px;
@@ -54,42 +57,147 @@ input {
 .signBtn{
   	margin-top: 7px;
 }
+
+.errorMessage, .mismatch-message {
+	color:red;
+}
+        
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+	width: 1000px;
+	height: 500px;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+	width: 1000px;
+	height: 500px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
 <body>
 	<div class="joinFormContainer">
 		<h2>회원가입</h2>
 		<div class="formContainer">	
-			<form>
+			<form action="/user/register" method="post" modelAttribute="userDto">
 				아이디<br />
-				<input type="text" name="userId" />
+				<input type="text" name="email" value=${userDto.email}/>
+				<div class="errorMessage">${valid_email}</div>
 				<br />
 				비밀번호<br />
-				<input type="text" name="password" />
+				<input type="text" id="password" name="password" />
+				<div class="errorMessage">${valid_password}</div>
 				<br />
+				
 				비밀번호 확인<br />
-				<input type="text" name="pwdcheck" />
+				<input type="text" id="pwdcheck" name="pwdcheck" />
+				 <div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
 				<p />
 				이름<br />
 				<input type="text" name="name" />
 				<br />
 				핸드폰 번호<br />
-				<input type="text" name="phoneNum" />
+				<input type="text" name="phoneNum" placeholder="- 제외 휴대폰 번호를 입력해주세요."/>
+				<div class="errorMessage">${valid_phoneNum}</div>
 				<br />		
 				닉네임<br />
 				<input type="text" name="nickName" />
 				<br />
 				주소<br />
 				<input class="zipCode" type="text" name="zipCode" />
-				<Button class="zipCodeBtn" type="button"> 우편번호검색 </Button>
+				<button class="zipCodeBtn"  onclick="toggleModal(event)"> 우편번호검색 </button>
+			    <div id="myModal" class="modal">
+			        <div class="modal-content">
+			            <span class="close" onclick="toggleModal()">&times;</span>
+			            <div id="postcode-container"></div>
+			        </div>
+			    </div>
 				<br />
-				<input type="text" name="streetAdd" />
+				<input type="text" name="addStreet" />
 				<br />
-				<input type="text" name="streetDetail" />
+				<input type="text" name="addDetail" />
 				<br />
 			
-				<Button class="signBtn" type="button">가입하기</Button>
+				<Button class="signBtn" type="submit">가입하기</Button>
 			</form>
 		</div>	
 	</div>
+
+<script>
+        function toggleModal(event) {
+            event.preventDefault();
+            var modal = document.getElementById("myModal");
+            if (modal.style.display === "none" || modal.style.display === "") {
+                modal.style.display = "block";
+                window.loadPostcodeSearch(
+                    function(zonecode) {
+                        document.getElementsByName('zipCode')[0].value = zonecode;
+                    },
+                    function(address) {
+                        document.getElementsByName('addStreet')[0].value = address;
+                    },
+                    function() {
+                        modal.style.display = "none";
+                    }
+                );
+            } else {
+                modal.style.display = "none";
+            }
+        }
+
+        function setZonecode(zonecode) {
+            console.log("Zonecode:", zonecode);
+        }
+
+        function setAdd(address) {
+            console.log("Address:", address);
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".zipCodeBtn").addEventListener("click", toggleModal);
+        });
+
+        let elInputPassword = document.getElementById('password');
+        let elInputPasswordRetype = document.getElementById('pwdcheck'); 
+        let elMismatchMessage = document.querySelector('.mismatch-message');
+        
+        elInputPasswordRetype.onkeyup = function () {
+            if (elInputPasswordRetype.value.length !== 0) {
+                if (elInputPassword.value === elInputPasswordRetype.value) {
+                    elMismatchMessage.classList.add('hide');
+                } else {
+                    elMismatchMessage.classList.remove('hide');
+                }
+            } else {
+                elMismatchMessage.classList.add('hide');
+            }
+        };
+    </script>
 </body>
 </html>
