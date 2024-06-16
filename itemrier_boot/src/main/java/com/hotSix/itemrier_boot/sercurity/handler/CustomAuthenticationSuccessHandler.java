@@ -5,8 +5,10 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
@@ -23,6 +25,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         emailLoginSuccess(response);
     }
 
+    // 로그인 실패 후 성공 시 남아있는 에러 세션 제거
+    protected void clearSession(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        }
+    }
+    
     public void emailLoginSuccess(HttpServletResponse response) throws IOException {
         String jsonResponse = new ObjectMapper().writeValueAsString("성공");
 
@@ -30,5 +40,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jsonResponse);
+        response.sendRedirect("/");
     }
 }

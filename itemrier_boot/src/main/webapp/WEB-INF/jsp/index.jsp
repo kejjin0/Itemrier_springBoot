@@ -1,31 +1,30 @@
 <!-- 로그인 전 홈페이지 -->
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Itemrior</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
+
 <body>
-    <header id="header">
-        <h1>Itemrior</h1>
-        <nav class="item">
-            <ul>
-                <li><a href="">중고거래</a></li>
-                <li><a href="">공동구매</a></li>
-            </ul>
-        </nav>
-        <nav class="log">
-            <ul>
-                <li><a href="">로그인</a></li>
-                <li><a href="">회원가입</a></li>
-            </ul>
-        </nav>
-    </header>
-    
+<%@ include file="header.jsp" %>
+
     <hr>
     <main>
+        <div id="logoinModal" class="modal fade" tabindex="-1" aria-labelledby="LoginModalLabel"
+    				aria-hidden="true">
+   	 		<div class="modal-dialog">
+        		<div class="modal-content">
+        		
+        		</div>
+    		</div>
+		</div>
         <div class="product-card">
             <a href=""><img src="img/product.jpg" alt="Product 1" class="product-image"></img></a>
             <p>Product 1</p>
@@ -55,5 +54,6 @@
     <footer>
         <p>&copy; Itemrior 잇템리어 </p>
     </footer>
+    
 </body>
 </html>
