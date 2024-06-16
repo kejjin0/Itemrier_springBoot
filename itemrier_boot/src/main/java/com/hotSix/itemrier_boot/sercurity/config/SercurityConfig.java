@@ -9,6 +9,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.hotSix.itemrier_boot.sercurity.handler.CustomAuthenticationSuccessHandler;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -28,14 +29,28 @@ public class SercurityConfig {
 				
 				// 폼 로그인은 현재 사용하지 않음         
 				.formLogin(formLogin -> formLogin
+						.loginPage("/user/login/form")
 						.loginProcessingUrl("/user/login")
 						.usernameParameter("email")
 						.successHandler(new CustomAuthenticationSuccessHandler())
 						.permitAll())
 				
 				.logout((logout) -> logout
-						.logoutSuccessUrl("/login")
-						.invalidateHttpSession(true)
+						.logoutUrl("/logout")   // 로그아웃 처리 URL (= form action url)
+			            //.logoutSuccessUrl("/login") // 로그아웃 성공 후 targetUrl, 
+			            // logoutSuccessHandler 가 있다면 효과 없으므로 주석처리.
+			            .addLogoutHandler((request, response, authentication) -> { 
+			                // 사실 굳이 내가 세션 무효화하지 않아도 됨. 
+			                // LogoutFilter가 내부적으로 해줌.
+			                HttpSession session = request.getSession();
+			                if (session != null) {
+			                    session.invalidate();
+			                }
+			            })  // 로그아웃 핸들러 추가
+			            .logoutSuccessHandler((request, response, authentication) -> {
+			                response.sendRedirect("/");
+			            }) // 로그아웃 성공 핸들러
+			            .deleteCookies("remember-me") // 로그아웃 후 삭제할 쿠키 지정
 				
 		);
 		

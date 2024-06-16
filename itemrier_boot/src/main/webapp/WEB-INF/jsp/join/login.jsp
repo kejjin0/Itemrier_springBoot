@@ -55,21 +55,21 @@ input {
 }
 </style>
 <body>
+<%@ include file="../header.jsp" %>
 	<div class="modalContainer">
 		<div class="loginContainer">
 			<h3>잇템리어</h3>
-			<form>
-				<input type="text" name="userId" placeholder="아이디를 입력하세요"/>
+			<form action="/user/login" method="post">
+				<input type="text" name="email" placeholder="아이디를 입력하세요"/>
 				<br/>
-				<input type="text" name="pwd" placeholder="비밀번호를 입력하세요" />
+				<input type="text" name="password" placeholder="비밀번호를 입력하세요" />
 				<br/>
-				<button class="loginBtn" type="button">로그인</button>
-				<br/>
-				<button class="kakaoBtn" type="button">카카오 로그인</button>
+				<button class="loginBtn" type="submit">로그인</button>
 			</form>
 			<div>
 				아이디 찾기 | 비밀번호 찾기 | 회원가입
 			</div>
+	
 		</div>
 	</div>
 </body>
