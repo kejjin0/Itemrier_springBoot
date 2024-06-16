@@ -95,14 +95,18 @@ input {
     text-decoration: none;
     cursor: pointer;
 }
+.hide{
+    display: none;
+}
 </style>
 <body>
+<%@ include file="../header.jsp" %>
 	<div class="joinFormContainer">
 		<h2>회원가입</h2>
 		<div class="formContainer">	
 			<form action="/user/register" method="post" modelAttribute="userDto">
 				아이디<br />
-				<input type="text" name="email" value=${userDto.email}/>
+				<input type="text" name="email"/>
 				<div class="errorMessage">${valid_email}</div>
 				<br />
 				비밀번호<br />
@@ -116,14 +120,13 @@ input {
 				<p />
 				이름<br />
 				<input type="text" name="name" />
-				<br />
+				<br /><br />
 				핸드폰 번호<br />
 				<input type="text" name="phoneNum" placeholder="- 제외 휴대폰 번호를 입력해주세요."/>
-				<div class="errorMessage">${valid_phoneNum}</div>
-				<br />		
+				<div class="errorMessage">${valid_phoneNum}</div>	
 				닉네임<br />
-				<input type="text" name="nickName" />
-				<br />
+				<input type="text" name="nickname" />
+				<br /><br />
 				주소<br />
 				<input class="zipCode" type="text" name="zipCode" />
 				<button class="zipCodeBtn"  onclick="toggleModal(event)"> 우편번호검색 </button>
