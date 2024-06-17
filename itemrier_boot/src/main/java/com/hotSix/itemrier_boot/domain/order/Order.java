@@ -38,6 +38,9 @@ public class Order {
 	@OneToMany(cascade = CascadeType.ALL) 
 	@JoinColumn(name = "orderId")
 	private List<OrderItem> orderItems;
+	
+	@Column(nullable = true)
+	private String type; // 구매자 아이디
 
 	@Column(nullable = false)
 	private int buyerId; // 구매자 아이디
