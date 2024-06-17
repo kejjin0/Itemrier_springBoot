@@ -18,8 +18,9 @@ public interface OrderRepository extends JpaRepository<Order, String>{
 	Boolean existsByOrderId(String orderId);
 	
 	// (구매자) 
-	// 마이페이지 (구매) 공동 구매, 경매 주문 내역
-	List<Order> findOrderByBuyerId(int buyerId);
+	// 마이페이지 (구매) 공동 구매 or 경매 주문 내역
+//	@Query("SELECT o FROM Order o JOIN o.orderItems i JOIN ItemInfo f ON i.itemId = f.itemId WHERE f.type = :type AND o.buyerId = :buyerId")
+	List<Order> findOrderByBuyerIdAndType(int buyerId, String type);
 		
 	// 마이페이지에서 주문 내역 클릭 -> 구매 상세 내역(주문한 물품들 리스트, 주소, 사용자 정보 등)
 	// 취소 확인 정보 전달, 결제 확인 창
