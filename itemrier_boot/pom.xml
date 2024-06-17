@@ -41,8 +41,8 @@
 
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
-        	<artifactId>hibernate-core</artifactId>
-        	<version>6.2.6.Final</version>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.2.6.Final</version>
 		</dependency>
 
 		<dependency>
@@ -90,30 +90,45 @@
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-	
-		<dependency>
-	    	<groupId>org.javassist</groupId>
-	    	<artifactId>javassist</artifactId>
-	    	<version>3.23.1-GA</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.23.1-GA</version>
+		</dependency>
+
+		<!-- 아임포트 (결제 기능) -->
+		<dependency>
+	    	<groupId>com.github.iamport</groupId>
+	    	<artifactId>iamport-rest-client-java</artifactId>
+	    	<version>0.2.23</version>
+		</dependency>
 	</dependencies>
+	
+	<repositories>
+		<repository>
+	   		<id>jitpack.io</id>
+	    	<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
+	
 
 	<build>
 		<plugins>
