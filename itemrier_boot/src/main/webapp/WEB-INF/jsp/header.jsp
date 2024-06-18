@@ -13,6 +13,7 @@
             <ul>
                 <li><sec:authorize access="isAnonymous()"><a href="/user/login/form">로그인</a></sec:authorize>
                <sec:authorize access="isAuthenticated()"><a href="/logout">로그아웃</a></sec:authorize>
+               <sec:authorize access="isAuthenticated()"><a href="/myPage">마이페이지</a></sec:authorize>
 				</li>      
                 <li><a href="/user/register/form">회원가입</a></li>
             </ul>
