@@ -2,6 +2,7 @@ package com.hotSix.itemrier_boot.service.order;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hotSix.itemrier_boot.domain.order.BuyerInfo;
@@ -12,7 +13,14 @@ import com.hotSix.itemrier_boot.repository.order.OrderRepository;
 
 @Service
 public class OrderService {
+	@Autowired
 	OrderRepository orderRepository;
+	
+	// 주문
+	public void insertOrder(Order order) {
+		orderRepository.save(order);
+	}
+	
 	// order 가져오기
 	public Order getOrder(String orderId) {
 		Order order = orderRepository.findOrderByOrderId(orderId);
@@ -20,11 +28,12 @@ public class OrderService {
 	}
 	
 	// (구매자)
-	// 마이페이지 (구매) 공동 구매, 경매 주문 내역
-	public List<Order> getOrders(int buyerId){
-		List<Order> orders = orderRepository.findOrderByBuyerId(buyerId);
+	// 마이페이지 (구매) 공동 구매 주문 내역
+	public List<Order> getOrders(int buyerId, String type){
+		List<Order> orders = orderRepository.findOrderByBuyerIdAndType(buyerId, type);
 		return orders;
 	}
+	
 	
 	// 성함, 전화번호 변경
 	public void modifyBuyerInfo(String orderId, BuyerInfo buyerInfo) {
