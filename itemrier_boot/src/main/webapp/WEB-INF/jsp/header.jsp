@@ -7,6 +7,7 @@
             <ul>
                 <li><a href="">중고거래</a></li>
                 <li><a href="">공동구매</a></li>
+                <li><a href="/auction/list">경매</a></li>
             </ul>
         </nav>
         <nav class="log">

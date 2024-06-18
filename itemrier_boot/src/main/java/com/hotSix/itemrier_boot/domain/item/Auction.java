@@ -1,14 +1,24 @@
 package com.hotSix.itemrier_boot.domain.item;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.hotSix.itemrier_boot.dto.item.AuctionDto;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter 
-@ToString
+@Getter                  
+@Setter
+@ToString                       
 @Table(name = "AUCTION")
+@DiscriminatorValue("auction")
+@EntityListeners(AuditingEntityListener.class)
 public class Auction extends ItemInfo {
     @Column(nullable = false)
     private String condition; // 상품 상태
@@ -21,7 +31,9 @@ public class Auction extends ItemInfo {
     
     private int currentBid; // 현재 최고가
     
-    @Column(nullable = false)
+    @Column(updatable = false)
+    @CreatedDate                                        
+    @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime startTime; // 시작시간(등록 날짜)
     
     @Column(nullable = false)
@@ -29,5 +41,21 @@ public class Auction extends ItemInfo {
         
     private int buyerId; // 구매자 아이디
     
-    private String image; // 이미지 파일 이름
+    private String fileName; // 이미지 파일 이름
+    
+    private String filePath; // 이미지 파일 경로
+    
+    private Integer winner; // 낙찰자
+    
+    public void update(AuctionDto dto) {
+    	this.setItemName(dto.getItemName());
+    	this.setDescription(dto.getDescription());
+    	this.setCondition(dto.getCondition());
+    	this.setContactType(dto.getContactType());
+    	this.setPrice(dto.getPrice());
+    	this.setStartPrice(dto.getStartPrice());
+    	this.setCategory(dto.getCategory());
+    	this.setStatus(dto.getStatus());
+    	this.setEndTime(dto.getEndTime());
+    }
 }

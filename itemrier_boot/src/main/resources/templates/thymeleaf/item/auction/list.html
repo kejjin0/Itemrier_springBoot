@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>경매상품 목록</title>
+<style>
+	h2 {
+		text-align: center;
+	}
+	.imgSize {
+		width: 180px;
+		height: 180px;
+		padding-right: 35px;
+	}
+	table {
+		width: 1000px;
+		border-collapse: collapse;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	td {
+		border: none;
+		padding: 30px;
+	}
+	tr {
+		border-bottom: 1px solid black;
+	}
+	th {
+        font-size: 20px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+	<h2>경매 상품 목록</h2>
+	<table>
+		<tr>
+			<th>이미지</th>
+			<th>상품명</th>
+			<th>판매현황</th>
+			<th>현재최고가격</th>
+		</tr>
+		<tr th:each="auction: ${auctionList}">
+			<td><img th:src="@{${auction.getFilePath()}}" alt="상품사진" class="imgSize"></td>
+			<td><a th:href="@{/auction/view/{itemId} (itemId=${auction.itemId})}" th:text="${auction.itemName}">상품명</a></td>
+			<td th:if="${#strings.equals(auction.status, 'Available')}" th:text="판매중"></td>
+			<td th:if="${#strings.equals(auction.status, 'Complete')}" th:text="판매완료"></td>
+			<td th:text="|${auction.currentBid}원|">현재가</td>
+		</tr>
+	</table>
+</body>
+</html>
