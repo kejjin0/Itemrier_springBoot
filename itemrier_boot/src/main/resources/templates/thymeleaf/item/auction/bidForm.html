@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>입찰 등록</title>
+</head>
+<body>
+	<form action="/bid/create" method="post" th:object="${bidDto}">
+		<input type="hidden" name="item" th:field="*{item}">
+	    <table>
+	    	<tr><td>경매 상품</td></tr>
+	        <tr>
+	            <td>상품명</td>
+	            <td th:text="*{item.itemName}"></td>
+	        </tr>
+	        <tr>
+	            <!-- <td>남은 시간</td>  -->
+	            <td>마감일</td>
+				<td th:text="*{#temporals.format(item.endTime, 'yyyy-MM-dd HH:mm:ss')}">종료시간</td>
+	        </tr>
+	    </table>
+	
+	    <table>
+	        <h4>입찰하기</h4><hr>
+	        <tr>
+	            <td>현재가</td>
+	            <td th:text="|*{item.currentBid}원|"></td>
+	        </tr>
+	        <tr>
+	            <td>입찰금액</td>
+	            <td>
+	                <input type="number" name="amount" th:field="*{amount}" placeholder="입찰 가격을 입력하세요">
+	                <span>원</span>
+	            </td>
+	        </tr>
+	    </table>
+	
+	    <input type="submit" value="입찰하기">
+	</form>
+</body>
+</html>

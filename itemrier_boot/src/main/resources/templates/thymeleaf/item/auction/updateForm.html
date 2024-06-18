@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>경매 상품 수정</title>
+<style>
+	table {
+	    width: 1000px; 
+	    height: 800px;
+	    border-collapse: collapse;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	th, td {
+	    border: 1px solid black;
+	    padding: 8px; 
+	    text-align: center; 
+	}
+	.imgSize {
+	    padding: 70px 0;
+	}
+</style>
+</head>
+<body>
+	<form th:action="@{/auction/update}" method="POST" th:object=${auction}>
+		<input type="hidden" th:field="*{itemId}">
+		<input type="hidden" th:field="*{seller}">
+		<input type="hidden" th:field="*{status}">
+		<input type="hidden" th:field="*{startTime}">
+		<table>
+	         <tr>
+	             <td>제목(상품명)</td>
+	             <td><input type="text" th:field="*{itemName}" placeholder="등록할 제목을 입력하세요"></td>
+	         </tr>
+	         <tr>
+	             <td>상품 정보</td>
+	             <td><input type="text" th:field="*{description}" placeholder="상품 정보를 입력해주세요"></td>
+	         </tr>
+	         <tr>
+	             <td>제품 상태</td>
+	             <td>
+	                 <select th:field="*{condition}">
+	                 	<option value="0" th:selected="*{condition eq '0'}">미사용(새상품)</option>
+	                 	<option value="1" th:selected="*{condition eq '1'}">미세한 사용감</option>
+	                 	<option value="2" th:selected="*{condition eq '2'}">사용감 적음</option>
+	                 	<option value="3" th:selected="*{condition eq '3'}">사용감 있음</option>
+	                 	<option value="4" th:selected="*{condition eq '4'}">사용감 많음</option>
+	                 </select>
+	             </td>
+	         </tr>
+	         <tr>
+	             <td>등록 가격</td>
+	             <td>
+	                 <input type="number" th:field="*{startPrice}" placeholder="등록 가격을 입력하세요" min="0">
+	                 <span>원</span>
+	             </td>
+	         </tr>
+	         <tr>
+	             <td>카테고리</td>
+	             <td>
+	                 <select name="category">
+	                 	<option th:each="cat : ${category}" th:value="${cat.catId}" th:utext="${cat.catName}" th:selected="${cat.catId == auction.category.catId}"></option>
+	                 </select>
+	             </td>
+	         </tr>
+	         <tr>
+	             <td>연락 수단</td>
+	             <td><input type="text" th:field="*{contactType}" placeholder="카카오톡 아이디, 전화번호 등 연락할 수단을 입력해주세요"></td>
+	         </tr>
+	        <tr>
+	        	<td>마감일</td>
+	            <td><input type="datetime-local" th:field="*{endTime}"></td>
+	        </tr>
+	        <tr>
+	        <!-- 적용이 안됨 -->
+	        	<td>상태변경</td>
+	            <td>
+	            	<select name="status" th:field="*{status}">
+					    <option th:each="s : ${T(com.hotSix.itemrier_boot.domain.item.ItemStatus).values()}"
+					            th:value="${s}" th:text="${s}">
+					    </option>
+					</select>
+	            </td>
+	        </tr>
+	         <tr>
+	             <td colspan="2"><input type="submit" value="수정하기"></td>
+	         </tr>
+		</table>
+	</form>
+</body>
+</html>
