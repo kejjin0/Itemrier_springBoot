@@ -38,7 +38,7 @@
 	<hr>
 	<h3>회원 정보</h3>
 	<ul>
-		<li>회원 정보 수정</li>
+		<li><a href="/myPage/change">회원 정보 수정</a></li>
 		<li>탈퇴</li>
 	</ul>
 
