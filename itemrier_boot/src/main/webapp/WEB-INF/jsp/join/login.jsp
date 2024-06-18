@@ -20,12 +20,12 @@ h3 {
   	flex-direction: column;
   	align-items: center;
   	justify-content: center;
-  	margin-top: 80px;
+  	margin-top: 100px;
 }
 
 input {
-	width: 300px;
-	height: 30px;
+	width: 500px;
+	height: 50px;
 	background-color: #F2F2F2;  
 	font-size: 15px;
 	font-color: black;
@@ -33,32 +33,28 @@ input {
   	border-radius: 10px;
  	outline: none;
  	margin-top: 7px;
- 	margin-bottom: 7px;
+ 	margin-bottom: 15px;
  	padding-left:10px;
 }
 
-.loginBtn, .kakaoBtn {
-  width: 300px;
-  height: 30px;
+.loginBtn{
+	width: 400px;
+	height: 50px;
   border-radius: 10px;
   background-color: #000;
   color: #FFFFFF;
   border: none;
-   	margin-top: 7px;
- 	margin-bottom: 7px;
+	margin-top: 15px;
+	margin-bottom: 7px;
+  	justify-content: center;
 }
 
-.kakaoBtn {
-	background-color:white;
-	color: black;
-	border: solid 0.3px;
-}
 </style>
 <body>
 <%@ include file="../header.jsp" %>
 	<div class="modalContainer">
 		<div class="loginContainer">
-			<h3>잇템리어</h3>
+			<h1>잇템리어</h1>
 			<form action="/user/login" method="post">
 				<input type="text" name="email" placeholder="아이디를 입력하세요"/>
 				<br/>
@@ -66,9 +62,6 @@ input {
 				<br/>
 				<button class="loginBtn" type="submit">로그인</button>
 			</form>
-			<div>
-				아이디 찾기 | 비밀번호 찾기 | 회원가입
-			</div>
 	
 		</div>
 	</div>
