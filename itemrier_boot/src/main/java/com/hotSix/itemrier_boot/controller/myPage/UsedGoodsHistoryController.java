@@ -50,7 +50,7 @@ public class UsedGoodsHistoryController {
 		
 		List<UsedGoodsDto> userGoodsList = usedGoodsService.getUsedGoodsStatusSearch(userId, status);
 		System.out.println("usedGoods" + userGoodsList);
-		model.addAttribute(userGoodsList);
+		model.addAttribute("userGoodsList", userGoodsList);
 		
 		return "myPage/usedGoods/usedGoodsEnded";
 	}

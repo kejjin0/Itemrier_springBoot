@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>구매한 중고 물품</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <style>
 	.myPageUsedGoods{
 		display: flex;
+		height: 1000px;
 	}
 	
 	.itemList{
@@ -51,34 +53,25 @@
 	
 </style>
 <body>
-	<div class="myPageUsedGoods">
 		<jsp:include page="../myPage.jsp" />
+	<div class="myPageUsedGoods">
 		<div class="itemList">
 			<div class="title">
 				<br>중고거래 내역<br>
 			</div>
-			<div class="item">
-				<table>
-					<tr>
-						<td rowspan="6"><img src="https://placehold.co/180"/></td>
-						<td> </td>
-					</tr>
-					<tr>
-						<td>상품 이름</td>
-					</tr>
-					<tr>
-						<td>$가격</td>
-					</tr>
-					<tr>
-						<td>판매자</td>
-					</tr>
-					<tr>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td> </td>
-					</tr>
-				</table>
+			<div class=container>
+				<div class="row" align="center">
+					<c:forEach var="userGoods" items="${usedGoods}">
+					<div class="col-md-4">
+						<img src="https://placehold.co/180" alt="상품 이미지"/>
+						<h3>상품 이름: ${userGoods.itemName}</h3>
+						<p>가격: ${userGoods.price}원</p>
+						<p>올린 날짜:${userGoods.registerDate}
+						</p>
+						<div class="status">${userGoods.status}</div>
+					</div>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>
