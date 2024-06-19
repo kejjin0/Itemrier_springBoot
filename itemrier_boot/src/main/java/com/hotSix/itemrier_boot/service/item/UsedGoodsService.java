@@ -1,6 +1,8 @@
 package com.hotSix.itemrier_boot.service.item;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -35,4 +37,15 @@ public class UsedGoodsService {
 	public void delete(int itemId) {
 		usedGoodsRepository.deleteById(itemId);
 	}
+	public List<UsedGoods> getAllUsedGoods() {
+        return usedGoodsRepository.findAll();
+    }
+	
+	// 중고거래 상품 검색
+    public List<UsedGoodsDto> searchUsedGoods(String query) {
+        List<UsedGoods> searchResults = usedGoodsRepository.findByItemNameContaining(query);
+        return searchResults.stream()
+                .map(UsedGoodsDto::toUsedGoodsDto)
+                .collect(Collectors.toList());
+    }
 }

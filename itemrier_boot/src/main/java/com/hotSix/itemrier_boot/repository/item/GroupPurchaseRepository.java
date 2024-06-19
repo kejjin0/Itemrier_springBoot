@@ -19,4 +19,7 @@ public interface GroupPurchaseRepository extends JpaRepository<GroupPurchase, In
 	
 	// 마감시간 지난 공동구매 내역 리스트
 	List<GroupPurchase> findAllByEndTimeBeforeAndStatus(LocalDateTime endTime, ItemStatus status);
+
+	//상품명 검색
+	List<GroupPurchase> findByItemNameContaining(String itemName);
 }

@@ -58,7 +58,7 @@ input {
 			<form action="/user/login" method="post">
 				<input type="text" name="email" placeholder="아이디를 입력하세요"/>
 				<br/>
-				<input type="text" name="password" placeholder="비밀번호를 입력하세요" />
+				<input type="password" name="password" placeholder="비밀번호를 입력하세요" />
 				<br/>
 				<button class="loginBtn" type="submit">로그인</button>
 			</form>
