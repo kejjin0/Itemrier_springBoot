@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공동구매 판매 중</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <style>
 	.myPageUsedGoods{
@@ -29,10 +30,6 @@
 		padding-left: 30px; 
 	}
 	
-	.item{
-		margin-left: 10px;
-		margin-top: 40px;
-	}
 	button {
 		
 		background-color: #e6e6fa;
@@ -62,6 +59,7 @@
 					</div>
 					</c:forEach>
 				</div>
+			</div>
 		</div>
 	</div>
 </body>
