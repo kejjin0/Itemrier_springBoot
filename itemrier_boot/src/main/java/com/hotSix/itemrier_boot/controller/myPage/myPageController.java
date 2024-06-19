@@ -14,4 +14,9 @@ public class myPageController {
 		return "myPage/myPage";
 	}
 	
+	@GetMapping("/myPage/delete")
+	public String deleteProfile() {
+		
+		return "myPage/profile/deleteForm";
+	}
 }
