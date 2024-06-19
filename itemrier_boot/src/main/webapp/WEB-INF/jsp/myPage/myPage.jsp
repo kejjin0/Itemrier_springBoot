@@ -8,8 +8,8 @@
 <title>마이페이지</title>
 </head>
 <style>
+
 	.myPageList{
-		height: 100%;
 		width: 240px;
 		border: 1px solid gray;
 		padding-top: 20px;
@@ -33,6 +33,7 @@
 
 </style>
 <body>
+<%@ include file="/WEB-INF/jsp/header.jsp" %>
 <div class="myPageList">
 	<h2>마이페이지</h2>
 	<hr>

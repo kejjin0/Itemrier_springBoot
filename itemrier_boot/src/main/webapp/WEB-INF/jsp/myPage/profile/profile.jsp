@@ -10,27 +10,25 @@
 <script defer src="${pageContext.request.contextPath}/postCode.js"></script>
 </head>
 <style>
+
 .joinFormContainer {
-  	width: max;
-}
-
-h2 {
-	text-align:center;
-}
-
-.formContainer {
-	display: flex;
+	margin-top: 10px;
+	margin-left: 600px;
   	flex-direction: column;
   	align-items: center;
   	justify-content: center;
-  	margin-top: 80px;
+}
+
+.formContainer {
+
+  	margin-top: 50px;
 }
 
 input {
-	width: 330px;
-	height: 30px;
+	width: 500px;
+	height: 40px;
 	background-color: #F2F2F2;  
-	font-size: 15px;
+	font-size: 18px;
 	font-color: black;
   	border: 0;
   	border-radius: 10px;
@@ -99,9 +97,9 @@ input {
 }
 </style>
 <body>
-<%@ include file="/WEB-INF/jsp/header.jsp" %>
+<jsp:include page="../myPage.jsp" />
 	<div class="joinFormContainer">
-		<h2>회원가입</h2>
+		<h2>회원 정보 수정</h2>
 		<div class="formContainer">	
 			<form action="/myPage/change" method="post" modelAttribute="userDto">
 				<input type="hidden" name="_method" value="patch"/>
@@ -137,7 +135,6 @@ input {
 			</form>
 		</div>	
 	</div>
-
 <script>
         function toggleModal(event) {
             event.preventDefault();
