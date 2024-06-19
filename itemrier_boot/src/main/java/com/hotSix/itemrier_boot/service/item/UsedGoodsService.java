@@ -1,5 +1,6 @@
 package com.hotSix.itemrier_boot.service.item;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -35,4 +36,9 @@ public class UsedGoodsService {
 	public void delete(int itemId) {
 		usedGoodsRepository.deleteById(itemId);
 	}
+	
+	//리스트 나열
+	public List<UsedGoods> getAllUsedGoods() {
+        return usedGoodsRepository.findAll();
+    }
 }
