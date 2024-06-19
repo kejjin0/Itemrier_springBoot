@@ -7,24 +7,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Itemrior</title>
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../css/index.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <link rel="stylesheet"  type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
 </head>
 
 <body>
 <%@ include file="header.jsp" %>
-
+	<div>
     <hr>
     <main>
-        <div id="logoinModal" class="modal fade" tabindex="-1" aria-labelledby="LoginModalLabel"
-    				aria-hidden="true">
-   	 		<div class="modal-dialog">
-        		<div class="modal-content">
-        		
-        		</div>
-    		</div>
-		</div>
         <div class="product-card">
             <a href=""><img src="img/product.jpg" alt="Product 1" class="product-image"></img></a>
             <p>Product 1</p>
@@ -50,7 +41,7 @@
             <p>Product 6<p>
         </div>
     </main>
-    
+    </div>
     <footer>
         <p>&copy; Itemrior 잇템리어 </p>
     </footer>
