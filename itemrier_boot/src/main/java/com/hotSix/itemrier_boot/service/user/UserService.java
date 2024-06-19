@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService implements UserDetailsService {
 	
 	private final UserRepository userRepository;
+	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	public UserDto insertUser(UserDto userDto) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -32,6 +33,12 @@ public class UserService implements UserDetailsService {
 		userRepository.save(userDto.toUserEntity(userDto));
 		return userDto;
 	}
+	
+	public int emailCheck(String email) {
+		int cnt = userRepository.countByEmail(email);
+		System.out.println("cnt: " + cnt);
+		return cnt;
+	}	
 	
 	@Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -61,5 +68,16 @@ public class UserService implements UserDetailsService {
 		user.setAddDetail(profileDto.getAddDetail());
 		user.setAddStreet(profileDto.getAddStreet());
     	userRepository.save(user);
+    }
+    
+    public boolean deleteUser(String email, String password) {
+        UserEntity user = userRepository.findByEmail(email);
+
+        if (passwordEncoder.matches(password, user.getPassword())) {
+        	userRepository.delete(user);
+            return true;
+        } else {
+            return false;
+        }	
     }
 }

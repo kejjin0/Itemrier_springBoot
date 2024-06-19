@@ -40,7 +40,7 @@
 	<h3>회원 정보</h3>
 	<ul>
 		<li><a href="/myPage/change">회원 정보 수정</a></li>
-		<li>탈퇴</li>
+		<li><a href="/myPage/delete">탈퇴</a></li>
 	</ul>
 
 	<hr>
@@ -63,8 +63,8 @@
 	<h3>경매</h3>
 	<ul>
 		<li><a href="/myPage/orders/auction">구매 내역 (현황)</a></li>
-		<li><a href="/myPage/orders/groupPurchase">경매 중인 상품</a></li>
-		<li><a href="/myPage/orders/groupPurchase">판매 완료 상품</a></li>
+		<li><a href="/myPage/auction/inProgress">경매 중인 상품</a></li>
+		<li><a href="/myPage/auction/ended">판매 완료 상품</a></li>
 	</ul>
 
 	<hr>

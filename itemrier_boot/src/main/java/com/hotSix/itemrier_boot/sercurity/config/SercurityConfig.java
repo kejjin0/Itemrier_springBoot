@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class SercurityConfig {
 
 	
+	@SuppressWarnings("removal")
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http	.csrf(AbstractHttpConfigurer::disable)
@@ -34,7 +35,6 @@ public class SercurityConfig {
 						.usernameParameter("email")
 						.successHandler(new CustomAuthenticationSuccessHandler())
 						.permitAll())
-				
 				.logout((logout) -> logout
 						.logoutUrl("/logout")   // 로그아웃 처리 URL (= form action url)
 			            //.logoutSuccessUrl("/login") // 로그아웃 성공 후 targetUrl, 
@@ -50,10 +50,8 @@ public class SercurityConfig {
 			            .logoutSuccessHandler((request, response, authentication) -> {
 			                response.sendRedirect("/");
 			            }) // 로그아웃 성공 핸들러
-			            .deleteCookies("remember-me") // 로그아웃 후 삭제할 쿠키 지정
-				
-		);
-		
+			            .deleteCookies("remember-me")) // 로그아웃 후 삭제할 쿠키 지정
+				.exceptionHandling().accessDeniedPage("/user/login/form");
 		return http.build();
 	}
 	

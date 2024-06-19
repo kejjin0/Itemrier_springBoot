@@ -98,6 +98,15 @@ input {
 .hide{
     display: none;
 }
+.id_ok{
+color:#008000;
+display: none;
+}
+
+.id_already{
+color:red; 
+display: none;
+}
 </style>
 <body>
 <%@ include file="../header.jsp" %>
@@ -106,8 +115,11 @@ input {
 		<div class="formContainer">	
 			<form action="/user/register" method="post" modelAttribute="userDto">
 				아이디<br />
-				<input type="text" name="email"/>
+				<input type="text" id="email" name="email"  oninput = "checkId()" />
 				<div class="errorMessage">${valid_email}</div>
+				<!-- id ajax 중복체크 -->
+				<p class="id_ok">사용 가능한 아이디입니다.</p>
+				<p class="id_already">누군가 이 아이디를 사용하고 있어요.</p>
 				<br />
 				비밀번호<br />
 				<input type="password" id="password" name="password" />
@@ -155,7 +167,7 @@ input {
                 modal.style.display = "block";
                 window.loadPostcodeSearch(
                     function(zonecode) {
-                        document.getElementsByName('zipCode')[0].value = zonecode;
+                        document.getElementsByName('zipcode')[0].value = zonecode;
                     },
                     function(address) {
                         document.getElementsByName('addStreet')[0].value = address;
@@ -201,6 +213,29 @@ input {
                 elMismatchMessage.classList.add('hide');
             }
         };
+        
+        function checkId(){
+            var email = $('#email').val(); //id값이 "id"인 입력란의 값을 저장
+            $.ajax({
+                url:'/emailCheck', //Controller에서 요청 받을 주소
+                type:'post', //POST 방식으로 전달
+                data:{email:email},
+                success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
+                    if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+                        $('.id_ok').css("display","inline-block"); 
+                        $('.id_already').css("display", "none");
+                    } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                        $('.id_already').css("display","inline-block");
+                        $('.id_ok').css("display", "none");
+                        alert("아이디를 다시 입력해주세요");
+                        $('#email').val('');
+                    }
+                },
+                error:function(){
+                    alert("에러입니다");
+                }
+            });
+            };
     </script>
 </body>
 </html>
