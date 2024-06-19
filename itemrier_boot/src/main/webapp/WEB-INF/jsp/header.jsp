@@ -10,8 +10,8 @@
         <h1 ><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
        <nav class="itemTop">
             <ul class="item">
-                <li><a href="">중고거래</a></li>
-                <li><a href="">공동구매</a></li>
+                <li><a href="/usedGoods/list">중고거래</a></li>
+                <li><a href="/groupPurchase/list">공동구매</a></li>
                 <li><a href="/auction/list">경매</a></li>
             </ul>
         </nav>
