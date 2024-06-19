@@ -89,7 +89,6 @@ public class AuctionController {
 	public String update(@ModelAttribute AuctionDto auctionDto, Model model) {
 		AuctionDto updateAuction = auctionService.update(auctionDto);
 		model.addAttribute("auction", updateAuction);
-		System.out.println("테스트 중: " + auctionDto.getStatus() + auctionDto.getItemName());
 		return "redirect:view/" + updateAuction.getItemId();
 	}
 	
@@ -108,7 +107,7 @@ public class AuctionController {
 		return "thymeleaf/item/auction/list";
 	}
 	
-	// 경매 상품 상세보기(추가할 부분: 입찰 내용도 보여야 함)
+	// 경매 상품 상세보기
 	@GetMapping("/view/{itemId}")
 	public String findById(@PathVariable int itemId, Model model, @AuthenticationPrincipal UserDetails userDetail) {
 		AuctionDto auctionDto = auctionService.findById(itemId);
