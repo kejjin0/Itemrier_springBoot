@@ -38,6 +38,6 @@ public abstract class ItemInfo {
 	private UserEntity buyer; 
 
 	@ManyToOne
-  @JoinColumn(name = "catId", nullable = false)
+	@JoinColumn(name = "catId", nullable = false)
 	private Category category; // 카테고리
 }

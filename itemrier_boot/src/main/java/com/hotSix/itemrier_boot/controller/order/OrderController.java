@@ -25,6 +25,7 @@ import com.hotSix.itemrier_boot.domain.order.OrderStatus;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 import com.hotSix.itemrier_boot.dto.user.UserDto;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
+import com.hotSix.itemrier_boot.service.item.GroupPurchaseService;
 import com.hotSix.itemrier_boot.service.myPage.UsedGoodsHistoryService;
 import com.hotSix.itemrier_boot.service.order.OrderService;
 
@@ -38,7 +39,9 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private UserRepository userRepository;
-
+	@Autowired
+	private GroupPurchaseService groupPurchaseService;
+	
 	// (구매자)
 	// 구매하기
 	@PostMapping("insertOrder")
@@ -59,6 +62,10 @@ public class OrderController {
 
 		orderService.insertOrder(order);
 		System.out.println(order.toString());
+		
+		// 현재 판매 수량 업데이트
+		groupPurchaseService.updateCurrentQuantity(item.getItemId());
+		
 		return "myPage/myPage";
 	}
 

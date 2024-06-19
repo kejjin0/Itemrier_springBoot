@@ -93,7 +93,6 @@ public class AuctionService {
 	public AuctionDto findById(int itemId) {
 		Auction auction = auctionRepository.getReferenceById(itemId);
 		AuctionDto auctionDto = AuctionDto.toDTO(auction);
-		// Bid 기록들도 출력해야 함.
 		return auctionDto;
 	}
 	

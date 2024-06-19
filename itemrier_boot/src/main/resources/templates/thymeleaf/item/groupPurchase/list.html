@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>공동구매 상품 목록</title>
+<style>
+	h2 {
+		text-align: center;
+	}
+	.imgSize {
+		width: 180px;
+		height: 180px;
+		padding-right: 35px;
+	}
+	table {
+		width: 1000px;
+		border-collapse: collapse;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	td {
+		border: none;
+		padding: 30px;
+	}
+	tr {
+		border-bottom: 1px solid black;
+	}
+	th {
+        font-size: 20px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+	<h2>공동구매 상품 목록</h2>
+	<table>
+		<tr>
+			<th>이미지</th>
+			<th>상품명</th>
+			<th>판매현황</th>
+			<th>판매가격</th>
+		</tr>
+		<tr th:each="gp: ${gpDtoList}">
+			<td><img th:src="@{${gp.getFilePath()}}" alt="상품사진" class="imgSize"></td>
+			<td><a th:href="@{/groupPurchase/view/{itemId} (itemId=${gp.itemId})}" th:text="${gp.itemName}">상품명</a></td>
+			<td th:if="${#strings.equals(gp.status, 'Available')}" th:text="판매중"></td>
+			<td th:if="${#strings.equals(gp.status, 'Complete')}" th:text="판매완료"></td>
+			<td th:if="${#strings.equals(gp.status, 'Cancel')}" th:text="실패"></td>
+			<td th:text="|${gp.price}원|">판매가격</td>
+		</tr>
+	</table>
+</body>
+</html>
