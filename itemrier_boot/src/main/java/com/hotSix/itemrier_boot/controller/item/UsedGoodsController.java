@@ -1,6 +1,5 @@
 package com.hotSix.itemrier_boot.controller.item;
 
-import com.hotSix.itemrier_boot.domain.item.UsedGoods;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 import com.hotSix.itemrier_boot.dto.item.UsedGoodsDto;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
@@ -28,75 +27,68 @@ import java.util.List;
 @RequestMapping("/usedGoods")
 public class UsedGoodsController {
 
-	//    @Autowired
-	//    private UsedGoodsSearchService usedGoodsSearchService;
-	//
-	//    @GetMapping("/search")
-	//    public List<UsedGoods> searchUsedGoods(@RequestParam("keyword") String keyword) {
-	//        return usedGoodsSearchService.searchUsedGoods(keyword);
-	//    }
-
+//    @Autowired
+//    private UsedGoodsSearchService usedGoodsSearchService;
+//
+//    @GetMapping("/search")
+//    public List<UsedGoods> searchUsedGoods(@RequestParam("keyword") String keyword) {
+//        return usedGoodsSearchService.searchUsedGoods(keyword);
+//    }
+	
 	@Autowired
 	private UsedGoodsService usedGoodsService;
 
 	@Autowired 
 	private  UserRepository userRepository;
 
-	@GetMapping
-	public String listUsedGoods(Model model) {
-		List<UsedGoods> usedGoodsList = usedGoodsService.getAllUsedGoods();
-		model.addAttribute("usedGoodsList", usedGoodsList);
-		return "item/UsedGoodsList";
-	}
-
 	@GetMapping("/create")
 	public String saveForm() {
 		return "item/usedGoods/createForm";
 	}
-
+	
 	@PostMapping("/create")
 	public String save(@AuthenticationPrincipal UserDetails userDetail, @ModelAttribute UsedGoodsDto dto) {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername()); 
 		dto.setSeller(user);
-
+		
 		// Test
-		//		UserEntity user = userRepository.getReferenceById(952);
-		//		dto.setSeller(user);
-		//		
-		//		Category category = new Category();
-		//		category.setCatId(52);
-		//		category.setCatName("책상");
-		//		dto.setCategory(category);
-		//
+//		UserEntity user = userRepository.getReferenceById(952);
+//		dto.setSeller(user);
+//		
+//		Category category = new Category();
+//		category.setCatId(52);
+//		category.setCatName("책상");
+//		dto.setCategory(category);
+//
 		dto.setRegisterDate(LocalDateTime.now());
-		//		
-		//		usedGoodsService.save(dto);
-		//		System.out.println(dto.getItemId());
-
+//		
+//		usedGoodsService.save(dto);
+//		System.out.println(dto.getItemId());
+		
 		return "redirect:item/usedGoods/detail";
 	}
-
+	
 	@GetMapping("/view/{itemId}")
 	public String findById(@PathVariable int itemId, Model model) {
 		UsedGoodsDto ugDto = usedGoodsService.findById(itemId);
 		model.addAttribute("usedGoods", ugDto);
 		return "item/usedGoods/view";
 	}
-
+	
 	@GetMapping("/update/{itemId}")
 	public String updateForm(@PathVariable int itemId, Model model) {
 		UsedGoodsDto ugDto = usedGoodsService.findById(itemId);
 		model.addAttribute("usedGoods", ugDto);
 		return "item/usedGoods/updateForm";
 	}
-
+	
 	@PostMapping("/update")
 	public String update(@ModelAttribute UsedGoodsDto dto, Model model) {
 		UsedGoodsDto ugDto = usedGoodsService.update(dto);
 		model.addAttribute("usedGoods", ugDto);
 		return "item/usedGoods/view";
 	}
-
+	
 	@GetMapping("/delete/{itemId}")
 	public String delete(@PathVariable int itemId) {
 		usedGoodsService.delete(itemId);
