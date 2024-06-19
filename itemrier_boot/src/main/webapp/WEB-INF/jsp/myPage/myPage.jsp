@@ -46,25 +46,25 @@
 	<hr>
 	<h3>중고 거래</h3>
 	<ul>
-		<li>구매 내역 (현황)</li>
-		<li>판매, 예약 중인 상품</li>
-		<li>판매 완료 상품</li>
+		<li><a href="/myPage/usedGoodsTransactionHistory">구매 내역</a></li>
+		<li><a href="/myPage/usedGoodsTransaction/inProgress">판매, 예약 중인 상품</a></li>
+		<li><a href="/myPage/usedGoodsTransaction/ended">판매 완료 상품</a></li>
 	</ul>
 	
 	<hr>
 	<h3>공동 구매</h3>
 	<ul>
 		<li><a href="/myPage/orders/groupPurchase">구매 내역 (현황)</a></li>
-		<li>공동 구매 중인 상품</li>
-		<li>판매 완료 상품</li>
+		<li><a href="/myPage/groupPurchase/inProgress">공동 구매 중인 상품</a></li>
+		<li><a href="/myPage/groupPurchase/ended">판매 완료 상품</a></li>
 	</ul>
 
 	<hr>
 	<h3>경매</h3>
 	<ul>
 		<li><a href="/myPage/orders/auction">구매 내역 (현황)</a></li>
-		<li>경매 중인 상품</li>
-		<li>판매 완료 상품</li>
+		<li><a href="/myPage/orders/groupPurchase">경매 중인 상품</a></li>
+		<li><a href="/myPage/orders/groupPurchase">판매 완료 상품</a></li>
 	</ul>
 
 	<hr>
