@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>경매 중</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <style>
 	.myPageUsedGoods{
 		display: flex;
+		height: 1000px;
 	}
 	
 	.itemList{
@@ -61,48 +63,38 @@
 		border-radius: 20px;
 	}
 	
-	button{
-		width: 110px;
+	button {
+		
+		background-color: #e6e6fa;
+		width : 100px;
 		height: 30px;
-		background-color: #add8e6;
-		margin-left: 10px;
+		text-align: center;
+		border-radius: 20px;
 	}
 	
 </style>
 <body>
-	<div class="myPageUsedGoods">
 		<jsp:include page="../myPage.jsp" />
+	<div class="myPageUsedGoods">
 		<div class="itemList">
 			<div class="title">
 				<br>경매 중<br>
 			</div>
-			<div class="item">
-				<table>
-					<tr>
-						<td rowspan="6"><img src="https://placehold.co/180"/></td>
-						<td> </td>
-					</tr>
-					<tr>
-						<td>상품 이름</td>
-					</tr>
-					<tr>
-						<td>$가격</td>
-					</tr>
-					<tr>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="click">
-								<div class="status">현황</div>
-								<button>구매자 관리</button>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td></td>
-					</tr>
-				</table>
+			<div class=container>
+				<div class="row" align="center">
+					<c:forEach var="auction" items="${auctionList}">
+					<div class="col-md-4">
+						<img src="https://placehold.co/180" alt="상품 이미지"/>
+						<h3>상품 이름: ${auction.itemName}</h3>
+						<p>가격: ${auction.price}원</p>
+						<p>날짜:${auction.startTime}
+						</p>
+						<div class="status">${auction.status}</div>
+						<button type="button">구매자 관리</button>
+					</div>
+					</c:forEach>
+				</div>
+			</div>
 			</div>
 		</div>
 	</div>

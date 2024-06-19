@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매한 중고 물품</title>
+<title>경매 판매 완료</title>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <style>
@@ -30,9 +31,13 @@
 		padding-left: 30px; 
 	}
 	
-	
-	img{
-		margin: 20px;
+	button {
+		
+		background-color: #e6e6fa;
+		width : 100px;
+		height: 30px;
+		text-align: center;
+		border-radius: 20px;
 	}
 	
 </style>
@@ -41,19 +46,22 @@
 	<div class="myPageUsedGoods">
 		<div class="itemList">
 			<div class="title">
-				<br>중고거래 내역<br>
+				<br>경매 판매 완료<br>
 			</div>
 			<div class=container>
 				<div class="row" align="center">
-					<c:forEach var="userGoods" items="${usedGoods}">
-					<div class="col-md-4">
-						<img src="https://placehold.co/180" alt="상품 이미지"/>
-						<h3>상품 이름: ${userGoods.itemName}</h3>
-						<p>가격: ${userGoods.price}원</p>
-						<p>판매자: ${userGoods.seller.nickname}원</p>
-						<p>날짜:${userGoods.registerDate}</p>
-						<div class="status">${userGoods.status}</div>
-					</div>
+					 <c:forEach var="entry" items="${auctionList.entrySet()}">
+				        <c:set var="auction" value="${entry.key}" />
+				        <c:set var="details" value="${entry.value}" />
+						<div class="col-md-4">
+							<img src="https://placehold.co/180" alt="상품 이미지"/>
+							<h3>상품 이름: ${auction.itemName}</h3>
+							<p>가격: ${auction.price}원</p>
+							<p>거래자: ${details}원</p>
+							<p>날짜:${auction.startTime}
+							</p>
+							<button type="button">구매자 관리</button>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
