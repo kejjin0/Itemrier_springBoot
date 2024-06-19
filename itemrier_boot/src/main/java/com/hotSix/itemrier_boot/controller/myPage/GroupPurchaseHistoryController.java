@@ -34,7 +34,7 @@ public class GroupPurchaseHistoryController {
 		
 		List<GroupPurchaseDto> groupPurchaseList = groupPurchaseService.getGroupPurchaseStatusSearch(userId, status);
 		System.out.println("groupPurchase" + groupPurchaseList);
-		model.addAttribute(groupPurchaseList);
+		model.addAttribute("groupPurchaseList", groupPurchaseList);
 		
 		return "myPage/groupPurchase/groupPurchaseInProgress";
 	}
@@ -48,7 +48,7 @@ public class GroupPurchaseHistoryController {
 		
 		List<GroupPurchaseDto> groupPurchaseList = groupPurchaseService.getGroupPurchaseStatusSearch(userId, status);
 		System.out.println("groupPurchase" + groupPurchaseList);
-		model.addAttribute(groupPurchaseList);
+		model.addAttribute("groupPurchaseList", groupPurchaseList);
 		
 		return "myPage/groupPurchase/groupPurchaseEnded";
 	}
