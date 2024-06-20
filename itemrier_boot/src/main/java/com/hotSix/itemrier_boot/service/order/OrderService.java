@@ -33,6 +33,17 @@ public class OrderService {
 		return order;
 	}
 	
+	// 구매자 정보 확인
+	public long getOrderCount(int itemId, OrderStatus status) {
+		long count = orderRepository.countByItemIdAndStatus(itemId, status);
+		return count;
+	}
+	
+	public List<Order> getOrderList(int itemId, OrderStatus status){
+		List<Order> orders = orderRepository.findOrderByItemIdAndStatus(itemId, status);
+		return orders;
+	}
+	
 	// (구매자)
 	// 마이페이지 (구매) 공동 구매 주문 내역
 	public List<Order> getOrders(int buyerId, String type){

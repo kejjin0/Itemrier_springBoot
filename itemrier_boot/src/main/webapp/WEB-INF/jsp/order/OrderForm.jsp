@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,39 +30,39 @@
 				//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 				alert("결제 완료");
 				var result = {
-						orderId : rsp.merchant_uid,
-						buyerId : $('#buyerId').val(),
-						buyerInfo :{
-							buyerName : $('#buyerName').val(),
-							phoneNum : rsp.buyer_tel	
-						},
-						deliveryInfo :{
-							zipCode : rsp.buyer_postcode,
-							addStreet : $('#addStreet').val(),
-							addDetail : $('#addDetail').val(),
-							deliveryLocation : $('#deliveryLocation').val(),
-							deliveryRequest : $('#deliveryRequest').val()
-						},
-						email : rsp.buyer_email,
-						price : rsp.paid_amount,
-						quantity : 1,
-						pg : "html5_inicis",
-						pay_method : "card",
-						orderDate : new Date().toISOString(),
-						itemId : $('#itemId').val(),
-						type : $('#type').val()
+					orderId : rsp.merchant_uid,
+					buyerId : $('#buyerId').val(),
+					buyerInfo : {
+						buyerName : $('#buyerName').val(),
+						phoneNum : rsp.buyer_tel
+					},
+					deliveryInfo : {
+						zipCode : rsp.buyer_postcode,
+						addStreet : $('#addStreet').val(),
+						addDetail : $('#addDetail').val(),
+						deliveryLocation : $('#deliveryLocation').val(),
+						deliveryRequest : $('#deliveryRequest').val()
+					},
+					email : rsp.buyer_email,
+					price : rsp.paid_amount,
+					quantity : 1,
+					pg : "html5_inicis",
+					pay_method : "card",
+					orderDate : new Date().toISOString(),
+					itemId : $('#itemId').val(),
+					type : $('#type').val()
 				}
-				
+
 				$.ajax({
 					url : 'insertOrder', //cross-domain error가 발생하지 않도록 주의해주세요
 					type : 'POST',
 					contentType : "application/json; charset=utf-8",
 					data : JSON.stringify(result),
-					success: function(res){
+					success : function(res) {
 						console.log(res);
-						window.location.href=res;
+						window.location.href = res;
 					},
-					error: function(err){
+					error : function(err) {
 						alert("Error: " + JSON.stringify(err));
 						console.log(err);
 					}
@@ -154,8 +154,18 @@ button {
 td {
 	width: 250px;
 }
+
+.imgFile {
+	height: 200px;
+	width: 200px;
+}
+
+b {
+	font-size: 20px;
+}
 </style>
 <body>
+	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="title">
 		<br>주문<br>
 	</div>
@@ -189,7 +199,8 @@ td {
 				</tr>
 				<tr>
 					<td>배송 위치</td>
-					<td>&nbsp;<input type="text" class="smallText" id="deliveryLocation"></td>
+					<td>&nbsp;<input type="text" class="smallText"
+						id="deliveryLocation"></td>
 				</tr>
 				<tr class="longInfo">
 					<td>배송 요청 사항</td>
@@ -198,21 +209,21 @@ td {
 				<tr>
 				</tr>
 			</table>
-			<input type="hidden" id="buyerId" value="${buyerId}">
-			<input type="hidden" id="itemName" value="${itemName}">
-			<input type="hidden" id="price" value="${price}">
-			<input type="hidden" id="itemId" value="${itemId}">
-			<input type="hidden" id="orderId" value="${orderId}">
-			<input type="hidden" id="type" value="${type}">
+			<input type="hidden" id="buyerId" value="${buyerId}"> <input
+				type="hidden" id="itemName" value="${itemName}"> <input
+				type="hidden" id="price" value="${price}"> <input
+				type="hidden" id="itemId" value="${itemId}"> <input
+				type="hidden" id="orderId" value="${orderId}"> <input
+				type="hidden" id="type" value="${type}">
 		</div>
 		<div class="item">
 			<table class="itemTable">
 				<tr>
-					<td rowspan="3"><img src="https://placehold.co/180" /></td>
-					<td>${itemName}</td>
+					<td rowspan="3"><img src="${filePath}" onerror="this.src='https://placehold.co/150'" class="imgFile" /></td>
+					<td><b>${itemName}</b></td>
 				</tr>
 				<tr>
-					<td>${price}원</td>
+					<td><b>${price}원</b></td>
 				</tr>
 			</table>
 			<button onclick="requestPay()">결제하기</button>

@@ -36,11 +36,11 @@ public interface OrderRepository extends JpaRepository<Order, String>{
 	// (판매자)
 	// 상품 구매자 정보 확인 (총 구매자수, 구매자 정보)	// itemId가 Order에 없음
 	@Query("SELECT count(i) FROM Order o JOIN o.orderItems i WHERE i.itemId = :itemId and o.status = :status")
-	int countByItemIdAndStatus(@Param("itemId") int itemId, @Param("status") OrderStatus status);
+	long countByItemIdAndStatus(@Param("itemId") int itemId, @Param("status") OrderStatus status);
 	
-	@Query(value = "SELECT o FROM Order o JOIN o.orderItems i WHERE i.itemId = :itemId and o.status = :status",
-			countQuery = "SELECT count(o) FROM Order o JOIN o.orderItems i WHERE i.itemId = :itemId and o.status = :status")
-	Page<Order> findOrderByItemIdAndStatus(@Param("itemId") int itemId, @Param("status") OrderStatus status, Pageable pageable);
+	
+	@Query(value = "SELECT o FROM Order o JOIN o.orderItems i WHERE i.itemId = :itemId and o.status = :status")
+	List<Order> findOrderByItemIdAndStatus(@Param("itemId") int itemId, @Param("status") OrderStatus status);
 	
 	// 송장 번호 입력 및 수정 => save 사용
 }

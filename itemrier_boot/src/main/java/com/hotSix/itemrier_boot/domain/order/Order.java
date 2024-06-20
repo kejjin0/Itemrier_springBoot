@@ -40,7 +40,7 @@ public class Order {
 	private List<OrderItem> orderItems;
 	
 	@Column(nullable = true)
-	private String type; // 구매자 아이디
+	private String type; // 구매 물품 타입
 
 	@Column(nullable = false)
 	private int buyerId; // 구매자 아이디

@@ -44,6 +44,11 @@
 		border-radius: 20px;
 	}
 	
+	.imgFile{
+		height: 130px;
+		width:130px;
+	}
+	
 </style>
 <body>
 		<jsp:include page="../myPage.jsp" />
@@ -58,7 +63,7 @@
 				        <c:set var="auction" value="${entry.key}" />
 				        <c:set var="details" value="${entry.value}" />
 						<div class="col-md-4">
-							<img src="https://placehold.co/180" alt="상품 이미지"/>
+							<img src="${auction.filePath}" alt="상품 이미지" onerror="this.src='https://placehold.co/150'" class="imgFile"/>
 							<h3>상품 이름: ${auction.itemName}</h3>
 							<p>가격: ${auction.price}원</p>
 							<p>거래자: ${details}</p>
@@ -66,7 +71,10 @@
 							<fmt:parseDate value="${auction.startTime }" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parseDateTime" type="both" />
 							<fmt:formatDate value="${parseDateTime}" pattern="yyyy-MM-dd"/>
 							</p>
-							<button type="button">구매자 관리</button>
+							<a
+								href="<c:url value='/myPage/seller/auction/orders'>
+										<c:param name='itemId' value='${auction.itemId}'/>
+										</c:url>"><button type="button">구매자 관리</button></a>
 						</div>
 					</c:forEach>
 				</div>
