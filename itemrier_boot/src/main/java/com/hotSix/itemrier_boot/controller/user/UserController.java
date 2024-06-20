@@ -92,21 +92,21 @@ public class UserController {
 	}
 	
 	@PatchMapping("/myPage/change") 
-	public String changeUser(@AuthenticationPrincipal UserDetails userDetail, @Valid ProfileDto profileDto, Errors errors, Model model) {
+	public String changeUser(@AuthenticationPrincipal UserDetails userDetail, ProfileDto profileDto, Errors errors, Model model) {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername()); 
 		System.out.println(user.getPassword());
-        if (errors.hasErrors()) {
-            /* 회원가입 실패 시 입력 데이터 유지 */
-            model.addAttribute("userDto", profileDto);
-
-            /* 유효성 검사를 통과하지 못한 필드와 메세지 핸들링 */
-            Map<String, String> validatorResult = userService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
-            /* 프로필수정 페이지로 리턴 */
-            return  "myPage/profile/profile";
-        }
+//        if (errors.hasErrors()) {
+//            /* 회원가입 실패 시 입력 데이터 유지 */
+//            model.addAttribute("userDto", profileDto);
+//
+//            /* 유효성 검사를 통과하지 못한 필드와 메세지 핸들링 */
+//            Map<String, String> validatorResult = userService.validateHandling(errors);
+//            for (String key : validatorResult.keySet()) {
+//                model.addAttribute(key, validatorResult.get(key));
+//            }
+//            /* 프로필수정 페이지로 리턴 */
+//            return  "myPage/profile/profile";
+//        }
 		System.out.println("t수정");
 		userService.updateUser(user, profileDto);
 		

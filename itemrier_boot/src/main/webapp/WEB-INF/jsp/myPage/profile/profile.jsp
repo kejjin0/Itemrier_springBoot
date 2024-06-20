@@ -56,7 +56,7 @@ input {
   	margin-top: 7px;
 }
 
-.errorMessage, .mismatch-message {
+.name-message, .phoneNum-message, .nickname-message, .zipcode-message {
 	color:red;
 }
         
@@ -102,24 +102,27 @@ input {
 	<div class="joinFormContainer">
 		<h2>회원 정보 수정</h2>
 		<div class="formContainer">	
-			<form action="/myPage/change" method="post" modelAttribute="userDto">
+			<form action="/myPage/change" name="pageForm" method="post" modelAttribute="userDto">
 				<input type="hidden" name="_method" value="patch"/>
 				아이디<br />
-				<input type="text" name="email" value="${userDto.email }"/>
-				<div class="errorMessage">${valid_email}</div>
+				<input type="text" name="email" value="${userDto.email }" readonly/>
 				<br />
 				이름<br />
-				<input type="text" name="name" value="${userDto.name }"/>
+				<input type="text" name="name" id="name" value="${userDto.name }"/>
+				<div class="name-message hide">이름을 입력해주세요.</div>	
 				<br /><br />
 				핸드폰 번호<br />
-				<input type="text" name="phoneNum" value="${userDto.phoneNum }" placeholder="- 제외 휴대폰 번호를 입력해주세요."/>
-				<div class="errorMessage">${valid_phoneNum}</div>	
+				<input type="text" name="phoneNum" id="phoneNum" value="${userDto.phoneNum }" placeholder="- 제외 휴대폰 번호를 입력해주세요."/>
+				<div class="phoneNum-message hide">- 제외 휴대폰 번호를 입력해주세요.</div>		
+				<br /><br />
 				닉네임<br />
-				<input type="text" name="nickname" value="${userDto.nickname }"/>
+				<input type="text" name="nickname" id="nickname" value="${userDto.nickname }"/>
+				<div class="nickname-message hide">닉네임을 입력해주세요</div>	
 				<br /><br />
 				주소<br />
 				<input class="zipCode" type="text" name="zipcode" value="${userDto.zipcode }"/>
 				<button class="zipCodeBtn"  onclick="toggleModal(event)"> 우편번호검색 </button>
+			    <div class="zipcode-message hide">주소를 입력해주세요.</div>	
 			    <div id="myModal" class="modal">
 			        <div class="modal-content">
 			            <span class="close" onclick="toggleModal()">&times;</span>
@@ -132,7 +135,7 @@ input {
 				<input type="text" name="addDetail" value="${userDto.addDetail }"/>
 				<br />
 			
-				<Button class="signBtn" type="submit">수정하기</Button>
+				<Button class="signBtn" type="submit" onclick="return validCheck(event)">수정하기</Button>
 			</form>
 		</div>	
 	</div>
@@ -174,6 +177,38 @@ input {
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelector(".zipCodeBtn").addEventListener("click", toggleModal);
         });
+        
+        let elNameMismatchMessage = document.querySelector('.name-message');
+        let elPhoneNumMismatchMessage = document.querySelector('.phoneNum-message');
+        let elNicknameMismatchMessage = document.querySelector('.nickname-message');
+        let elZipcodeMismatchMessage = document.querySelector('.zipcode-message');
+
+        function validCheck(event) {
+        	if (pageForm.name.value.length == 0 || pageForm.phoneNum.value.length == 0|| pageForm.nickname.value.length == 0 || pageForm.zipcode.value.length == 0) {
+	        	if (pageForm.name.value.length == 0) {
+	        		console.log("name실행")
+	        		elNameMismatchMessage.classList.remove('hide');
+	        	} 
+	
+				if (pageForm.phoneNum.value.length == 0) {
+					console.log("phoneNum실행")
+					elPhoneNumMismatchMessage.classList.remove('hide');
+	        	}
+	
+				if (pageForm.nickname.value.length == 0) {
+					console.log("nickname실행")
+					elNicknameMismatchMessage.classList.remove('hide');
+	        	} 
+	
+				if (pageForm.zipcode.value.length == 0) {
+					console.log("zipcode실행")
+	        		elZipcodeMismatchMessage.classList.remove('hide');
+	        	}
+
+        		return false;
+        	}
+        }
+     
     </script>
 </body>
 </html>
