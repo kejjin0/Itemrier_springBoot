@@ -132,16 +132,19 @@ display: none;
 				<p />
 				이름<br />
 				<input type="text" name="name" />
+				<div class="errorMessage">${valid_name}</div>	
 				<br /><br />
 				핸드폰 번호<br />
 				<input type="text" name="phoneNum" placeholder="- 제외 휴대폰 번호를 입력해주세요."/>
 				<div class="errorMessage">${valid_phoneNum}</div>	
 				닉네임<br />
 				<input type="text" name="nickname" />
+				<div class="errorMessage">${valid_nickname}</div>	
 				<br /><br />
 				주소<br />
 				<input class="zipCode" type="text" name="zipcode" />
 				<button class="zipCodeBtn"  onclick="toggleModal(event)"> 우편번호검색 </button>
+				<div class="errorMessage">${valid_zipcode}</div>	
 			    <div id="myModal" class="modal">
 			        <div class="modal-content">
 			            <span class="close" onclick="toggleModal()">&times;</span>
