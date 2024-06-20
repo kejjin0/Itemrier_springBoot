@@ -66,4 +66,22 @@ public class UsedGoods extends ItemInfo {
 		usedGoods.setFilePath(usedGoodsDto.getFilePath());
 		return usedGoods;
   	}
+  	
+  	public static UsedGoods toUpdateEntityWithBuyerId(UsedGoodsDto usedGoodsDto) {
+  		UsedGoods usedGoods = new UsedGoods();
+  		usedGoods.setItemId(usedGoodsDto.getItemId());
+  		usedGoods.setItemName(usedGoodsDto.getItemName());
+  		usedGoods.setDescription(usedGoodsDto.getDescription());
+		usedGoods.setPrice(usedGoodsDto.getPrice());
+		usedGoods.setStatus(usedGoodsDto.getStatus());
+		usedGoods.setCategory(usedGoodsDto.getCategory());
+		usedGoods.setCondition(usedGoodsDto.getCondition());
+		usedGoods.setContactType(usedGoodsDto.getContactType());
+		usedGoods.setSeller(usedGoodsDto.getSeller());
+		usedGoods.setRegisterDate(usedGoodsDto.getRegisterDate());
+		usedGoods.setFileName(usedGoodsDto.getFileName());
+		usedGoods.setFilePath(usedGoodsDto.getFilePath());
+		usedGoods.setBuyerId(usedGoodsDto.getBuyerId());
+		return usedGoods;
+  	}
 }

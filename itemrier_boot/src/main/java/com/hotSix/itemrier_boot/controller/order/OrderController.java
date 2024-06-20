@@ -117,7 +117,7 @@ public class OrderController {
 		System.out.println(order.toString());
 		
 		// 공동구매 현재 판매 수량 업데이트
-		if(orderDto.getType()=="groupPurchase") {
+		if(orderDto.getType().equals("groupPurchase")) {
 			groupPurchaseService.updateCurrentQuantity(item.getItemId());
 		}
 

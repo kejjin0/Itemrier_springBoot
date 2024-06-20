@@ -88,15 +88,16 @@ public class UsedGoodsHistoryController {
 
 	// 중고거래 구매자 확정
 	@PostMapping("/usedGoodTransaction/insertBuyer")
-	public String insertBuyerId(@RequestParam("itemId") int itemId, @RequestParam("buyerId") int buyerId, Model model,
-			RedirectAttributes redirect) {
+	public String insertBuyerId(@RequestParam("itemId") int itemId, @RequestParam("buyerId") Integer buyerId, Model model) {
 		boolean rslt = userRepository.existsById(buyerId);
 		String message="";
 		if(rslt==true) {
 			UsedGoodsDto ugDto = usedGoodsBuyerService.findById(itemId);
 			ugDto.setBuyerId(buyerId);
 			ugDto.setStatus(ItemStatus.Complete);
-			usedGoodsBuyerService.update(ugDto);
+			System.out.println("buyerId : "+ buyerId);
+			UsedGoodsDto result = usedGoodsBuyerService.update(ugDto);
+			System.out.println(result);
 			message="완료되었습니다.";
 		}else {
 			message="존재하지 않는 사용자입니다.";

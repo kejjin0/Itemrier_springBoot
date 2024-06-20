@@ -157,6 +157,7 @@ public class GroupPurchaseService {
 		int count = orderItemRepository.countByItemId(itemId);
 		GroupPurchase gp = groupPurchaseRepository.getReferenceById(itemId);
 		gp.setTotalQuantity(count);
+		groupPurchaseRepository.save(gp);
 	}
 
 	// 검색

@@ -157,7 +157,7 @@ td {
 </style>
 <body>
 	<div class="title">
-		<br>경매 주문<br>
+		<br>주문<br>
 	</div>
 	<div class="info">
 		<div class="write">
