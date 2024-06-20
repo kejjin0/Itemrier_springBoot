@@ -9,11 +9,6 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <style>
-	.myPageIndex {
-		display: flex;
-		height: 1000px;
-	}
-	
 	.myPageUsedGoods{
 		display: flex;
 		height: 1000px;
@@ -79,9 +74,8 @@
 	
 </style>
 <body>
-	<jsp:include page="../myPage.jsp" />
-	<div class="myPageIndex">
-
+		<jsp:include page="../myPage.jsp" />
+	<div class="myPageUsedGoods">
 		<div class="itemList">
 			<div class="title">
 				<br>경매 중<br>
