@@ -18,9 +18,7 @@ public class UsedGoodsDto {
 	private String description;
 	private int price; // 가격
 	private ItemStatus status;
-	
 	private String strStatus; // status추가
-	
 	private LocalDateTime registerDate;
 	private long userId;
 	private UserEntity seller;

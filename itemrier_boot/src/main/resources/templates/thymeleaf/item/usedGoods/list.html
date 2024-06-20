@@ -47,7 +47,7 @@
 			<th>판매현황</th>
 			<th>가격</th>
 		</tr>
-		<tr th:each="ug: ${ugList}">
+		<tr th:each="ug: ${usedGoodsList}">
 			<td><img th:src="@{${ug.getFilePath()}}" alt="상품사진" class="imgSize"></td>
 			<td><a th:href="@{/usedGoods/view/{itemId} (itemId=${ug.itemId})}" th:text="${ug.itemName}">상품명</a></td>
 			<td th:if="${#strings.equals(ug.status, 'Available')}" th:text="판매중"></td>
