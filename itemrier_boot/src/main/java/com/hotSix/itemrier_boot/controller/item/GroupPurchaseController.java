@@ -1,5 +1,6 @@
 package com.hotSix.itemrier_boot.controller.item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import com.hotSix.itemrier_boot.domain.category.Category;
 import com.hotSix.itemrier_boot.domain.item.GroupPurchase;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 import com.hotSix.itemrier_boot.dto.item.GroupPurchaseDto;
+import com.hotSix.itemrier_boot.dto.item.RequestDto;
 import com.hotSix.itemrier_boot.repository.item.CategoryRepository;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
 import com.hotSix.itemrier_boot.service.item.GroupPurchaseService;
@@ -97,11 +99,21 @@ public class GroupPurchaseController {
 	// 공동구매 상품 목록
 	@GetMapping("/list")
 	public String findAll(Model model) {
-		List<GroupPurchaseDto> gpDtoList = groupPurchaseService.findAll();
+		List<GroupPurchaseDto> gpList = groupPurchaseService.findAll();
+		List<List<GroupPurchaseDto>> gpDtoList = chunkList(gpList, 3);
 		model.addAttribute("gpDtoList", gpDtoList);
 		return "thymeleaf/item/groupPurchase/list";
 	}
 
+	// 리스트를 3개씩 묶음
+	private List<List<GroupPurchaseDto>> chunkList(List<GroupPurchaseDto> list, int chunkSize) {
+	    List<List<GroupPurchaseDto>> groupPurchaseList = new ArrayList<>();
+	    for (int i = 0; i < list.size(); i += chunkSize) {
+	    	groupPurchaseList.add(list.subList(i, Math.min(i + chunkSize, list.size())));
+	    }
+	    return groupPurchaseList;
+	}
+	
 	// 공동구매 상품 상세보기
 	@GetMapping("/view/{itemId}")
 	public String findById(@PathVariable int itemId, Model model, @AuthenticationPrincipal UserDetails userDetail) {

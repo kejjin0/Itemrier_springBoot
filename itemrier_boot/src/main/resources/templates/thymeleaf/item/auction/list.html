@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <title>경매상품 목록</title>
 <style>
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	
+	h1 {
+		display: flex;
+    	justify-content: center;
+    	align-items: center;
+	}
+
 	h2 {
 		text-align: center;
 	}
@@ -21,32 +32,41 @@
 	td {
 		border: none;
 		padding: 30px;
+		text-align: center;
 	}
 	tr {
+		border-top: 1px solid black;
 		border-bottom: 1px solid black;
 	}
 	th {
         font-size: 20px;
         text-align: center;
     }
+    .title {
+    	font-weight: bold;
+    }
+    .status {
+    	color: gray;
+    }
 </style>
 </head>
 <body>
+	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
 	<h2>경매 상품 목록</h2>
 	<table>
-		<tr>
-			<th>이미지</th>
-			<th>상품명</th>
-			<th>판매현황</th>
-			<th>현재최고가격</th>
-		</tr>
-		<tr th:each="auction: ${auctionList}">
-			<td><img th:src="@{${auction.getFilePath()}}" alt="상품사진" class="imgSize"></td>
-			<td><a th:href="@{/auction/view/{itemId} (itemId=${auction.itemId})}" th:text="${auction.itemName}">상품명</a></td>
-			<td th:if="${#strings.equals(auction.status, 'Available')}" th:text="판매중"></td>
-			<td th:if="${#strings.equals(auction.status, 'Complete')}" th:text="판매완료"></td>
-			<td th:text="|${auction.currentBid}원|">현재가</td>
-		</tr>
+		 <tr th:each="row : ${auctionList}">
+            <td th:each="auction : ${row}">
+                <img th:src="@{${auction.getFilePath()}}" alt="상품사진" class="imgSize">
+                <br>
+                <a th:href="@{/auction/view/{itemId} (itemId=${auction.itemId})}" th:text="${auction.itemName}" class="title">상품명</a>
+                <p>
+                <span th:if="${#strings.equals(auction.status, 'Available')}" th:text="판매중"></span>
+                <span th:if="${#strings.equals(auction.status, 'Complete')}" th:text="판매완료" class="status"></span>
+                <span th:if="${#strings.equals(auction.status, 'Cancel')}" th:text="경매실패" class="status"></span>
+                <br>
+                <span th:text="|${auction.currentBid}원|">현재가</span>
+            </td>
+        </tr>
 	</table>
 </body>
 </html>

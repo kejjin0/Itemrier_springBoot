@@ -33,6 +33,9 @@ public class AuctionScheduler {
 			    Bid highestBid = highestBids.get(0); // 가장 큰 입찰을 가져옴
 			    auction.setWinner(highestBid.getUser().getUserId());
 			} 
+			if (auction.getWinner() == null) {
+				auction.setStatus(ItemStatus.Cancel);
+			}
 			auctionRepository.save(auction);
 		}
 	}
