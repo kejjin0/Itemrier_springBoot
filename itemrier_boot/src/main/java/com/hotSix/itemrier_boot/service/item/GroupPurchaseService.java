@@ -161,10 +161,18 @@ public class GroupPurchaseService {
 	}
 
 	// 검색
-	 public List<GroupPurchaseDto> searchGroupPurchase(String query) {
-	        List<GroupPurchase> groupPurchases = groupPurchaseRepository.findByItemNameContaining(query);
-	        return groupPurchases.stream()
-	                .map(GroupPurchaseDto::toDTO)
-	                .collect(Collectors.toList());
-	    }
+	public List<GroupPurchaseDto> searchGroupPurchase(String query) {
+		List<GroupPurchase> groupPurchases = groupPurchaseRepository.findByItemNameContaining(query);
+		return groupPurchases.stream()
+				.map(GroupPurchaseDto::toDTO)
+				.collect(Collectors.toList());
+	}
+
+	//추천
+	public List<GroupPurchaseDto> recommend(int categoryId, int itemId) {
+		List<GroupPurchase> recommendedItems = groupPurchaseRepository.findTop5ByCategoryCatIdAndItemIdNotOrderByStartTimeDesc(categoryId, itemId);
+		return recommendedItems.stream()
+				.map(groupPurchase -> groupPurchase.toGroupPurchaseDto(groupPurchase))
+				.collect(Collectors.toList());
+	}
 }

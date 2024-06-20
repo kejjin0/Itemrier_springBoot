@@ -20,4 +20,8 @@ public interface UsedGoodsRepository extends JpaRepository<UsedGoods, Integer> {
 
 	//상품이름 검색
 	List<UsedGoods> findByItemNameContaining(String query);
+
+	//추천
+	List<UsedGoods> findTop5ByCategoryCatIdAndItemIdNotOrderByRegisterDateDesc(int categoryId, int itemId);
+
 }
