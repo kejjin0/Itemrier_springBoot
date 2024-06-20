@@ -28,14 +28,15 @@ public class ReviewService {
 		ReviewDto result = reviewRepository.findAverageByItemId(itemId);
 		
         Review review = new Review();
-		if (result!=null ) {
+		if (result.getSatisfactionRate()!=null) {
 			review.setSatisfactionRate(result.getSatisfactionRate());
 			review.setSpeedOfAnswer(result.getSpeedOfAnswer());
 			review.setPromise(result.getPromise());
 		}else {
-			review.setSatisfactionRate(0.0);
-			review.setSpeedOfAnswer(0.0);
-			review.setPromise(0.0);
+			Double score = 0.0;
+			review.setSatisfactionRate(score);
+			review.setSpeedOfAnswer(score);
+			review.setPromise(score);
 		}
 		return review;
 	}
@@ -45,14 +46,15 @@ public class ReviewService {
 		ReviewDto result = reviewRepository.findAverageByUserId(userId);
 		
 		Review review = new Review();
-		if (result!=null ) {
+		if (result.getSatisfactionRate()!=null) {
 			review.setSatisfactionRate(result.getSatisfactionRate());
 			review.setSpeedOfAnswer(result.getSpeedOfAnswer());
 			review.setPromise(result.getPromise());
 		}else {
-			review.setSatisfactionRate(0.0);
-			review.setSpeedOfAnswer(0.0);
-			review.setPromise(0.0);
+			Double score = 0.0;
+			review.setSatisfactionRate(score);
+			review.setSpeedOfAnswer(score);
+			review.setPromise(score);
 		}
 		return review;
 	}
