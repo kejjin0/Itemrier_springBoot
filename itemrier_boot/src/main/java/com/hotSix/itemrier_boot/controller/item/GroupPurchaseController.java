@@ -107,11 +107,15 @@ public class GroupPurchaseController {
 	public String findById(@PathVariable int itemId, Model model, @AuthenticationPrincipal UserDetails userDetail) {
 		GroupPurchaseDto gpDto = groupPurchaseService.findById(itemId);
 		model.addAttribute("groupPurchase", gpDto);
-
+//
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername());
 		int sellerId = user.getUserId();
 		model.addAttribute("loginUserId", sellerId);
 
+        // 추천 상품 추가
+        List<GroupPurchaseDto> recommendations = groupPurchaseService.recommend(gpDto.getCategory().getCatId(), itemId);
+        model.addAttribute("recommendedItems", recommendations);
+        
 		return "thymeleaf/item/groupPurchase/view";
 	}
 
