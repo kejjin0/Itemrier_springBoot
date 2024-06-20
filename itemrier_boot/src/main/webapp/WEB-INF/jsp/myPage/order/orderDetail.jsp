@@ -8,6 +8,18 @@
 <title>주문 내역</title>
 </head>
 <style>
+.myPageIndex {
+	display: flex;
+	height: 1000px;
+}
+
+.itemList {
+	float: rigth;
+	margin-top: 10px;
+	margin-left: 30px;
+	flex-grow: 1;
+}
+
 .title {
 	background-color: #fff0f5;
 	font-size: 25px;

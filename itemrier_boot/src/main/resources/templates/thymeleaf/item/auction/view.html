@@ -177,6 +177,8 @@ hr {
 	</table>
 
 	<hr>
+	<!-- 경매 결제하기 // startPrice에서 결제 가격 바꾸기 -->
+				<button th:onclick="viewOrderForm(/*[[${auction.itemId}]]*/, /*[[${auction.itemName}]]*/, /*[[${auction.startPrice}]]*/)" id="btn1">결제하기</button>
 
 	<div class="winner">
 		<div th:if="${auction.winner != null}">
@@ -278,6 +280,17 @@ hr {
 			url += '?itemId=' + encodeURIComponent(itemId);
 
 			window.open(url, "상품 리뷰", "width=600, height=500")
+		}
+		
+		// 주문하기
+		function viewOrderForm(itemId,itemName,price){
+			var url = "/orderForm";
+			url += '?itemId=' + encodeURIComponent(itemId);
+			url += '&itemName=' + encodeURIComponent(itemName);
+			url += '&price=' + encodeURIComponent(price);
+			url += '&type=' + encodeURIComponent("auction");
+			
+			window.location.href = url;
 		}
 	</script>
 </body>
