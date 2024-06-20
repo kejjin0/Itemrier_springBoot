@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,10 @@
 						<img src="https://placehold.co/180" alt="상품 이미지"/>
 						<h3>상품 이름: ${userGoods.itemName}</h3>
 						<p>가격: ${userGoods.price}원</p>
-						<p>올린 날짜:${userGoods.registerDate}
+						<p>올린 날짜:
+						
+						<fmt:parseDate value="${userGoods.registerDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parseDateTime" type="both" />
+							<fmt:formatDate value="${parseDateTime}" pattern="yyyy-MM-dd"/>
 						</p>
 						<div class="status">${userGoods.status}</div>
 					</div>
