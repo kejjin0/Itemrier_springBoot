@@ -77,7 +77,7 @@ public class UsedGoodsService {
 	}
 	
 	public UsedGoodsDto update(UsedGoodsDto dto) {
-		UsedGoods usedGoods = UsedGoods.toUpdateEntity(dto);
+		UsedGoods usedGoods = UsedGoods.toUpdateEntityWithBuyerId(dto);
 		usedGoodsRepository.save(usedGoods);
 		
 		return findById(dto.getItemId());

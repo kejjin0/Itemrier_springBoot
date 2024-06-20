@@ -49,7 +49,28 @@
 		margin: 20px;
 	}
 	
+	.reviewWriteBtn {
+		width: 100px;
+		height: 30px;
+		border-radius: 5px;
+		background-color: #add8e6;
+		font-size: 13px;
+	}
+	
 </style>
+<script>
+	function openWriteReview(itemId, buyerId) {
+		var url = "/write/reviewForm";
+		url += '?itemId=' + encodeURIComponent(itemId);
+		url += '&userId=' + encodeURIComponent(buyerId);
+	
+		window.open(url, "리뷰 작성", "width=600, height=500")
+	}
+	
+	function refreshWindow() {
+		window.location.reload();
+	}
+</script>
 <body>
 <jsp:include page="../myPage.jsp" />
 	<div class="myPageUsedGoods">
@@ -68,6 +89,9 @@
 						<p>올린 날짜:${userGoods.registerDate}
 						</p>
 						<div class="status">${userGoods.status}</div>
+						<div><button class="reviewWriteBtn"
+										onclick="openWriteReview('${userGoods.itemId}', '${userGoods.buyerId}')">리뷰
+										작성하기</button></td></div>
 					</div>
 					</c:forEach>
 				</div>
