@@ -53,6 +53,7 @@ public class AuctionDto {
     private LocalDateTime startTime; // 시작시간(등록 날짜)
     
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	@NotNull(message = "마감일은 필수 선택 항목입니다.")
     private LocalDateTime endTime; // 종료시간
     
     private String fileName; // 파일이름
