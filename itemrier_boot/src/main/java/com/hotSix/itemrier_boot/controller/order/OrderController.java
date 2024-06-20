@@ -221,25 +221,6 @@ public class OrderController {
 		// order 세부 정보 보여주는 곳으로 이동
 		return "redirct:/myPage/order/cancel";
 	}
-
-	// 취소 확인 정보 전달
-	@GetMapping("/myPage/order/cancel")
-	public String viewCancelConfirm(@RequestParam("orderId") String orderId, Model model) throws Exception {
-
-		Order order = this.orderService.getOrder(orderId);
-		model.addAttribute("order", order);
-		return "orderCancelInfo";
-	}
-
-	// 결제 확인 정보 전달
-	@GetMapping("/myPage/order/completion")
-	public String viewCompletionConfirm(@RequestParam("orderId") String orderId, Model model) throws Exception {
-
-		Order order = this.orderService.getOrder(orderId);
-		model.addAttribute("order", order);
-		return "orderCompletionInfo";
-	}
-
 	
 	// 공동 구매 물품 구매자 정보 확인
 	@GetMapping("/myPage/seller/groupPurchase/orders")
@@ -255,6 +236,7 @@ public class OrderController {
 		return "myPage/order/seller/viewGroupPurchaseBuyers";
 	}
 	
+	// 경매 구매자 정보 확인
 	@GetMapping("/myPage/seller/auction/orders")
 	public String viewAuctionOrders(@RequestParam("itemId")int itemId, Model model) {
 		List<Order> orders = this.orderService.getOrderList(itemId, OrderStatus.Complete);
