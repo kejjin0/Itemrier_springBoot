@@ -22,4 +22,7 @@ public interface GroupPurchaseRepository extends JpaRepository<GroupPurchase, In
 
 	//상품명 검색
 	List<GroupPurchase> findByItemNameContaining(String itemName);
+	
+	//추천 
+	List<GroupPurchase> findTop5ByCategoryCatIdAndItemIdNotOrderByStartTimeDesc(int categoryId, int itemId);
 }

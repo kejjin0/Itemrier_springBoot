@@ -86,10 +86,21 @@ public class UsedGoodsController {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername());
 		int sellerId = user.getUserId();
 		model.addAttribute("loginUserId", sellerId);
-		
+//		
+		// 추천 상품 추가
+        List<UsedGoodsDto> recommendations = usedGoodsService.recommend(ugDto.getCategory().getCatId(), itemId);
+        model.addAttribute("recommendations", recommendations);
+        
 		return "thymeleaf/item/usedGoods/view";
 	}
 	
+//	 @GetMapping("/recommendations/{categoryId}/{itemId}")
+//	    public String showRecommendations(@PathVariable int categoryId, @PathVariable int itemId, Model model) {
+//	        List<UsedGoodsDto> recommendations = usedGoodsService.recommend(categoryId, itemId);
+//	        model.addAttribute("recommendations", recommendations);
+//	        return "recommendations"; // 해당 뷰의 이름으로 수정하세요.
+//	    }
+//	
 	@GetMapping("/update/{itemId}")
 	public String updateForm(@PathVariable int itemId, Model model) {
 		UsedGoodsDto ugDto = usedGoodsService.findById(itemId);

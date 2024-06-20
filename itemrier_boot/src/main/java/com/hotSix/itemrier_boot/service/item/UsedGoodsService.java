@@ -115,4 +115,12 @@ public class UsedGoodsService {
                 .map(UsedGoodsDto::toUsedGoodsDto)
                 .collect(Collectors.toList());
     }
+    
+    //관련 상품 추천
+    public List<UsedGoodsDto> recommend(int categoryId, int itemId) {
+        List<UsedGoods> recommendedItems = usedGoodsRepository.findTop5ByCategoryCatIdAndItemIdNotOrderByRegisterDateDesc(categoryId, itemId);
+        return recommendedItems.stream()
+                .map(usedGoods -> usedGoods.toUsedGoodsDto(usedGoods))
+                .collect(Collectors.toList());
+    }
 }
