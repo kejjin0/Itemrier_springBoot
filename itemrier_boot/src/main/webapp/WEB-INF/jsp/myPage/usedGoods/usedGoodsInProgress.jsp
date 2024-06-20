@@ -47,7 +47,27 @@
 	img{
 		margin: 20px;
 	}
+	
+	.writeBuyerBtn {
+		width: 110px;
+		height: 30px;
+		border-radius: 5px;
+		background-color: #add8e6;
+		font-size: 13px;
+	}
 </style>
+<script>
+	function openWriteBuyerId(itemId){
+		var url = "/myPage/usedGoodsBuyerForm";
+		url += '?itemId=' + encodeURIComponent(itemId);
+		
+		window.open(url, "구매자 확정", "width=600, height=500")
+	}
+
+	function refreshWindow() {
+		window.location.reload();
+	}
+</script>
 <body>
 <jsp:include page="../myPage.jsp" />
 	<div class="myPageUsedGoods">
@@ -65,6 +85,7 @@
 						<p>올린 날짜:${userGoods.registerDate}
 						</p>
 						<div class="status">${userGoods.status}</div>
+						<div><button class="writeBuyerBtn" onclick="openWriteBuyerId('${userGoods.itemId}')">구매자 확정하기</button></div>
 					</div>
 					</c:forEach>
 				</div>

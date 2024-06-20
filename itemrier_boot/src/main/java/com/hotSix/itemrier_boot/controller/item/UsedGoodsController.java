@@ -149,4 +149,5 @@ public class UsedGoodsController {
         model.addAttribute("usedGoodsList", searchResults);
         return "thymeleaf/item/usedGoods/list";
     }
+  
 }
