@@ -30,16 +30,6 @@ ul {
 	padding-left: 10px;
 }
 
-.itemList {
-	float: rigth;
-	margin-top: 10px;
-	margin-left: 30px;
-	flex-grow: 1;
-}
-
-.myPageIndex {
-	display: flex;
-}
 </style>
 <body>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -75,14 +65,6 @@ ul {
 		<li><a href="/myPage/auction/inProgress">경매 중인 상품</a></li>
 		<li><a href="/myPage/auction/ended">판매 완료 상품</a></li>
 	</ul>
-
-		<hr>
-		<h3>경매</h3>
-		<ul>
-			<li><a href="/myPage/orders/auction">구매 내역 (현황)</a></li>
-			<li>경매 중인 상품</li>
-			<li>판매 완료 상품</li>
-		</ul>
 
 		<hr>
 		<h3>찜</h3>

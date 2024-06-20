@@ -8,6 +8,11 @@
 <title>경매 중</title>
 </head>
 <style>
+	.myPageIndex {
+		display: flex;
+		height: 1000px;
+	}
+
 	.myPageUsedGoods{
 		display: flex;
 	}
@@ -70,8 +75,9 @@
 	
 </style>
 <body>
-	<div class="myPageUsedGoods">
-		<jsp:include page="../myPage.jsp" />
+	<jsp:include page="../myPage.jsp" />
+	<div class="myPageIndex">
+
 		<div class="itemList">
 			<div class="title">
 				<br>경매 중<br>

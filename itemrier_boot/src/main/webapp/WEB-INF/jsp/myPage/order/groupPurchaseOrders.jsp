@@ -45,9 +45,9 @@ tr {
 }
 </style>
 <body>
-<jsp:include page="../myPage.jsp" />
+	<jsp:include page="../myPage.jsp" />
 	<div class="myPageIndex">
-		
+
 		<div class="itemList">
 			<div class="title">
 				<br>공동구매 내역<br>
@@ -63,13 +63,11 @@ tr {
 					</tr>
 					<c:forEach var="o" items="${orders}">
 						<tr>
-							<td>
-								<a href="<c:url value='/myPage/orders/orderInfo'>
+							<td><a
+								href="<c:url value='/myPage/orders/orderInfo'>
 										<c:param name='orderId' value='${o.orderId}'/>
 										</c:url>">
-									${o.orderId}
-								</a>
-							</td>
+									${o.orderId} </a></td>
 							<td>${o.orderDate}</td>
 							<td>${o.price}</td>
 							<td>${o.status}</td>
