@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공동구매 판매 완료</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <style>
 	.myPageUsedGoods{
@@ -18,6 +19,11 @@
 		margin-top: 10px;
 		margin-left: 30px;
 		flex-grow:1;
+	}
+	
+		
+	.container {
+		margin-top:50px;
 	}
 	
 	.title{

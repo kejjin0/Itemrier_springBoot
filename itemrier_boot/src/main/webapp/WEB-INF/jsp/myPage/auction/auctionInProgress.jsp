@@ -30,21 +30,9 @@
 		padding-left: 30px; 
 	}
 	
-	.item{
-		margin-left: 10px;
-		margin-top: 40px;
-	}
-	
-	table{
-		border: 1px solid gray;
-		margin: 10px;
-		border-radius: 30px;
-		height: 250px;
-		width: 450px;
-	}
-	
-	td{
-		width : 50%;
+		
+	.container {
+		margin-top:50px;
 	}
 	
 	img{
