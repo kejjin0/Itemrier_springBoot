@@ -142,9 +142,9 @@ display: none;
 				<div class="errorMessage">${valid_nickname}</div>	
 				<br /><br />
 				주소<br />
-				<input class="zipCode" type="text" name="zipcode" />
+				<input class="zipCode" type="text" name="zipcode" readonly/>
 				<button class="zipCodeBtn"  onclick="toggleModal(event)"> 우편번호검색 </button>
-				<div class="errorMessage">${valid_zipcode}</div>	
+				<div class="errorMessage">${valid_addStreet}</div>	
 			    <div id="myModal" class="modal">
 			        <div class="modal-content">
 			            <span class="close" onclick="toggleModal()">&times;</span>
@@ -152,7 +152,7 @@ display: none;
 			        </div>
 			    </div>
 				<br />
-				<input type="text" name="addStreet" />
+				<input type="text" name="addStreet" readonly/>
 				<br />
 				<input type="text" name="addDetail" />
 				<br />
