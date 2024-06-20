@@ -89,6 +89,20 @@ hr {
 	background-color: #add8e6;
 	font-size: 13px;
 }
+
+#rec {
+	width: 900px;
+	border-collapse: collapse;
+	border: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#rec li {
+	list-style: none;
+	display: inline-block;
+	margin-right : 20px;
+}
 </style>
 <script>
 	function openSellerReview(sellerId) {
@@ -104,18 +118,17 @@ hr {
 
 		window.open(url, "상품 리뷰", "width=600, height=500")
 	}
-	
-	function viewOrderForm(itemId,itemName,price,filePath){
+
+	function viewOrderForm(itemId, itemName, price, filePath) {
 		var url = "/orderForm";
 		url += '?itemId=' + encodeURIComponent(itemId);
 		url += '&itemName=' + encodeURIComponent(itemName);
 		url += '&price=' + encodeURIComponent(price);
 		url += '&type=' + encodeURIComponent("groupPurchase");
 		url += '&filePath=' + encodeURIComponent(filePath);
-		
 		window.location.href = url;
 	}
-	</script>
+</script>
 </head>
 <body>
 	<h1>
@@ -207,24 +220,24 @@ hr {
 	</div>
 
 	<hr>
-	
-	
+
+
 	<!-- 추천 상품 목록 추가 -->
-	<div th:fragment="recommendedItems">
+	<div th:fragment="recommendedItems" id="rec">
 		<h2>추천 상품 목록</h2>
 		<ul>
-			<li th:each="item : ${recommendedItems}">
-				<h3 th:text="${item.itemName}"></h3>
-				<p th:text="${item.description}"></p>
-				<p>
-					가격: <span th:text="${item.price}"></span>원
-				</p>
-				<p>
-					<a th:href="@{/groupPurchase/view/{itemId}(itemId=${item.itemId})}">상세
-						보기</a>
-				</p>
-				<hr>
-			</li>
+			<li th:each="item : ${recommendedItems}"><a
+				th:href="@{/groupPurchase/view/{itemId}(itemId=${item.itemId})}">
+				
+					<img th:src="@{${item.filePath}}" alt="상품 이미지" width="200"
+					height="200" />
+					<h3 th:text="${item.itemName}"></h3>
+					<p>
+						가격: <span th:text="${item.price}"></span>원
+					</p>
+					<p>
+			</a>
+				</p></li>
 		</ul>
 	</div>
 </body>
