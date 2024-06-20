@@ -177,16 +177,12 @@ hr {
 	</table>
 
 	<hr>
-	<!-- 경매 결제하기 // startPrice에서 결제 가격 바꾸기 -->
-				<button th:onclick="viewOrderForm(/*[[${auction.itemId}]]*/, /*[[${auction.itemName}]]*/, /*[[${auction.startPrice}]]*/)" id="btn1">결제하기</button>
 
 	<div class="winner">
 		<div th:if="${auction.winner != null}">
 			축하합니다. <span th:text="${winner.nickname}"></span>님이 낙찰되었습니다.
 			<div th:if="${winner.userId == loginUserId}">
-				<form action="" method="">
-					<button id="btn3">결제하기</button>
-				</form>
+				<button th:onclick="viewOrderForm(/*[[${auction.itemId}]]*/, /*[[${auction.itemName}]]*/, /*[[${auction.currentBid}]]*/)" id="btn3">결제하기</button>
 			</div>
 
 		</div>
