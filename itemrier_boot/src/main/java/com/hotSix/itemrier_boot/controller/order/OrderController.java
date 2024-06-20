@@ -90,38 +90,73 @@ public class OrderController {
 	}
 
 	// 주문 자세한 내역 보여주기
-	@GetMapping("myPage/orders/orderInfo")
+	@GetMapping("/myPage/orders/orderInfo")
 	public String viewAuctionOrderDetail(@RequestParam("orderId") String orderId, Model model) throws Exception {
 
 		Order order = this.orderService.getOrder(orderId);
 		model.addAttribute("order", order);
-		return "orderDetail";
+		return "myPage/order/orderDetail";
+	}
+	
+	// 성함, 전화번호 수정 창
+	@GetMapping("/myPage/order/updateBuyerInfoForm")
+	public String viewBuyerInfoForm(@RequestParam("orderId") String orderId,
+									@RequestParam("buyerName") String buyerName,
+									@RequestParam("phoneNum") String phoneNum, Model model) {
+		BuyerInfo buyerInfo = new BuyerInfo(buyerName, phoneNum);
+		model.addAttribute("buyerInfo", buyerInfo);
+		model.addAttribute("orderId", orderId);
+		return "myPage/order/buyerInfoForm";
 	}
 
 	// 성함, 전화번호 변경
-	@GetMapping("myPage/order/updateBuyerInfo")
+	@PostMapping("/myPage/order/updateBuyerInfo")
 	public String modifyAuctionInvoiceNumber(@RequestParam("orderId") String orderId,
-			@RequestParam("buyerInfo") BuyerInfo buyerInfo, Model model) throws Exception {
+			@RequestParam("buyerName") String buyerName,
+			@RequestParam("phoneNum") String phoneNum, Model model,
+			RedirectAttributes redirect) throws Exception {
 
+		BuyerInfo buyerInfo = new BuyerInfo(buyerName,phoneNum);
 		this.orderService.modifyBuyerInfo(orderId, buyerInfo);
-		model.addAttribute("orderId", orderId);
+		redirect.addAttribute("orderId", orderId);
 		// order 세부 정보 보여주는 곳으로 이동
-		return "redirct:/myPage/order/orderInfo";
+		return "myPage/order/modifyResult";
+	}
+	
+	// 배송지 변경 창
+	@GetMapping("/myPage/order/updateDeliveryInfoForm")
+	public String viewDeliveryForm(@RequestParam("orderId") String orderId,
+			@RequestParam("zipCode") String zipCode,
+			@RequestParam("addStreet") String addStreet,
+			@RequestParam("addDetail") String addDetail,
+			@RequestParam("deliveryLocation") String deliveryLocation,
+			@RequestParam("deliveryRequest") String deliveryRequest, Model model){
+		DeliveryInfo deliveryInfo = new DeliveryInfo(zipCode, addStreet, addDetail, deliveryLocation, deliveryRequest);
+		this.orderService.modifyDeliveryInfo(orderId, deliveryInfo);
+		model.addAttribute("orderId", orderId);
+		
+		return "myPage/order/deliveryInfoForm";
 	}
 
 	// 배송지 변경
-	@GetMapping("myPage/order/updateDeliveryInfo")
+	@PostMapping("/myPage/order/updateDeliveryInfo")
 	public String modifyDeliveryInfo(@RequestParam("orderId") String orderId,
-			@RequestParam("deliveryInfo") DeliveryInfo deliveryInfo, Model model) throws Exception {
+			@RequestParam("zipCode") String zipCode,
+			@RequestParam("addStreet") String addStreet,
+			@RequestParam("addDetail") String addDetail,
+			@RequestParam("deliveryLocation") String deliveryLocation,
+			@RequestParam("deliveryRequest") String deliveryRequest,  Model model,
+			RedirectAttributes redirect) throws Exception {
 
+		DeliveryInfo deliveryInfo = new DeliveryInfo(zipCode, addStreet, addDetail, deliveryLocation, deliveryRequest);
 		this.orderService.modifyDeliveryInfo(orderId, deliveryInfo);
-		model.addAttribute("orderId", orderId);
+		redirect.addAttribute("orderId", orderId);
 		// order 세부 정보 보여주는 곳으로 이동
-		return "redirct:/myPage/order/orderInfo";
+		return "myPage/order/modifyResult";
 	}
 
 	// 현황 변경
-	@GetMapping("myPage/order/updateStatus")
+	@GetMapping("/myPage/order/updateStatus")
 	public String modifyDeliveryInfo(@RequestParam("orderId") String orderId, Model model) throws Exception {
 
 		this.orderService.modifyStatus(orderId);

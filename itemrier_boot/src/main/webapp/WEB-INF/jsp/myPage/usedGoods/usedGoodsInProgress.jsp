@@ -21,6 +21,11 @@
 		flex-grow:1;
 	}
 	
+		
+	.container {
+		margin-top:50px;
+	}
+	
 	.title{
 		background-color: #fff0f5;
 		font-size: 25px;
