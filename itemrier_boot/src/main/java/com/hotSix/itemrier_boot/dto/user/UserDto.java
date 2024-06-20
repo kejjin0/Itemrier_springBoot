@@ -30,9 +30,10 @@ public class UserDto {
 	@NotBlank(message = "닉네임을 입력해주세요.")
 	private String nickname;
 	
-	@NotNull(message = "주소를 입력해주세요.")
+	
 	private int zipcode;
 	
+	@NotBlank(message = "주소를 입력해주세요.")
 	private String addStreet;
 
 	private String addDetail;
