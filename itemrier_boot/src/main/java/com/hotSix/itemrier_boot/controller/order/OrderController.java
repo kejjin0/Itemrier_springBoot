@@ -25,9 +25,12 @@ import com.hotSix.itemrier_boot.domain.order.Order;
 import com.hotSix.itemrier_boot.domain.order.OrderItem;
 import com.hotSix.itemrier_boot.domain.order.OrderStatus;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
+import com.hotSix.itemrier_boot.dto.item.AuctionDto;
+import com.hotSix.itemrier_boot.dto.item.GroupPurchaseDto;
 import com.hotSix.itemrier_boot.dto.order.OrderDto;
 import com.hotSix.itemrier_boot.dto.user.UserDto;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
+import com.hotSix.itemrier_boot.service.item.AuctionService;
 import com.hotSix.itemrier_boot.service.item.GroupPurchaseService;
 import com.hotSix.itemrier_boot.service.myPage.UsedGoodsHistoryService;
 import com.hotSix.itemrier_boot.service.order.OrderService;
@@ -44,6 +47,8 @@ public class OrderController {
 	private UserRepository userRepository;
 	@Autowired
 	private GroupPurchaseService groupPurchaseService;
+	@Autowired
+	private AuctionService auctionService;
 
 	// (구매자)
 	// 구매 폼
@@ -234,4 +239,29 @@ public class OrderController {
 		return "orderCompletionInfo";
 	}
 
+	
+	// 공동 구매 물품 구매자 정보 확인
+	@GetMapping("/myPage/seller/groupPurchase/orders")
+	public String viewGroupPurchaseOrders(@RequestParam("itemId")int itemId, Model model) {
+		long count = this.orderService.getOrderCount(itemId, OrderStatus.Complete);
+		List<Order> orders = this.orderService.getOrderList(itemId, OrderStatus.Complete);
+		GroupPurchaseDto item = this.groupPurchaseService.findById(itemId);
+		
+		model.addAttribute("count", count);
+		model.addAttribute("buyers", orders);
+		model.addAttribute("item", item);
+		
+		return "myPage/order/seller/viewGroupPurchaseBuyers";
+	}
+	
+	@GetMapping("/myPage/seller/auction/orders")
+	public String viewAuctionOrders(@RequestParam("itemId")int itemId, Model model) {
+		List<Order> orders = this.orderService.getOrderList(itemId, OrderStatus.Complete);
+		AuctionDto item = this.auctionService.findById(itemId);
+		
+		model.addAttribute("buyers", orders);
+		model.addAttribute("item", item);
+		
+		return "myPage/order/seller/viewAuctionBuyers";
+	}
 }
