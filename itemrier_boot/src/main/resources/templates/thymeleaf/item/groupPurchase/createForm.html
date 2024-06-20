@@ -5,89 +5,104 @@
 <title>공동구매 상품 등록</title>
 <style>
 	table {
-	    width: 1000px; 
-	    height: 800px;
+	    width: 650px; 
+	    height: 600px;
 	    border-collapse: collapse;
 	    margin-left: auto;
 	    margin-right: auto;
 	}
-	th, td {
+	th {
 	    border: 1px solid black;
 	    padding: 8px; 
 	    text-align: center; 
 	}
-	.imgSize {
-	    padding: 70px 0;
+	td {
+		border: 1px solid black;
+	    padding: 8px; 
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	h1 {
+		text-align: center;
+	}
+	h2 {
+		text-align: center;
+	}
+	.btn {
+		text-align: center;
 	}
 </style>
 </head>
 <body>
+	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
+	<h2>공동구매 상품 등록</h2>
 	<form th:action="@{/groupPurchase/create}" method="POST" th:object="${gpDto}" enctype="multipart/form-data">
 		<table>
-                <tr>
-                    <td class="imgSize">상품 사진</td>
-                    <td><input type="file" id="file" name="file"></td>
-                </tr>
-                <tr>
-                    <td>제목(상품명)</td>
-                    <td><input type="text" name="itemName" th:field="*{itemName}" placeholder="등록할 제목을 입력하세요">
-                    <span th:if="${valid_itemName}" id="valid" th:text="${valid_itemName}"></span></td>
-                </tr>
-                <tr>
-                    <td>상품 정보</td>
-                    <td><input type="text" name="description" th:field="*{description}" placeholder="상품 정보를 입력해주세요">
-                    <span th:if="${valid_description}" id="valid" th:text="${valid_description}"></span></td>
-                </tr>
-                <tr>
-                    <td>가격</td>
-                    <td>
-                        <input type="number" name="originalPrice" th:field="*{originalPrice}" placeholder="등록 가격을 입력하세요" min="0">
-                        <span>원</span>
-                        <span th:if="${valid_originalPrice}" id="valid" th:text="${valid_originalPrice}"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>할인율</td>
-                    <td>
-                        <input type="number" name="discRate" th:field="*{discRate}" placeholder="한일율을 입력하세요" min="0" step="1.0">
-                        <span>%</span>
-                        <span th:if="${valid_discRate}" id="valid" th:text="${valid_discRate}"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>최소수량</td>
-                    <td>
-                        <input type="number" name="minQuantity" th:field="*{minQuantity}" placeholder="최소 수량을 입력하세요" min="0">
-                        <span>개</span>
-                        <span th:if="${valid_minQuantity}" id="valid" th:text="${valid_minQuantity}"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>카테고리</td>
-                    <td>
-                        <select name="catId">
-                            <option value="1" th:selected="*{catId eq '1'}">소파</option>
-                            <option value="2" th:selected="*{catId eq '2'}">침대</option>
-                            <option value="3" th:selected="*{catId eq '3'}">테이블</option>
-                            <option value="4" th:selected="*{catId eq '4'}">의자</option>
-                            <option value="5" th:selected="*{catId eq '5'}">기타가구</option>
-                            <option value="6" th:selected="*{catId eq '6'}">조명</option>
-                            <option value="7" th:selected="*{catId eq '7'}">러그/카펫</option>
-                            <option value="8" th:selected="*{catId eq '8'}">홈데코</option>
-                            <option value="9" th:selected="*{catId eq '9'}">수납</option>
-                        </select>
-                        <span th:if="${valid_catId}" id="valid" th:text="${valid_catId}"></span>
-                    </td>
-                </tr>
-                <tr>
-                	<td>마감일</td>
-                	<td><input type="datetime-local" name="endTime" th:field="*{endTime}">
-                	<span th:if="${valid_endTime}" id="valid" th:text="${valid_endTime}"></span></td>
-                </tr>
-                
-                <tr>
-                    <td colspan="2"><input type="submit" value="등록하기"></td>
-                </tr>
+               <tr>
+                   <th>제목(상품명)</th>
+                   <td><input type="text" name="itemName" th:field="*{itemName}" placeholder="등록할 제목을 입력하세요" style="width: 400px; height: 30px;">
+                   <div th:if="${valid_itemName}" id="valid" th:text="${valid_itemName}"></div></td>
+               </tr>
+               <tr>
+                   <th>상품 정보</th>
+                   <td><input type="text" name="description" th:field="*{description}" placeholder="상품 정보를 입력해주세요" style="width: 400px; height: 80px;">
+                   <div th:if="${valid_description}" id="valid" th:text="${valid_description}"></div></td>
+               </tr>
+               <tr>
+                   <th>가격</th>
+                   <td>
+                       <input type="number" name="originalPrice" th:field="*{originalPrice}" placeholder="등록 가격을 입력하세요" min="0" style="width: 160px;">
+                       <span>원</span>
+                       <div th:if="${valid_originalPrice}" id="valid" th:text="${valid_originalPrice}"></div>
+                   </td>
+               </tr>
+               <tr>
+                   <th>할인율</th>
+                   <td>
+                       <input type="number" name="discRate" th:field="*{discRate}" placeholder="한일율을 입력하세요" min="0" step="1.0" style="width: 50px;">
+                       <span>%</span>
+                       <div th:if="${valid_discRate}" id="valid" th:text="${valid_discRate}"></div>
+                   </td>
+               </tr>
+               <tr>
+                   <th>최소수량</th>
+                   <td>
+                       <input type="number" name="minQuantity" th:field="*{minQuantity}" placeholder="최소 수량을 입력하세요" min="0" style="width: 50px;">
+                       <span>개</span>
+                       <div th:if="${valid_minQuantity}" id="valid" th:text="${valid_minQuantity}"></div>
+                   </td>
+               </tr>
+               <tr>
+                   <th>카테고리</th>
+                   <td>
+                       <select name="catId">
+                           <option value="1" th:selected="*{catId eq '1'}">소파</option>
+                           <option value="2" th:selected="*{catId eq '2'}">침대</option>
+                           <option value="3" th:selected="*{catId eq '3'}">테이블</option>
+                           <option value="4" th:selected="*{catId eq '4'}">의자</option>
+                           <option value="5" th:selected="*{catId eq '5'}">기타가구</option>
+                           <option value="6" th:selected="*{catId eq '6'}">조명</option>
+                           <option value="7" th:selected="*{catId eq '7'}">러그/카펫</option>
+                           <option value="8" th:selected="*{catId eq '8'}">홈데코</option>
+                           <option value="9" th:selected="*{catId eq '9'}">수납</option>
+                       </select>
+                       <div th:if="${valid_catId}" id="valid" th:text="${valid_catId}"></div>
+                   </td>
+               </tr>
+               <tr>
+               	<th>마감일</th>
+               	<td><input type="datetime-local" name="endTime" th:field="*{endTime}">
+               	<div th:if="${valid_endTime}" id="valid" th:text="${valid_endTime}"></div></td>
+               </tr>
+               <tr>
+                   <th>상품 사진</th>
+                   <td><input type="file" id="file" name="file"></td>
+               </tr>
+               <tr>
+                   <td colspan="2" class="btn"><input type="submit" value="등록하기"></td>
+               </tr>
             </table>
         </form>
 </body>

@@ -5,23 +5,39 @@
 <title>중고거래 수정</title>
 <style>
 	table {
-	    width: 1000px; 
-	    height: 800px;
+	    width: 650px; 
+	    height: 600px;
 	    border-collapse: collapse;
 	    margin-left: auto;
 	    margin-right: auto;
 	}
-	th, td {
+	th {
 	    border: 1px solid black;
 	    padding: 8px; 
 	    text-align: center; 
 	}
-	.imgSize {
-	    padding: 70px 0;
+	td {
+	    border: 1px solid black;
+	    padding: 8px; 
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	h1 {
+		text-align: center;
+	}
+	h2 {
+		text-align: center;
+	}
+	.btn {
+		text-align: center;
 	}
 </style>
 </head>
 <body>
+	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
+	<h2>중고거래 상품 수정</h2>
 	<form th:action="@{/usedGoods/update}" method="POST">
 		<input type="hidden" name="itemId" th:value="${usedGoods.itemId}">
 		<input type="hidden" name="sellerId" th:value="${usedGoods.seller.userId}">
@@ -29,62 +45,58 @@
 		<input type="hidden" name="fileName" th:value="${usedGoods.fileName}">
 		<input type="hidden" name="filePath" th:value="${usedGoods.filePath}">
 		<table>
-                <tr>
-                    <td class="imgSize">상품 사진</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>제목(상품명)</td>
-                    <td><input type="text" name="itemName" th:value="${usedGoods.itemName}" placeholder="등록할 제목을 입력하세요"></td>
-                </tr>
-                <tr>
-                    <td>상품 정보</td>
-                    <td><input type="text" name="description" th:value="${usedGoods.description}" placeholder="상품 정보를 입력해주세요"></td>
-                </tr>
-                <tr>
-                    <td>제품 상태</td>
-                    <td>
-                        <select name="condition" th:value="${usedGoods.condition}">
-                        	<option value="0" th:selected="${usedGoods.condition eq '0'}">미사용(새상품)</option>
-                        	<option value="1" th:selected="${usedGoods.condition eq '1'}">미세한 사용감</option>
-                        	<option value="2" th:selected="${usedGoods.condition eq '2'}">사용감 적음</option>
-                        	<option value="3" th:selected="${usedGoods.condition eq '3'}">사용감 있음</option>
-                        	<option value="4" th:selected="${usedGoods.condition eq '4'}">사용감 많음</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>등록 가격</td>
-                    <td>
-                        <input type="number" name="price" th:value="${usedGoods.price}" placeholder="등록 가격을 입력하세요" min="0">
-                        <span>원</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>카테고리</td>
-                    <td>
-                        <select name="category">
-                        	<option th:each="cat : ${category}" th:value="${cat.catId}" th:utext="${cat.catName}" th:selected="${cat.catId == usedGoods.category.catId}"></option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>연락 수단</td>
-                    <td><input type="text" name="contactType" th:value="${usedGoods.contactType}"placeholder="카카오톡 아이디, 전화번호 등 연락할 수단을 입력해주세요"></td>
-                </tr>
-                <tr>
-                	<td>판매 상태</td>
-                	<td>
-                		<select name="strStatus">
-                			<option value="Available" th:selected="${usedGoods.status.name() == 'Availalbe'}" th:text="판매중">판매중</option>
-                			<option value="Complete" th:selected="${usedGoods.status.name() == 'Complete'}" th:text="판매완료">판매완료</option>
-                		</select>
-                	</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" value="수정하기"></td>
-                </tr>
-            </table>
-        </form>
+	        <tr>
+	            <td>제목(상품명)</td>
+	            <td><input type="text" name="itemName" th:value="${usedGoods.itemName}" placeholder="등록할 제목을 입력하세요" style="width: 400px; height: 30px;"></td>
+	        </tr>
+	        <tr>
+	            <td>상품 정보</td>
+	            <td><input type="text" name="description" th:value="${usedGoods.description}" placeholder="상품 정보를 입력해주세요" style="width: 400px; height: 80px;"></td>
+	        </tr>
+	        <tr>
+	            <td>제품 상태</td>
+	            <td>
+	                <select name="condition" th:value="${usedGoods.condition}">
+	                	<option value="0" th:selected="${usedGoods.condition eq '0'}">미사용(새상품)</option>
+	                	<option value="1" th:selected="${usedGoods.condition eq '1'}">미세한 사용감</option>
+	                	<option value="2" th:selected="${usedGoods.condition eq '2'}">사용감 적음</option>
+	                	<option value="3" th:selected="${usedGoods.condition eq '3'}">사용감 있음</option>
+	                	<option value="4" th:selected="${usedGoods.condition eq '4'}">사용감 많음</option>
+	                </select>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>등록 가격</td>
+	            <td>
+	                <input type="number" name="price" th:value="${usedGoods.price}" placeholder="등록 가격을 입력하세요" min="0" style="width: 160px;">
+	                <span>원</span>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>카테고리</td>
+	            <td>
+	                <select name="category">
+	                	<option th:each="cat : ${category}" th:value="${cat.catId}" th:utext="${cat.catName}" th:selected="${cat.catId == usedGoods.category.catId}"></option>
+	                </select>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>연락 수단</td>
+	            <td><input type="text" name="contactType" th:value="${usedGoods.contactType}"placeholder="카카오톡 아이디, 전화번호 등 연락할 수단을 입력해주세요" style="width: 400px; height: 30px;"></td>
+	        </tr>
+	        <tr>
+	        	<td>판매 상태</td>
+	        	<td>
+	        		<select name="strStatus">
+	        			<option value="Available" th:selected="${usedGoods.status.name() == 'Availalbe'}" th:text="판매중">판매중</option>
+	        			<option value="Complete" th:selected="${usedGoods.status.name() == 'Complete'}" th:text="판매완료">판매완료</option>
+	        		</select>
+	        	</td>
+	        </tr>
+	        <tr>
+	            <td colspan="2" class="btn"><input type="submit" value="수정하기"></td>
+	        </tr>
+		</table>
+	</form>
 </body>
 </html>

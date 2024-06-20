@@ -48,16 +48,41 @@
     .status {
     	color: gray;
     }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        position: relative; 
+    }
+    .createBtn {
+    	position: absolute;
+        top: -30px;
+        right: 0;
+        background-color: gray;
+        border: none;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+        z-index: 1000; 
+    }
 </style>
 </head>
 <body>
 	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
 	<h2>경매 상품 목록</h2>
+	<div class="button-container">
+   		<button type="button" th:onclick="|location.href='@{/auction/create}'|" class="createBtn">경매 상품 등록</button>
+   	</div>
 	<table>
 		 <tr th:each="row : ${auctionList}">
             <td th:each="auction : ${row}">
                 <img th:src="@{${auction.getFilePath()}}" alt="상품사진" class="imgSize">
-                <br>
+                <p>
                 <a th:href="@{/auction/view/{itemId} (itemId=${auction.itemId})}" th:text="${auction.itemName}" class="title">상품명</a>
                 <p>
                 <span th:if="${#strings.equals(auction.status, 'Available')}" th:text="판매중"></span>

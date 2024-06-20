@@ -139,7 +139,7 @@
 	            	<button th:onclick="|location.href='@{/usedGoods/list}'|" id="btn1">목록</button>
 					<span th:if="${loginUserId == usedGoods.seller.userId}">
 						<th:block th:with="itemId=${usedGoods.itemId}" />
-						<button th:if="${#strings.equals(usedGoods.status, 'Available')}" th:onclick="|location.href='@{/usedGoods/update/}' + ${itemId}|" id="btn2">수정</button>
+						<button th:onclick="|location.href='@{/usedGoods/update/}' + ${itemId}|" id="btn2">수정</button>
 						<button th:onclick="|location.href='@{/usedGoods/delete/}' + ${itemId}|" id="btn2">삭제</button>
 					</span>	 
 	            </td>

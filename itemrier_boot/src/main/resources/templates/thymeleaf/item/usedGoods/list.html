@@ -51,6 +51,28 @@
     .status {
     	color: gray;
     }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        position: relative; 
+    }
+    .createBtn {
+    	position: absolute;
+        top: -30px;
+        right: 0;
+        background-color: gray;
+        border: none;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+        z-index: 1000; 
+    }
 </style>
 </head>
 <body>
@@ -60,11 +82,14 @@
         <input type="text" name="query" placeholder="상품명 검색">
         <button type="submit">검색</button>
     </form>
+     <div class="button-container">
+   		<button type="button" th:onclick="|location.href='@{/usedGoods/create}'|" class="createBtn">중고거래 상품 등록</button>
+   	</div>
 	<table>
 		 <tr th:each="row : ${usedGoodsList}">
             <td th:each="ug : ${row}">
                 <img th:src="@{${ug.getFilePath()}}" alt="상품사진" class="imgSize">
-                <br>
+                <p>
                 <a th:href="@{/usedGoods/view/{itemId} (itemId=${ug.itemId})}" th:text="${ug.itemName}" class="title">상품명</a>
                 <p>
                 <span th:if="${#strings.equals(ug.status, 'Available')}" th:text="판매중"></span>
@@ -74,6 +99,5 @@
             </td>
         </tr>
 	</table>
-
 </body>
 </html>
