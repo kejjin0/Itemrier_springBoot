@@ -225,9 +225,9 @@ td {
 					<c:forEach var="i" items="${order.orderItems}">
 						<table class="itemTable">
 							<tr>
-								<td rowspan="3"><img src="${i.itemInfo.filePath}" onerror="this.src='https://placehold.co/180'" class="imgFile"/></td>
+								<td rowspan="3"><img src="${i.itemInfo.filePath}" onerror="this.srsc='https://placehold.co/180'" class="imgFile"/></td>
 								<td><br> <b>${i.itemInfo.itemName}</b> <br> <br>
-									${i.orderPrice}₩ <br> <br> ${i.amount}개</td>
+									${i.orderPrice}₩ <br> <br> ${i.amount}개 <br> <br> ${i.status}</td>
 							<tr>
 								<td><button class="reviewWriteBtn"
 										onclick="openWriteReview('${i.itemInfo.itemId}', '${i.itemInfo.seller.userId}')">리뷰
