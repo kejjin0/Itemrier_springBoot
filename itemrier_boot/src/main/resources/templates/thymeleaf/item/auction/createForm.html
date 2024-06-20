@@ -5,93 +5,108 @@
 <title>경매상품 등록</title>
 <style>
 	table {
-	    width: 1000px; 
-	    height: 800px;
+	    width: 650px; 
+	    height: 600px;
 	    border-collapse: collapse;
 	    margin-left: auto;
 	    margin-right: auto;
 	}
-	th, td {
+	th {
 	    border: 1px solid black;
 	    padding: 8px; 
 	    text-align: center; 
 	}
-	.imgSize {
-	    padding: 70px 0;
+	td {
+		border: 1px solid black;
+	    padding: 8px; 
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	h1 {
+		text-align: center;
+	}
+	h2 {
+		text-align: center;
+	}
+	.btn {
+		text-align: center;
 	}
 </style>
 </head>
 <body>
+	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
+	<h2>경매 상품 등록</h2>
 	<form th:action="@{/auction/create}" method="POST" th:object="${auctionDto}" enctype="multipart/form-data">
 		<table>
-                <tr>
-                    <td class="imgSize">상품 사진</td>
-                    <td><input type="file" id="file" name="file"></td>
-                </tr>
-                <tr>
-                    <td>제목(상품명)</td>
-                    <td><input type="text" name="itemName" th:field="*{itemName}" placeholder="등록할 제목을 입력하세요">
-                    <span th:if="${valid_itemName}" id="valid" th:text="${valid_itemName}"></span></td>
-                </tr>
-                <tr>
-                    <td>상품 정보</td>
-                    <td><input type="text" name="description" th:field="*{description}" placeholder="상품 정보를 입력해주세요">
-                    <span th:if="${valid_description}" id="valid" th:text="${valid_description}"></span></td>
-                </tr>
-                <tr>
-                    <td>제품 상태</td>
-                    <td>
-                        <select name="condition" th:field="*{condition}">
-                        	<option value="0" th:selected="${auctionDto.condition eq '0'}">미사용(새상품)</option>
-                        	<option value="1" th:selected="${auctionDto.condition eq '1'}">미세한 사용감</option>
-                        	<option value="2" th:selected="${auctionDto.condition eq '2'}">사용감 적음</option>
-                        	<option value="3" th:selected="${auctionDto.condition eq '3'}">사용감 있음</option>
-                        	<option value="4" th:selected="${auctionDto.condition eq '4'}">사용감 많음</option>
-                        </select>
-                        <span th:if="${valid_condition}" id="valid" th:text="${valid_condition}"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>시작가</td>
-                    <td>
-                        <input type="number" name="startPrice" th:field="*{startPrice}" placeholder="등록 가격을 입력하세요" min="0">
-                        <span>원</span>
-                        <span th:if="${valid_startPrice}" id="valid" th:text="${valid_startPrice}"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>카테고리</td>
-                    <td>
-                        <select name="catId">
-                            <option value="1" th:selected="${auctionDto.catId eq '1'}">소파</option>
-                            <option value="2" th:selected="${auctionDto.catId eq '2'}">침대</option>
-                            <option value="3" th:selected="${auctionDto.catId eq '3'}">테이블</option>
-                            <option value="4" th:selected="${auctionDto.catId eq '4'}">의자</option>
-                            <option value="5" th:selected="${auctionDto.catId eq '5'}">기타가구</option>
-                            <option value="6" th:selected="${auctionDto.catId eq '6'}">조명</option>
-                            <option value="7" th:selected="${auctionDto.catId eq '7'}">러그/카펫</option>
-                            <option value="8" th:selected="${auctionDto.catId eq '8'}">홈데코</option>
-                            <option value="9" th:selected="${auctionDto.catId eq '9'}">수납</option>
-                        </select>
-                        <span th:if="${valid_catId}" id="valid" th:text="${valid_catId}"></span>
-                    </td>
-                </tr>
-                 
-                <tr>
-                    <td>연락 수단</td>
-                    <td><input type="text" name="contactType" th:field="*{contactType}" placeholder="카카오톡 아이디, 전화번호 등 연락할 수단을 입력해주세요">
-                    <span th:if="${valid_contactType}" id="valid" th:text="${valid_contactType}"></span></td>
-                </tr>
-                <tr>
-                	<td>마감일</td>
-                	<td><input type="datetime-local" name="endTime" th:field="*{endTime}">
-                	<span th:if="${valid_endTime}" id="valid" th:text="${valid_endTime}"></span></td>
-                </tr>
+            <tr>
+                <th>제목(상품명)</th>
+                <td><input type="text" name="itemName" th:field="*{itemName}" placeholder="등록할 제목을 입력하세요" style="width: 400px; height: 30px;">
+                <div th:if="${valid_itemName}" id="valid" th:text="${valid_itemName}"></div></td>
+            </tr>
+            <tr>
+                <th>상품 정보</th>
+                <td><input type="text" name="description" th:field="*{description}" placeholder="상품 정보를 입력해주세요" style="width: 400px; height: 80px;">
+                <div th:if="${valid_description}" id="valid" th:text="${valid_description}"></div></td>
+            </tr>
+            <tr>
+                <th>제품 상태</th>
+                <td>
+                    <select name="condition" th:field="*{condition}">
+                    	<option value="0" th:selected="${auctionDto.condition eq '0'}">미사용(새상품)</option>
+                    	<option value="1" th:selected="${auctionDto.condition eq '1'}">미세한 사용감</option>
+                    	<option value="2" th:selected="${auctionDto.condition eq '2'}">사용감 적음</option>
+                    	<option value="3" th:selected="${auctionDto.condition eq '3'}">사용감 있음</option>
+                    	<option value="4" th:selected="${auctionDto.condition eq '4'}">사용감 많음</option>
+                    </select>
+                    <div th:if="${valid_condition}" id="valid" th:text="${valid_condition}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>시작가</th>
+                <td>
+                    <input type="number" name="startPrice" th:field="*{startPrice}" placeholder="등록 가격을 입력하세요" min="0" style="width: 160px;">
+                    <span>원</span>
+                    <div th:if="${valid_startPrice}" id="valid" th:text="${valid_startPrice}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>카테고리</th>
+                <td>
+                    <select name="catId">
+                        <option value="1" th:selected="${auctionDto.catId eq '1'}">소파</option>
+                        <option value="2" th:selected="${auctionDto.catId eq '2'}">침대</option>
+                        <option value="3" th:selected="${auctionDto.catId eq '3'}">테이블</option>
+                        <option value="4" th:selected="${auctionDto.catId eq '4'}">의자</option>
+                        <option value="5" th:selected="${auctionDto.catId eq '5'}">기타가구</option>
+                        <option value="6" th:selected="${auctionDto.catId eq '6'}">조명</option>
+                        <option value="7" th:selected="${auctionDto.catId eq '7'}">러그/카펫</option>
+                        <option value="8" th:selected="${auctionDto.catId eq '8'}">홈데코</option>
+                        <option value="9" th:selected="${auctionDto.catId eq '9'}">수납</option>
+                    </select>
+                    <div th:if="${valid_catId}" id="valid" th:text="${valid_catId}"></div>
+                </td>
+            </tr>
                 
-                <tr>
-                    <td colspan="2"><input type="submit" value="등록하기"></td>
-                </tr>
-            </table>
-        </form>
+            <tr>
+                <th>연락 수단</th>
+                <td><input type="text" name="contactType" th:field="*{contactType}" placeholder="카카오톡 아이디, 전화번호 등 연락할 수단을 입력해주세요" style="width: 400px; height: 30px;">
+                <div th:if="${valid_contactType}" id="valid" th:text="${valid_contactType}"></div></td>
+            </tr>
+            <tr>
+            	<th>마감일</th>
+            	<td><input type="datetime-local" name="endTime" th:field="*{endTime}">
+            	<div th:if="${valid_endTime}" id="valid" th:text="${valid_endTime}"></div></td>
+            </tr>
+            <tr>
+	            <th>상품 사진</th>
+	            <td><input type="file" id="file" name="file"></td>
+	        </tr>   
+            <tr>
+                <td colspan="2" class="btn"><input type="submit" value="등록하기"></td>
+            </tr>
+		</table>
+	</form>
 </body>
 </html>
