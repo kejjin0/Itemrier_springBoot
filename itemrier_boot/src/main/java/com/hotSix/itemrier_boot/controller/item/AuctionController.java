@@ -1,5 +1,6 @@
 package com.hotSix.itemrier_boot.controller.item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.hotSix.itemrier_boot.domain.item.Bid;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 import com.hotSix.itemrier_boot.dto.item.AuctionDto;
 import com.hotSix.itemrier_boot.dto.item.BidDto;
+import com.hotSix.itemrier_boot.dto.item.GroupPurchaseDto;
 import com.hotSix.itemrier_boot.repository.item.BidRepository;
 import com.hotSix.itemrier_boot.repository.item.CategoryRepository;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
@@ -102,9 +104,19 @@ public class AuctionController {
 	// 경매 상품 목록
 	@GetMapping("/list")
 	public String findAll(Model model) {
-		List<AuctionDto> auctionDtoList = auctionService.findAll();
+		List<AuctionDto> auctionList = auctionService.findAll();
+		List<List<AuctionDto>> auctionDtoList = chunkList(auctionList, 3);
 		model.addAttribute("auctionList", auctionDtoList);
 		return "thymeleaf/item/auction/list";
+	}
+	
+	// 리스트를 3개씩 묶음
+	private List<List<AuctionDto>> chunkList(List<AuctionDto> list, int chunkSize) {
+	    List<List<AuctionDto>> auctionList = new ArrayList<>();
+	    for (int i = 0; i < list.size(); i += chunkSize) {
+	    	auctionList.add(list.subList(i, Math.min(i + chunkSize, list.size())));
+	    }
+	    return auctionList;
 	}
 	
 	// 경매 상품 상세보기

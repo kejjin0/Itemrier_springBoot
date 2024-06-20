@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.beans.PropertyEditorSupport;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -127,8 +128,18 @@ public class UsedGoodsController {
 	@GetMapping("/list")
 	public String findAll(Model model) {
 		List<RequestDto> ugDtoList = usedGoodsService.findAll();
-		model.addAttribute("usedGoodsList", ugDtoList);
+		List<List<RequestDto>> usedGoodsList = chunkList(ugDtoList, 3);
+		model.addAttribute("usedGoodsList", usedGoodsList);
 		return "thymeleaf/item/usedGoods/list";
+	}
+	
+	// 리스트를 3개씩 묶음
+	private List<List<RequestDto>> chunkList(List<RequestDto> list, int chunkSize) {
+	    List<List<RequestDto>> usedGoodsList = new ArrayList<>();
+	    for (int i = 0; i < list.size(); i += chunkSize) {
+	    	usedGoodsList.add(list.subList(i, Math.min(i + chunkSize, list.size())));
+	    }
+	    return usedGoodsList;
 	}
 
 	// 중고거래 상품 검색

@@ -4,9 +4,19 @@
 	<meta charset="utf-8">
 	<title>경매 상품 상세보기</title>
 	<style>
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+		
 		h1 {
 			text-align: center;
 		}
+		
+		h2 {
+			text-align: center;
+		}
+		
 		table {
 		    width: 900px;
 		    border-collapse: collapse;
@@ -65,7 +75,8 @@
 	</style>
 </head>
 	<body>
-		<h1>공동구매 상품 정보</h1>
+		<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
+		<h2>공동구매 상품 정보</h2>
 		<hr>
 		<table th:object="${groupPurchase}"> 
 		    <tr>

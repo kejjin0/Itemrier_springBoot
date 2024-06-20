@@ -4,14 +4,16 @@
 <meta charset="utf-8">
 <title>공동구매 상품 목록</title>
 <style>
-	h1 {
-		display: inline;
-		text-align : left; 
-		color: pink;
-		line-height: 50px;
+	a {
+		text-decoration: none;
+		color: inherit;
 	}
 	
-	a{text-decoration: none; color: black; }
+	h1 {
+		display: flex;
+    	justify-content: center;
+    	align-items: center;
+	}
 	
 	h2 {
 		text-align: center;
@@ -31,38 +33,45 @@
 	td {
 		border: none;
 		padding: 30px;
+		text-align: center;
 	}
 	tr {
+		border-top: 1px solid black;
 		border-bottom: 1px solid black;
 	}
 	th {
         font-size: 20px;
         text-align: center;
     }
+    .title {
+    	font-weight: bold;
+    }
+    .status {
+    	color: gray;
+    }
 </style>
 </head>
 <body>
-	<h1><a href="/">잇템리어</a></h1>
+	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
 	<h2>공동구매 상품 목록</h2>
 	<form th:action="@{/groupPurchase/search}" method="get">
         <input type="text" name="query" placeholder="상품명 검색">
         <button type="submit">검색</button>
     </form>
-	<table>
-		<tr>
-			<th>이미지</th>
-			<th>상품명</th>
-			<th>판매현황</th>
-			<th>판매가격</th>
-		</tr>
-		<tr th:each="gp: ${gpDtoList}">
-			<td><img th:src="@{${gp.getFilePath()}}" alt="상품사진" class="imgSize"></td>
-			<td><a th:href="@{/groupPurchase/view/{itemId} (itemId=${gp.itemId})}" th:text="${gp.itemName}">상품명</a></td>
-			<td th:if="${#strings.equals(gp.status, 'Available')}" th:text="판매중"></td>
-			<td th:if="${#strings.equals(gp.status, 'Complete')}" th:text="판매완료"></td>
-			<td th:if="${#strings.equals(gp.status, 'Cancel')}" th:text="실패"></td>
-			<td th:text="|${gp.price}원|">판매가격</td>
-		</tr>
+    <table>
+		 <tr th:each="row : ${gpDtoList}">
+            <td th:each="gp : ${row}">
+                <img th:src="@{${gp.getFilePath()}}" alt="상품사진" class="imgSize">
+                <br>
+                <a th:href="@{/groupPurchase/view/{itemId} (itemId=${gp.itemId})}" th:text="${gp.itemName}">상품명</a>
+                <p>
+                <span th:if="${#strings.equals(gp.status, 'Available')}" th:text="판매중"></span>
+                <span th:if="${#strings.equals(gp.status, 'Complete')}" th:text="판매완료" class="status"></span>
+                <span th:if="${#strings.equals(gp.status, 'Cancel')}" th:text="목표수량달성실패" class="status"></span>
+                <br>
+                <span th:text="|${gp.price}원|"></span>
+            </td>
+        </tr>
 	</table>
 </body>
 </html>

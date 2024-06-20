@@ -3,12 +3,20 @@
 <head>
 <meta charset="utf-8">
 <title>입찰 등록</title>
+<style>
+	input[type="submit"] {
+            background-color: black;
+            color: white;
+            border: 1px solid black; 
+            padding: 10px 20px; 
+    }
+</style>
 </head>
 <body>
 	<form action="/bid/create" method="post" th:object="${bidDto}">
 		<input type="hidden" name="item" th:field="*{item}">
+	    <h4>경매 상품</h4><hr>
 	    <table>
-	    	<tr><td>경매 상품</td></tr>
 	        <tr>
 	            <td>상품명</td>
 	            <td th:text="*{item.itemName}"></td>
@@ -19,9 +27,9 @@
 				<td th:text="*{#temporals.format(item.endTime, 'yyyy-MM-dd HH:mm:ss')}">종료시간</td>
 	        </tr>
 	    </table>
-	
+				
+		<h4>입찰하기</h4><hr>
 	    <table>
-	        <h4>입찰하기</h4><hr>
 	        <tr>
 	            <td>현재가</td>
 	            <td th:text="|*{item.currentBid}원|"></td>
@@ -35,6 +43,8 @@
 	        </tr>
 	    </table>
 	
+		<p></p>
+		
 	    <input type="submit" value="입찰하기">
 	</form>
 </body>
