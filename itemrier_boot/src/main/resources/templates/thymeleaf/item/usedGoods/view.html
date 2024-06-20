@@ -89,6 +89,20 @@ hr {
 	background-color: #add8e6;
 	font-size: 13px;
 }
+
+#rec {
+	width: 900px;
+	border-collapse: collapse;
+	border: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#rec li {
+	list-style: none;
+	display: inline-block;
+	margin-right: 20px;
+}
 </style>
 <script>
 	//review 보기
@@ -190,21 +204,18 @@ hr {
 
 
 	<!-- 추천 상품 목록 추가 -->
-	<div th:fragment="recommendedItems">
+	<div th:fragment="recommendedItems" id="rec">
 		<h2>추천 상품 목록</h2>
 		<ul>
-			<li th:each="item : ${recommendations}">
-				<h3 th:text="${item.itemName}">Item Name</h3>
-				<p th:text="${item.description}">Description</p>
-				<p>
-					가격: <span th:text="${item.price}">Price</span>원
-				</p> <!-- 상세 보기 링크 -->
-				<p>
-					<a th:href="@{/usedGoods/view/{itemId}(itemId=${item.itemId})}">상세
-						보기</a>
-				</p>
-				<hr>
-			</li>
+			<li th:each="item : ${recommendations}"><a
+				th:href="@{/usedGoods/view/{itemId}(itemId=${item.itemId})}"> <img
+					th:src="@{${item.filePath}}" alt="상품 이미지" width="200" height="200" />
+					<h3 th:text="${item.itemName}">Item Name</h3>
+					<p>
+						가격: <span th:text="${item.price}">Price</span>원
+					</p> <!-- 상세 보기 링크 -->
+					<p></a>
+				</p></li>
 		</ul>
 	</div>
 
