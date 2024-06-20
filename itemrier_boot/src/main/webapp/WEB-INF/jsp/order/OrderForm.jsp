@@ -17,9 +17,9 @@
 		IMP.request_pay({
 			pg : "html5_inicis",
 			pay_method : "card",
-			merchant_uid : "2406145137", // 주문번호
-			name : $('#buyerName').val(),
-			amount : 100, // 숫자 타입
+			merchant_uid : $('#orderId').val(), // 주문번호
+			name : $('#itemName').val(),
+			amount : $('#price').val(), // 숫자 타입
 			buyer_email : $('#email').val(),
 			buyer_name : $('#buyerName').val(),
 			buyer_tel : $('#phoneNum').val(),
@@ -31,7 +31,7 @@
 				alert("결제 완료");
 				var result = {
 						orderId : rsp.merchant_uid,
-						buyerId : 451,
+						buyerId : $('#buyerId').val(),
 						buyerInfo :{
 							buyerName : $('#buyerName').val(),
 							phoneNum : rsp.buyer_tel	
@@ -49,20 +49,21 @@
 						pg : "html5_inicis",
 						pay_method : "card",
 						orderDate : new Date().toISOString(),
-						itemId : 51
+						itemId : $('#itemId').val(),
+						type : $('#type').val()
 				}
 				
 				$.ajax({
 					url : 'insertOrder', //cross-domain error가 발생하지 않도록 주의해주세요
 					type : 'POST',
 					contentType : "application/json; charset=utf-8",
-					dataType : "json",
 					data : JSON.stringify(result),
 					success: function(res){
-						consol.log(res);
-						location.href=res;
+						console.log(res);
+						window.location.href=res;
 					},
 					error: function(err){
+						alert("Error: " + JSON.stringify(err));
 						console.log(err);
 					}
 				});
@@ -156,7 +157,7 @@ td {
 </style>
 <body>
 	<div class="title">
-		<br>경매 주문<br>
+		<br>주문<br>
 	</div>
 	<div class="info">
 		<div class="write">
@@ -194,23 +195,28 @@ td {
 					<td>배송 요청 사항</td>
 					<td><textarea id="longinput" id="deliveryRequest"></textarea></td>
 				</tr>
+				<tr>
+				</tr>
 			</table>
+			<input type="hidden" id="buyerId" value="${buyerId}">
+			<input type="hidden" id="itemName" value="${itemName}">
+			<input type="hidden" id="price" value="${price}">
+			<input type="hidden" id="itemId" value="${itemId}">
+			<input type="hidden" id="orderId" value="${orderId}">
+			<input type="hidden" id="type" value="${type}">
 		</div>
 		<div class="item">
 			<table class="itemTable">
 				<tr>
 					<td rowspan="3"><img src="https://placehold.co/180" /></td>
-					<td>상품 이름</td>
+					<td>${itemName}</td>
 				</tr>
 				<tr>
-					<td>$가격</td>
-				</tr>
-				<tr>
-					<td>판매자</td>
+					<td>${price}원</td>
 				</tr>
 			</table>
+			<button onclick="requestPay()">결제하기</button>
 		</div>
 	</div>
-	<button onclick="requestPay()">결제하기</button>
 </body>
 </html>

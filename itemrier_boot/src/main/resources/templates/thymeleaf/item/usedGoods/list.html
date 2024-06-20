@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <title>중고거래 상품 목록</title>
 <style>
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	
+	h1 {
+		display: flex;
+    	justify-content: center;
+    	align-items: center;
+	}
+	
 	h2 {
 		text-align: center;
 	}
@@ -21,8 +32,10 @@
 	td {
 		border: none;
 		padding: 30px;
+		text-align: center;
 	}
 	tr {
+		border-top: 1px solid black;
 		border-bottom: 1px solid black;
 	}
 	th {
@@ -32,28 +45,59 @@
     form {
     	
     }
+    .title {
+    	font-weight: bold;
+    }
+    .status {
+    	color: gray;
+    }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        position: relative; 
+    }
+    .createBtn {
+    	position: absolute;
+        top: -30px;
+        right: 0;
+        background-color: gray;
+        border: none;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+        z-index: 1000; 
+    }
 </style>
 </head>
 <body>
-	<h2>중고거래 상품 목록</h2>
+	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
+	<h2>중고거래 상품</h2>
 	<form th:action="@{/usedGoods/search}" method="get">
         <input type="text" name="query" placeholder="상품명 검색">
         <button type="submit">검색</button>
     </form>
+     <div class="button-container">
+   		<button type="button" th:onclick="|location.href='@{/usedGoods/create}'|" class="createBtn">중고거래 상품 등록</button>
+   	</div>
 	<table>
-		<tr>
-			<th>이미지</th>
-			<th>상품명</th>
-			<th>판매현황</th>
-			<th>가격</th>
-		</tr>
-		<tr th:each="ug: ${ugList}">
-			<td><img th:src="@{${ug.getFilePath()}}" alt="상품사진" class="imgSize"></td>
-			<td><a th:href="@{/usedGoods/view/{itemId} (itemId=${ug.itemId})}" th:text="${ug.itemName}">상품명</a></td>
-			<td th:if="${#strings.equals(ug.status, 'Available')}" th:text="판매중"></td>
-			<td th:if="${#strings.equals(ug.status, 'Complete')}" th:text="판매완료"></td>
-			<td th:text="|${ug.price}원|">현재가</td>
-		</tr>
+		 <tr th:each="row : ${usedGoodsList}">
+            <td th:each="ug : ${row}">
+                <img th:src="@{${ug.getFilePath()}}" alt="상품사진" class="imgSize">
+                <p>
+                <a th:href="@{/usedGoods/view/{itemId} (itemId=${ug.itemId})}" th:text="${ug.itemName}" class="title">상품명</a>
+                <p>
+                <span th:if="${#strings.equals(ug.status, 'Available')}" th:text="판매중"></span>
+                <span th:if="${#strings.equals(ug.status, 'Complete')}" th:text="판매완료" class="status"></span>
+                <br>
+                <span th:text="|${ug.price}원|"></span>
+            </td>
+        </tr>
 	</table>
 </body>
 </html>

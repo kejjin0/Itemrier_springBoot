@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,11 @@
 		margin-top: 10px;
 		margin-left: 30px;
 		flex-grow:1;
+	}
+	
+		
+	.container {
+		margin-top:50px;
 	}
 	
 	.title{
@@ -42,7 +48,27 @@
 	img{
 		margin: 20px;
 	}
+	
+	.writeBuyerBtn {
+		width: 110px;
+		height: 30px;
+		border-radius: 5px;
+		background-color: #add8e6;
+		font-size: 13px;
+	}
 </style>
+<script>
+	function openWriteBuyerId(itemId){
+		var url = "/myPage/usedGoodsBuyerForm";
+		url += '?itemId=' + encodeURIComponent(itemId);
+		
+		window.open(url, "구매자 확정", "width=600, height=500")
+	}
+
+	function refreshWindow() {
+		window.location.reload();
+	}
+</script>
 <body>
 <jsp:include page="../myPage.jsp" />
 	<div class="myPageUsedGoods">
@@ -57,9 +83,13 @@
 						<img src="https://placehold.co/180" alt="상품 이미지"/>
 						<h3>상품 이름: ${userGoods.itemName}</h3>
 						<p>가격: ${userGoods.price}원</p>
-						<p>올린 날짜:${userGoods.registerDate}
+						<p>올린 날짜:
+						
+						<fmt:parseDate value="${userGoods.registerDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parseDateTime" type="both" />
+							<fmt:formatDate value="${parseDateTime}" pattern="yyyy-MM-dd"/>
 						</p>
 						<div class="status">${userGoods.status}</div>
+						<div><button class="writeBuyerBtn" onclick="openWriteBuyerId('${userGoods.itemId}')">구매자 확정하기</button></div>
 					</div>
 					</c:forEach>
 				</div>

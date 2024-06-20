@@ -1,6 +1,8 @@
 package com.hotSix.itemrier_boot.controller.order;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import com.hotSix.itemrier_boot.domain.order.Order;
 import com.hotSix.itemrier_boot.domain.order.OrderItem;
 import com.hotSix.itemrier_boot.domain.order.OrderStatus;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
+import com.hotSix.itemrier_boot.dto.order.OrderDto;
 import com.hotSix.itemrier_boot.dto.user.UserDto;
 import com.hotSix.itemrier_boot.repository.user.UserRepository;
 import com.hotSix.itemrier_boot.service.item.GroupPurchaseService;
@@ -41,21 +44,71 @@ public class OrderController {
 	private UserRepository userRepository;
 	@Autowired
 	private GroupPurchaseService groupPurchaseService;
-	
+
 	// (구매자)
+	// 구매 폼
+	@GetMapping("/orderForm")
+	public String viewOrderForm(@AuthenticationPrincipal UserDetails userDetail, @RequestParam("itemId") int itemId,
+			@RequestParam("itemName") String itemName, @RequestParam("price") int price,@RequestParam("type") String type, Model model) throws Exception {
+		UserEntity user = userRepository.findByEmail(userDetail.getUsername());
+		int buyerId = user.getUserId();
+
+		// orderId
+		// orderId 만들기
+		Date today = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd");
+		String orderId = simpleDateFormat.format(today).toString();
+		int randomN = 0;
+		for (int i = 0; i < 4; i++) {
+			randomN = (int) (Math.random() * 9);
+			orderId = orderId.concat(Integer.toString(randomN));
+		}
+
+		Boolean check = orderService.existsByOrderId(orderId);
+		while (check == true) {
+			simpleDateFormat = new SimpleDateFormat("yyMMdd");
+			orderId = simpleDateFormat.format(today).toString();
+			for (int i = 0; i < 4; i++) {
+				randomN = (int) (Math.random() * 9);
+				orderId = orderId.concat(Integer.toString(randomN));
+			}
+		}
+
+		model.addAttribute("buyerId", buyerId);
+		model.addAttribute("itemName", itemName);
+		model.addAttribute("price", price);
+		model.addAttribute("itemId", itemId);
+		model.addAttribute("orderId", orderId);
+		model.addAttribute("type", type);
+		return "order/OrderForm";
+	}
+
 	// 구매하기
 	@PostMapping("insertOrder")
 	@ResponseBody
-	public String insertOrder(@RequestBody Order order) {
+	public String insertOrder(@RequestBody OrderDto orderDto) {
 		System.out.println("insertOrder");
-
+		Order order = new Order();
+		
+		order.setOrderId(orderDto.getOrderId());
+		order.setBuyerId(orderDto.getBuyerId());
+		order.setDeliveryInfo(orderDto.getDeliveryInfo());
+		order.setBuyerId(orderDto.getBuyerId());
+		order.setBuyerInfo(orderDto.getBuyerInfo());
+		order.setEmail(orderDto.getEmail());
+		order.setPrice(orderDto.getPrice());
+		order.setQuantity(orderDto.getQuantity());
+		order.setPg(orderDto.getPg());
+		order.setPay_method(orderDto.getPay_method());
+		order.setOrderDate(orderDto.getOrderDate());		
 		order.setStatus(OrderStatus.Complete);
+		order.setType(orderDto.getType());		
 		List<OrderItem> items = new ArrayList<>();
 		OrderItem item = new OrderItem();
 		item.setLineNum(1);
 		item.setOrderId(order.getOrderId());
-		item.setItemId(101);
-		item.setOrderPrice(order.getPrice());
+		item.setItemId(orderDto.getItemId());
+		item.setOrderPrice(orderDto.getPrice());
 		item.setStatus(OrderStatus.Complete);
 		items.add(item);
 		order.setOrderItems(items);
@@ -63,15 +116,19 @@ public class OrderController {
 		orderService.insertOrder(order);
 		System.out.println(order.toString());
 		
-		// 현재 판매 수량 업데이트
-		groupPurchaseService.updateCurrentQuantity(item.getItemId());
-		
-		return "myPage/myPage";
+		// 공동구매 현재 판매 수량 업데이트
+		if(orderDto.getType().equals("groupPurchase")) {
+			groupPurchaseService.updateCurrentQuantity(item.getItemId());
+		}
+
+		String view = "/myPage/orders/orderInfo?orderId=" + orderDto.getOrderId();
+		return view;
 	}
 
 	// 공동 구매 주문 내역 보여주기
 	@GetMapping("/myPage/orders/groupPurchase")
-	public String groupPurchaseViewOrders(@AuthenticationPrincipal UserDetails userDetail, Model model) throws Exception {
+	public String groupPurchaseViewOrders(@AuthenticationPrincipal UserDetails userDetail, Model model)
+			throws Exception {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername());
 		int buyerId = user.getUserId();
 		List<Order> orders = orderService.getOrders(buyerId, "groupPurchase");
@@ -84,44 +141,73 @@ public class OrderController {
 	public String auctionViewOrders(@AuthenticationPrincipal UserDetails userDetail, Model model) throws Exception {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername());
 		int buyerId = user.getUserId();
-		List<Order> orders = orderService.getOrders(buyerId, "Auction");
+		List<Order> orders = orderService.getOrders(buyerId, "auction");
 		model.addAttribute("orders", orders);
 		return "myPage/order/auctionOrders";
 	}
 
 	// 주문 자세한 내역 보여주기
-	@GetMapping("myPage/orders/orderInfo")
+	@GetMapping("/myPage/orders/orderInfo")
 	public String viewAuctionOrderDetail(@RequestParam("orderId") String orderId, Model model) throws Exception {
 
 		Order order = this.orderService.getOrder(orderId);
 		model.addAttribute("order", order);
-		return "orderDetail";
+		return "myPage/order/orderDetail";
+	}
+
+	// 성함, 전화번호 수정 창
+	@GetMapping("/myPage/order/updateBuyerInfoForm")
+	public String viewBuyerInfoForm(@RequestParam("orderId") String orderId,
+			@RequestParam("buyerName") String buyerName, @RequestParam("phoneNum") String phoneNum, Model model) {
+		BuyerInfo buyerInfo = new BuyerInfo(buyerName, phoneNum);
+		model.addAttribute("buyerInfo", buyerInfo);
+		model.addAttribute("orderId", orderId);
+		return "myPage/order/buyerInfoForm";
 	}
 
 	// 성함, 전화번호 변경
-	@GetMapping("myPage/order/updateBuyerInfo")
+	@PostMapping("/myPage/order/updateBuyerInfo")
 	public String modifyAuctionInvoiceNumber(@RequestParam("orderId") String orderId,
-			@RequestParam("buyerInfo") BuyerInfo buyerInfo, Model model) throws Exception {
+			@RequestParam("buyerName") String buyerName, @RequestParam("phoneNum") String phoneNum, Model model,
+			RedirectAttributes redirect) throws Exception {
 
+		BuyerInfo buyerInfo = new BuyerInfo(buyerName, phoneNum);
 		this.orderService.modifyBuyerInfo(orderId, buyerInfo);
-		model.addAttribute("orderId", orderId);
+		redirect.addAttribute("orderId", orderId);
 		// order 세부 정보 보여주는 곳으로 이동
-		return "redirct:/myPage/order/orderInfo";
+		return "myPage/order/modifyResult";
+	}
+
+	// 배송지 변경 창
+	@GetMapping("/myPage/order/updateDeliveryInfoForm")
+	public String viewDeliveryForm(@RequestParam("orderId") String orderId, @RequestParam("zipCode") String zipCode,
+			@RequestParam("addStreet") String addStreet, @RequestParam("addDetail") String addDetail,
+			@RequestParam("deliveryLocation") String deliveryLocation,
+			@RequestParam("deliveryRequest") String deliveryRequest, Model model) {
+		DeliveryInfo deliveryInfo = new DeliveryInfo(zipCode, addStreet, addDetail, deliveryLocation, deliveryRequest);
+		this.orderService.modifyDeliveryInfo(orderId, deliveryInfo);
+		model.addAttribute("orderId", orderId);
+
+		return "myPage/order/deliveryInfoForm";
 	}
 
 	// 배송지 변경
-	@GetMapping("myPage/order/updateDeliveryInfo")
-	public String modifyDeliveryInfo(@RequestParam("orderId") String orderId,
-			@RequestParam("deliveryInfo") DeliveryInfo deliveryInfo, Model model) throws Exception {
+	@PostMapping("/myPage/order/updateDeliveryInfo")
+	public String modifyDeliveryInfo(@RequestParam("orderId") String orderId, @RequestParam("zipCode") String zipCode,
+			@RequestParam("addStreet") String addStreet, @RequestParam("addDetail") String addDetail,
+			@RequestParam("deliveryLocation") String deliveryLocation,
+			@RequestParam("deliveryRequest") String deliveryRequest, Model model, RedirectAttributes redirect)
+			throws Exception {
 
+		DeliveryInfo deliveryInfo = new DeliveryInfo(zipCode, addStreet, addDetail, deliveryLocation, deliveryRequest);
 		this.orderService.modifyDeliveryInfo(orderId, deliveryInfo);
-		model.addAttribute("orderId", orderId);
+		redirect.addAttribute("orderId", orderId);
 		// order 세부 정보 보여주는 곳으로 이동
-		return "redirct:/myPage/order/orderInfo";
+		return "myPage/order/modifyResult";
 	}
 
 	// 현황 변경
-	@GetMapping("myPage/order/updateStatus")
+	@GetMapping("/myPage/order/updateStatus")
 	public String modifyDeliveryInfo(@RequestParam("orderId") String orderId, Model model) throws Exception {
 
 		this.orderService.modifyStatus(orderId);

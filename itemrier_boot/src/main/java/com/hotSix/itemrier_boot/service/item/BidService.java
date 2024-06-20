@@ -73,6 +73,7 @@ public class BidService {
 		List<Bid> remainingBids = bidRepository.findByItemOrderByAmountDescBidTimeAsc(auction);
 		if(remainingBids.isEmpty()) {
 			auction.setWinner(null);
+			auction.setCurrentBid(auction.getStartPrice());
 		} else {
 			Bid newBid = remainingBids.get(0);
 			auction.setWinner(newBid.getUser().getUserId());

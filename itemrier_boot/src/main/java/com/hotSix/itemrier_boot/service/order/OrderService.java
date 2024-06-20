@@ -21,6 +21,12 @@ public class OrderService {
 		orderRepository.save(order);
 	}
 	
+	// orderId 존재하는지 확인
+	public Boolean existsByOrderId(String orderId) {
+		Boolean check = orderRepository.existsByOrderId(orderId);
+		return check;
+	}
+	
 	// order 가져오기
 	public Order getOrder(String orderId) {
 		Order order = orderRepository.findOrderByOrderId(orderId);

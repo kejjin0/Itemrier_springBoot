@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,11 @@
 		margin-top: 10px;
 		margin-left: 30px;
 		flex-grow:1;
+	}
+	
+		
+	.container {
+		margin-top:50px;
 	}
 	
 	.title{
@@ -44,7 +50,28 @@
 		margin: 20px;
 	}
 	
+	.reviewWriteBtn {
+		width: 100px;
+		height: 30px;
+		border-radius: 5px;
+		background-color: #add8e6;
+		font-size: 13px;
+	}
+	
 </style>
+<script>
+	function openWriteReview(itemId, buyerId) {
+		var url = "/write/reviewForm";
+		url += '?itemId=' + encodeURIComponent(itemId);
+		url += '&userId=' + encodeURIComponent(buyerId);
+	
+		window.open(url, "리뷰 작성", "width=600, height=500")
+	}
+	
+	function refreshWindow() {
+		window.location.reload();
+	}
+</script>
 <body>
 <jsp:include page="../myPage.jsp" />
 	<div class="myPageUsedGoods">
@@ -60,9 +87,14 @@
 						<h3>상품 이름: ${userGoods.itemName}</h3>
 						<p>가격: ${userGoods.price}원</p>
 						<p>구매자: ${userGoods.buyer.nickname}</p>
-						<p>올린 날짜:${userGoods.registerDate}
+						<p>올린 날짜:
+						<fmt:parseDate value="${userGoods.registerDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parseDateTime" type="both" />
+						<fmt:formatDate value="${parseDateTime}" pattern="yyyy-MM-dd"/>
 						</p>
 						<div class="status">${userGoods.status}</div>
+						<div><button class="reviewWriteBtn"
+										onclick="openWriteReview('${userGoods.itemId}', '${userGoods.buyerId}')">리뷰
+										작성하기</button></td></div>
 					</div>
 					</c:forEach>
 				</div>

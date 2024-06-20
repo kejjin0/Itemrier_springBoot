@@ -5,23 +5,39 @@
 <title>경매 상품 수정</title>
 <style>
 	table {
-	    width: 1000px; 
-	    height: 800px;
+	    width: 650px; 
+	    height: 600px;
 	    border-collapse: collapse;
 	    margin-left: auto;
 	    margin-right: auto;
 	}
-	th, td {
+	th {
 	    border: 1px solid black;
 	    padding: 8px; 
 	    text-align: center; 
 	}
-	.imgSize {
-	    padding: 70px 0;
+	td {
+		border: 1px solid black;
+	    padding: 8px; 
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	h1 {
+		text-align: center;
+	}
+	h2 {
+		text-align: center;
+	}
+	.btn {
+		text-align: center;
 	}
 </style>
 </head>
 <body>
+	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
+	<h2>경매 상품 수정</h2>
 	<form th:action="@{/auction/update}" method="POST" th:object=${auction}>
 		<input type="hidden" th:field="*{itemId}">
 		<input type="hidden" th:field="*{seller}">
@@ -29,15 +45,15 @@
 		<input type="hidden" th:field="*{startTime}">
 		<table>
 	         <tr>
-	             <td>제목(상품명)</td>
-	             <td><input type="text" th:field="*{itemName}" placeholder="등록할 제목을 입력하세요"></td>
+	             <th>제목(상품명)</th>
+	             <td><input type="text" th:field="*{itemName}" placeholder="등록할 제목을 입력하세요" style="width: 400px; height: 30px;"></td>
 	         </tr>
 	         <tr>
-	             <td>상품 정보</td>
-	             <td><input type="text" th:field="*{description}" placeholder="상품 정보를 입력해주세요"></td>
+	             <th>상품 정보</th>
+	             <td><input type="text" th:field="*{description}" placeholder="상품 정보를 입력해주세요" style="width: 400px; height: 80px;"></td>
 	         </tr>
 	         <tr>
-	             <td>제품 상태</td>
+	             <th>제품 상태</th>
 	             <td>
 	                 <select th:field="*{condition}">
 	                 	<option value="0" th:selected="*{condition eq '0'}">미사용(새상품)</option>
@@ -49,14 +65,14 @@
 	             </td>
 	         </tr>
 	         <tr>
-	             <td>등록 가격</td>
+	             <th>등록 가격</th>
 	             <td>
-	                 <input type="number" th:field="*{startPrice}" placeholder="등록 가격을 입력하세요" min="0">
+	                 <input type="number" th:field="*{startPrice}" placeholder="등록 가격을 입력하세요" min="0" style="width: 160px;">
 	                 <span>원</span>
 	             </td>
 	         </tr>
 	         <tr>
-	             <td>카테고리</td>
+	             <th>카테고리</th>
 	             <td>
 	                 <select name="category">
 	                 	<option th:each="cat : ${category}" th:value="${cat.catId}" th:utext="${cat.catName}" th:selected="${cat.catId == auction.category.catId}"></option>
@@ -64,26 +80,15 @@
 	             </td>
 	         </tr>
 	         <tr>
-	             <td>연락 수단</td>
-	             <td><input type="text" th:field="*{contactType}" placeholder="카카오톡 아이디, 전화번호 등 연락할 수단을 입력해주세요"></td>
+	             <th>연락 수단</th>
+	             <td><input type="text" th:field="*{contactType}" placeholder="카카오톡 아이디, 전화번호 등 연락할 수단을 입력해주세요" style="width: 400px; height: 30px;"></td>
 	         </tr>
 	        <tr>
-	        	<td>마감일</td>
+	        	<th>마감일</th>
 	            <td><input type="datetime-local" th:field="*{endTime}"></td>
 	        </tr>
-	        <tr>
-	        <!-- 적용이 안됨 -->
-	        	<td>상태변경</td>
-	            <td>
-	            	<select name="status" th:field="*{status}">
-					    <option th:each="s : ${T(com.hotSix.itemrier_boot.domain.item.ItemStatus).values()}"
-					            th:value="${s}" th:text="${s}">
-					    </option>
-					</select>
-	            </td>
-	        </tr>
 	         <tr>
-	             <td colspan="2"><input type="submit" value="수정하기"></td>
+	             <td colspan="2" class="btn"><input type="submit" value="수정하기"></td>
 	         </tr>
 		</table>
 	</form>

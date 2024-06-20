@@ -80,4 +80,9 @@ public class UserService implements UserDetailsService {
             return false;
         }	
     }
+    
+    public boolean findUserId(int userId) {
+    	Boolean rslt = userRepository.existsById(userId);
+    	return rslt;
+    }
 }

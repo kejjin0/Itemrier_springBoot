@@ -8,7 +8,6 @@
 <title>마이페이지</title>
 </head>
 <style>
-
 	.myPageList{
 		width: 240px;
 		border: 1px solid gray;
@@ -21,15 +20,15 @@
 		float: left;
 	}
 
-	hr{
-		margin-left: 0px;
-		width: 100px;
-	}
+hr {
+	margin-left: 0px;
+	width: 100px;
+}
 
-	ul{
-		list-style-type: none;
-		padding-left: 10px;
-	}
+ul {
+	list-style-type: none;
+	padding-left: 10px;
+}
 
 </style>
 <body>
@@ -67,13 +66,13 @@
 		<li><a href="/myPage/auction/ended">판매 완료 상품</a></li>
 	</ul>
 
-	<hr>
-	<h3>찜</h3>
-	<ul>
-		<li>찜한 상품</li>
-	</ul>
-	
-</div>
+		<hr>
+		<h3>찜</h3>
+		<ul>
+			<li>찜한 상품</li>
+		</ul>
+
+	</div>
 
 </body>
 </html>
