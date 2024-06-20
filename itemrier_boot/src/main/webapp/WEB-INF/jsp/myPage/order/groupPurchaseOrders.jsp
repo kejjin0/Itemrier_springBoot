@@ -8,7 +8,7 @@
 <title>구매한 공동구매 물품</title>
 </head>
 <style>
-.myPageUsedGoods {
+.myPageIndex {
 	display: flex;
 }
 
@@ -44,7 +44,7 @@ tr {
 }
 </style>
 <body>
-	<div class="myPageUsedGoods">
+	<div class="myPageIndex">
 		<jsp:include page="../myPage.jsp" />
 		<div class="itemList">
 			<div class="title">
@@ -60,10 +60,18 @@ tr {
 						<th>주문 상태</th>
 					</tr>
 					<c:forEach var="o" items="${orders}">
-						<td>${o.orderId}</td>
-						<td>${o.orderDate}</td>
-						<td>${o.price}</td>
-						<td>${o.status}</td>
+						<tr>
+							<td>
+								<a href="<c:url value='/myPage/orders/orderInfo'>
+										<c:param name='orderId' value='${o.orderId}'/>
+										</c:url>">
+									${o.orderId}
+								</a>
+							</td>
+							<td>${o.orderDate}</td>
+							<td>${o.price}</td>
+							<td>${o.status}</td>
+						</tr>
 					</c:forEach>
 				</table>
 			</center>
