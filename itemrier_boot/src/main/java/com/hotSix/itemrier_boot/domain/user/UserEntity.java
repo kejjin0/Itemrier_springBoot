@@ -42,4 +42,5 @@ public class UserEntity {
 	@OneToMany
 	@JoinColumn(name = "userId")
 	private List<Review> reviews;
+	
 }

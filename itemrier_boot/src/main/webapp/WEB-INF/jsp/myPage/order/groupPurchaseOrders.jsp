@@ -10,6 +10,7 @@
 <style>
 .myPageIndex {
 	display: flex;
+	height: 1000px;
 }
 
 .itemList {
@@ -44,8 +45,9 @@ tr {
 }
 </style>
 <body>
+<jsp:include page="../myPage.jsp" />
 	<div class="myPageIndex">
-		<jsp:include page="../myPage.jsp" />
+		
 		<div class="itemList">
 			<div class="title">
 				<br>공동구매 내역<br>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>입찰 등록 완료</title>
+</head>
+<body>
+	입찰 등록이 완료되었습니다!
+	<p>
+	<div><button onclick="closeWindow()">창 닫기</button></div>
+	
+	<script th:inline="javascript">
+		function closeWindow() {
+			window.opener.location.reload();
+            window.close();
+		}
+	</script>
+</body>
+</html>

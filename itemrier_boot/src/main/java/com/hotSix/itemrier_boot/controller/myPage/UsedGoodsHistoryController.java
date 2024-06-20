@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import com.hotSix.itemrier_boot.service.myPage.UsedGoodsHistoryService;
 
 import lombok.RequiredArgsConstructor;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping(value = "/myPage")
 public class UsedGoodsHistoryController {
@@ -27,34 +28,36 @@ public class UsedGoodsHistoryController {
 	
 	//중고거래 판매,예약 상품내역
 	@GetMapping("/usedGoodsTransaction/inProgress")
-	public List<UsedGoodsDto> getUsedGoodsInProgress(@AuthenticationPrincipal UserDetails userDetail, Model model) {
+	public String getUsedGoodsInProgress(@AuthenticationPrincipal UserDetails userDetail, Model model) {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername()); 
 		int userId = user.getUserId(); //로그인한 계정의 PK값
 		Boolean status = true;
 		
 		List<UsedGoodsDto> userGoodsList = usedGoodsService.getUsedGoodsStatusSearch(userId, status);
-		model.addAttribute(userGoodsList);
-		
-		return userGoodsList;
+		model.addAttribute("userGoodsList", userGoodsList);
+		for (int i = 0; i < userGoodsList.size(); i++) {
+			System.out.println(userGoodsList.get(i));
+		}
+		return "myPage/usedGoods/usedGoodsInProgress";
 	}
 	
 	//중고거래 판매완료된 상품내역
 	@GetMapping("/usedGoodsTransaction/ended")
-	public List<UsedGoodsDto> getUsedGoodsEnded(@AuthenticationPrincipal UserDetails userDetail, Model model) {
+	public String getUsedGoodsEnded(@AuthenticationPrincipal UserDetails userDetail, Model model) {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername()); 
 		int userId = user.getUserId(); //로그인한 계정의 PK값
 		Boolean status = false;
 		
 		List<UsedGoodsDto> userGoodsList = usedGoodsService.getUsedGoodsStatusSearch(userId, status);
 		System.out.println("usedGoods" + userGoodsList);
-		model.addAttribute(userGoodsList);
+		model.addAttribute("userGoodsList", userGoodsList);
 		
-		return userGoodsList;
+		return "myPage/usedGoods/usedGoodsEnded";
 	}
 	
 	//구매내역 조회
 	@GetMapping("/usedGoodsTransactionHistory")
-	public List<UsedGoodsDto> getUsedGoodsBuyHistory(@AuthenticationPrincipal UserDetails userDetail, Model model) {
+	public String getUsedGoodsBuyHistory(@AuthenticationPrincipal UserDetails userDetail, Model model) {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername()); 
 		int userId = user.getUserId(); //로그인한 계정의 PK값
 		
@@ -62,6 +65,6 @@ public class UsedGoodsHistoryController {
 		System.out.println("usedGoods" + userGoodsList);
 		model.addAttribute(userGoodsList);
 		
-		return userGoodsList;
+		return "myPage/usedGoods/purchasedUsedGoods";
 	}
 }
