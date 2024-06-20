@@ -105,12 +105,13 @@ hr {
 		window.open(url, "상품 리뷰", "width=600, height=500")
 	}
 	
-	function viewOrderForm(itemId,itemName,price){
+	function viewOrderForm(itemId,itemName,price,filePath){
 		var url = "/orderForm";
 		url += '?itemId=' + encodeURIComponent(itemId);
 		url += '&itemName=' + encodeURIComponent(itemName);
 		url += '&price=' + encodeURIComponent(price);
 		url += '&type=' + encodeURIComponent("groupPurchase");
+		url += '&filePath=' + encodeURIComponent(filePath);
 		
 		window.location.href = url;
 	}
@@ -163,7 +164,7 @@ hr {
 			<td colspan="3">
 				<button th:onclick="|location.href='@{/orderForm}'|" id="btn1">목록</button>
 				<button
-					th:onclick="viewOrderForm(/*[[${groupPurchase.itemId}]]*/, /*[[${groupPurchase.itemName}]]*/, /*[[${groupPurchase.price}]]*/)"
+					th:onclick="viewOrderForm(/*[[${groupPurchase.itemId}]]*/, /*[[${groupPurchase.itemName}]]*/, /*[[${groupPurchase.price}]]*/, /*[[${groupPurchase.filePath}]]*/)"
 					id="btn1">결제하기</button> <span
 				th:if="${loginUserId == groupPurchase.seller.userId}"> <th:block
 						th:with="itemId=${groupPurchase.itemId}" />

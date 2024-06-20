@@ -182,7 +182,7 @@ hr {
 		<div th:if="${auction.winner != null}">
 			축하합니다. <span th:text="${winner.nickname}"></span>님이 낙찰되었습니다.
 			<div th:if="${winner.userId == loginUserId}">
-				<button th:onclick="viewOrderForm(/*[[${auction.itemId}]]*/, /*[[${auction.itemName}]]*/, /*[[${auction.currentBid}]]*/)" id="btn3">결제하기</button>
+				<button th:onclick="viewOrderForm(/*[[${groupPurchase.itemId}]]*/, /*[[${groupPurchase.itemName}]]*/, /*[[${groupPurchase.price}]]*/, /*[[${groupPurchase.filePath}]]*/)" id="btn3">결제하기</button>
 			</div>
 
 		</div>
@@ -285,6 +285,7 @@ hr {
 			url += '&itemName=' + encodeURIComponent(itemName);
 			url += '&price=' + encodeURIComponent(price);
 			url += '&type=' + encodeURIComponent("auction");
+			url += '&filePath=' + encodeURIComponent(filePath);
 			
 			window.location.href = url;
 		}

@@ -54,7 +54,7 @@ public class OrderController {
 	// 구매 폼
 	@GetMapping("/orderForm")
 	public String viewOrderForm(@AuthenticationPrincipal UserDetails userDetail, @RequestParam("itemId") int itemId,
-			@RequestParam("itemName") String itemName, @RequestParam("price") int price,@RequestParam("type") String type, Model model) throws Exception {
+			@RequestParam("itemName") String itemName, @RequestParam("price") int price,@RequestParam("type") String type,@RequestParam("filePath") String filePath, Model model) throws Exception {
 		UserEntity user = userRepository.findByEmail(userDetail.getUsername());
 		int buyerId = user.getUserId();
 
@@ -85,6 +85,7 @@ public class OrderController {
 		model.addAttribute("itemId", itemId);
 		model.addAttribute("orderId", orderId);
 		model.addAttribute("type", type);
+		model.addAttribute("filePath", filePath);
 		return "order/OrderForm";
 	}
 
@@ -102,7 +103,7 @@ public class OrderController {
 		order.setBuyerInfo(orderDto.getBuyerInfo());
 		order.setEmail(orderDto.getEmail());
 		order.setPrice(orderDto.getPrice());
-		order.setQuantity(orderDto.getQuantity());
+		order.setQuantity(1);
 		order.setPg(orderDto.getPg());
 		order.setPay_method(orderDto.getPay_method());
 		order.setOrderDate(orderDto.getOrderDate());		

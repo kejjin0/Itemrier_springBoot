@@ -43,6 +43,11 @@ button {
 	text-align: center;
 	border-radius: 20px;
 }
+
+	.imgFile{
+		height: 130px;
+		width:130px;
+	}
 </style>
 <body>
 	<jsp:include page="../myPage.jsp" />
@@ -55,7 +60,7 @@ button {
 				<div class="row" align="center">
 					<c:forEach var="groupPurchase" items="${groupPurchaseList}">
 						<div class="col-md-4">
-							<img src="https://placehold.co/180" alt="상품 이미지" />
+							<img src="${groupPurchase.filePath}" alt="상품 이미지" onerror="this.src='https://placehold.co/150'" class="imgFile"/>
 							<h3>상품 이름: ${groupPurchase.itemName}</h3>
 							<p>가격: ${groupPurchase.price}원</p>
 							<p>

@@ -107,6 +107,11 @@ td {
 	background-color: #add8e6;
 	font-size: 13px;
 }
+
+.imgFile{
+	height: 150px;
+	width: 150px;
+}
 </style>
 <script>
 	function openBuyerInfoEditForm(orderId, buyerName, phoneNum) {
@@ -220,7 +225,7 @@ td {
 					<c:forEach var="i" items="${order.orderItems}">
 						<table class="itemTable">
 							<tr>
-								<td rowspan="3"><img src="https://placehold.co/130" /></td>
+								<td rowspan="3"><img src="${i.itemInfo.filePath}" onerror="this.src='https://placehold.co/180'" class="imgFile"/></td>
 								<td><br> <b>${i.itemInfo.itemName}</b> <br> <br>
 									${i.orderPrice}₩ <br> <br> ${i.amount}개</td>
 							<tr>

@@ -58,6 +58,11 @@ b{
 th{
 	background-color: #faf8da;
 }
+
+.imgFile{
+	height: 150px;
+	width: 150px;
+}
 </style>
 <body>
 	<jsp:include page="../../myPage.jsp" />
@@ -72,7 +77,7 @@ th{
 				<div class="item">
 					<table class="itemTable">
 						<tr>
-							<td rowspan="3"><img src="https://placehold.co/180" /></td>
+							<td rowspan="3"><img src="${item.filePath}" onerror="this.src='https://placehold.co/180'" class="imgFile"/></td>
 							<td><b>상품 명 : ${item.itemName}</b></td>
 						</tr>
 						<tr>

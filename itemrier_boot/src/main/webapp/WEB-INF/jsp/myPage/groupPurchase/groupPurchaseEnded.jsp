@@ -43,6 +43,11 @@
 		border-radius: 20px;
 	}
 	
+	.imgFile{
+		height: 130px;
+		width:130px;
+	}
+	
 </style>
 <body>
 		<jsp:include page="../myPage.jsp" />
@@ -55,14 +60,18 @@
 				<div class="row" align="center">
 					<c:forEach var="groupPurchase" items="${groupPurchaseList}">
 					<div class="col-md-4">
-						<img src="https://placehold.co/180" alt="상품 이미지"/>
+						<img src="${groupPurchase.filePath}" alt="상품 이미지" onerror="this.src='https://placehold.co/150'" class="imgFile"/>
 						<h3>상품 이름: ${groupPurchase.itemName}</h3>
 						<p>가격: ${groupPurchase.price}원</p>
 						<p>날짜:
 						<fmt:parseDate value="${groupPurchase.startTime}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parseDateTime" type="both" />
 						<fmt:formatDate value="${parseDateTime}" pattern="yyyy-MM-dd"/>
 						</p>
-						<button type="button">구매자 관리</button>
+							<a
+								href="<c:url value='/myPage/seller/groupPurchase/orders'>
+										<c:param name='itemId' value='${groupPurchase.itemId}'/>
+										</c:url>"><button
+									type="button">구매자 관리</button></a>
 					</div>
 					</c:forEach>
 				</div>

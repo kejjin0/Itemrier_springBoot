@@ -49,6 +49,11 @@
 		margin: 20px;
 	}
 	
+	.imgFile{
+		height: 130px;
+		width:130px;
+	}
+	
 	.writeBuyerBtn {
 		width: 110px;
 		height: 30px;
@@ -80,7 +85,7 @@
 				<div class="row" align="center">
 					<c:forEach var="userGoods" items="${userGoodsList}">
 					<div class="col-md-4">
-						<img src="https://placehold.co/180" alt="상품 이미지"/>
+						<img src="${userGoods.filePath }" alt="상품 이미지" onerror="this.src='https://placehold.co/150'" class="imgFile"/>
 						<h3>상품 이름: ${userGoods.itemName}</h3>
 						<p>가격: ${userGoods.price}원</p>
 						<p>올린 날짜:
