@@ -1,204 +1,131 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<title>공동구매 상품 상세보기</title>
-<style>
-h1 {
-	text-align: center;
-}
-
-table {
-	width: 900px;
-	border-collapse: collapse;
-	border: none;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-th {
-	text-align: left;
-}
-
-hr {
-	width: 1050px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-
-.boldText {
-	font-weight: bold;
-	font-size: 20px;
-}
-
-.imgSize {
-	width: 400px;
-	height: 400px;
-	padding-right: 35px;
-}
-
-.buttonDist {
-	margin-bottom: 60px;
-}
-
-.originalPrice {
-	text-decoration: line-through;
-}
-
-.discPrice {
-	color: red;
-}
-
-#btn1 {
-	background-color: #555555;
-	border: none;
-	color: white;
-	padding: 10px 25px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-}
-
-#btn2 {
-	border: none;
-	color: black;
-	margin-left: 60px;
-	margin-top: 2px;
-	margin-bottom: 40px;
-	padding: 10px 25px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-}
-
-#btn3 {
-	background-color: #4CAF50;
-	border: none;
-	color: white;
-	padding: 10px 25px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-}
-</style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script th:inline="javascript">
-    $(document).ready(function() {
-        $('#btn3').click(function() {
-            var itemId = /*[[${groupPurchase.itemId}]]*/;
-            var userId = parseInt(/*[[${session.loginUserId}]]*/ '0');
-            $.ajax({
-                type: 'POST',
-                url: '/wishlist/add',
-                data: {
-                    userId: userId,
-                    itemId: itemId,
-                    itemType: 'groupPurchase'
-                },
-                success: function(response) {
-                    alert('상품을 찜 목록에 추가했습니다.');
-                },
-                error: function() {
-                    alert('오류가 발생했습니다. 다시 시도해주세요.');
-                }
-            });
-        });
-    });
-</script>
+	<meta charset="utf-8">
+	<title>경매 상품 상세보기</title>
+	<style>
+		h1 {
+			text-align: center;
+		}
+		table {
+		    width: 900px;
+		    border-collapse: collapse;
+		    border: none;
+		    margin-left: auto;
+		    margin-right: auto;
+		}
+		th {
+			text-align: left;
+		}
+		hr {
+			width: 1050px;
+		    margin-top: 30px;
+		    margin-bottom: 30px;
+		}
+		.boldText {
+			font-weight: bold;
+			font-size: 20px;
+		}
+		.imgSize {
+			width: 400px;
+			height: 400px;
+			padding-right: 35px;
+		}
+		.buttonDist {
+			margin-bottom: 60px;
+		}
+		.originalPrice {
+			text-decoration: line-through;
+		}
+		.discPrice {
+			color: red; 
+		}
+		#btn1 {
+		  	background-color: #555555;
+		  	border: none;
+		 	color: white;
+		 	padding: 10px 25px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+		#btn2 {
+		  	border: none;
+		 	color: black;
+		 	margin-left: 60px;
+		 	margin-top: 2px;
+		 	margin-bottom: 40px;
+		 	padding: 10px 25px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+	</style>
 </head>
-<body>
-	<h1>공동구매 상품 정보</h1>
-	<hr>
-	<table th:object="${groupPurchase}">
-		<tr>
-			<td rowspan="11"><img th:src="@{*{getFilePath()}}" alt="상품사진"
-				class="imgSize"></td>
-		</tr>
-		<tr>
-			<td th:text="*{itemName}" class="boldText">제목</td>
-		</tr>
-		<tr>
-			<th th:text="등록자">닉네임</th>
-			<td th:text="*{seller.nickname}"></td>
-		</tr>
-		<tr>
-			<th th:text="카테고리">카테고리</th>
-			<td th:text="*{category.catName}">카테고리</td>
-		</tr>
-		<tr>
-			<th th:text="할인가격"></th>
-			<td><span th:text="|*{originalPrice}원|" class="originalPrice"></span>
-				<span th:text="|*{price}원|" class="discPrice"></span></td>
-		</tr>
-		<tr>
-			<th th:text="할인율"></th>
-			<td th:text="|*{discRate}%|">할인율</td>
-		</tr>
-		<tr>
-			<th th:text="목표수량"></th>
-			<td th:text="|*{minQuantity}원|">최소수량</td>
-		</tr>
-		<tr>
-			<th th:text="현재판매수량"></th>
-			<td th:text="|*{totalQuantity}개|">현재판매수량</td>
-		</tr>
-		<tr>
-			<th th:text="종료시간">종료시간</th>
-			<td th:text="*{#temporals.format(endTime, 'yyyy년 MM월 dd일 HH:mm:ss')}"></td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<button th:onclick="|location.href='@{/groupPurchase/list}'|"
-					id="btn1">목록</button> <span
-				th:if="${loginUserId == groupPurchase.seller.userId}"> <th:block
-						th:with="itemId=${groupPurchase.itemId}" />
-					<button
-						th:if="${#strings.equals(groupPurchase.status, 'Available')}"
-						th:onclick="|location.href='@{/groupPurchase/update/}' + ${itemId}|"
-						id="btn2">수정</button>
-					<button
-						th:onclick="|location.href='@{/groupPurchase/delete/}' + ${itemId}|"
-						id="btn2">삭제</button>
-			</span>
-				<button th:if="${loginUserId != groupPurchase.seller.userId}"
-					id="btn3">찜하기</button>
-			</td>
-		</tr>
-	</table>
-
-	<hr>
-
-	<div>
-		<table>
-			<tr>
-				<td class="boldText">상품 설명</td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
-			<tr>
-				<td th:text="${groupPurchase.description}"></td>
-			</tr>
+	<body>
+		<h1>공동구매 상품 정보</h1>
+		<hr>
+		<table th:object="${groupPurchase}"> 
+		    <tr>
+		    	<td rowspan="11"><img th:src="@{*{getFilePath()}}" alt="상품사진" class="imgSize"></td>
+		    </tr>
+		    <tr>
+		        <td th:text="*{itemName}" class="boldText">제목</td>
+		    </tr>
+		    <tr>
+		    	<th th:text="등록자">닉네임</th>
+		    	<td th:text="*{seller.nickname}"></td>
+		    </tr>
+		    <tr>
+		    	<th th:text="카테고리">카테고리</th>
+		        <td th:text="*{category.catName}">카테고리</td>
+		    </tr>
+		    <tr>
+		    	<th th:text="할인가격"></th>
+		        <td>
+		        	<span th:text="|*{originalPrice}원|" class="originalPrice"></span>
+		        	<span th:text="|*{price}원|" class="discPrice"></span>
+		        </td>
+		    </tr>
+		    <tr>
+		    	<th th:text="할인율"></th>
+		    	<td th:text="|*{discRate}%|">할인율</td>
+		    </tr>
+		    <tr>
+		    	<th th:text="목표수량"></th>
+		    	<td th:text="|*{minQuantity}원|">최소수량</td>
+		    </tr>
+		    <tr>
+		    	<th th:text="현재판매수량"></th>
+		    	<td th:text="|*{totalQuantity}개|">현재판매수량</td>
+		    </tr>
+		    <tr>
+		    	<th th:text="종료시간">종료시간</th>
+				<td th:text="*{#temporals.format(endTime, 'yyyy년 MM월 dd일 HH:mm:ss')}"></td>
+		    <tr>
+		    
+	        <tr>
+	            <td colspan="3">
+	            	<button th:onclick="|location.href='@{/groupPurchase/list}'|" id="btn1">목록</button>
+					<span th:if="${loginUserId == groupPurchase.seller.userId}">
+						<th:block th:with="itemId=${groupPurchase.itemId}" />
+						<button th:if="${#strings.equals(groupPurchase.status, 'Available')}" th:onclick="|location.href='@{/groupPurchase/update/}' + ${itemId}|" id="btn2">수정</button>
+						<button th:onclick="|location.href='@{/groupPurchase/delete/}' + ${itemId}|" id="btn2">삭제</button>
+					</span>	 
+	            </td>
+	        </tr>
 		</table>
-	</div>
-	
-	<hr /><!-- 추천 상품 목록 추가 -->
-<div th:fragment="recommendedItems">
-    <h2>추천 상품 목록</h2>
-    <ul>
-        <li th:each="item : ${recommendedItems}">
-            <h3 th:text="${item.itemName}"></h3>
-            <p th:text="${item.description}"></p>
-            <p>가격: <span th:text="${item.price}"></span>원</p>
-            <p><a th:href="@{/groupPurchase/view/{itemId}(itemId=${item.itemId})}">상세 보기</a></p>
-            <hr>
-        </li>
-    </ul>
-</div>
-	
-</body>
+		
+		<hr>
+			
+		<div>
+			<table>
+				<tr><td class="boldText">상품 설명</td></tr>
+				<tr><td></td></tr>
+				<tr><td th:text="${groupPurchase.description}"></td></tr>
+			</table>
+		</div>				
+	</body>
 </html>

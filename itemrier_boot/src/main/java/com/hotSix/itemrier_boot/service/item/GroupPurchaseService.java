@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -114,14 +113,6 @@ public class GroupPurchaseService {
 		return gpDto;
 	}
 
-	//	 // 추천 상품 가져오기
-	public List<GroupPurchaseDto> recommend(int categoryId, int itemId) {
-		List<GroupPurchase> recommendedItems = groupPurchaseRepository.findTop5ByCategoryCatIdAndItemIdNotOrderByStartTimeDesc(categoryId, itemId);
-		return recommendedItems.stream()
-				.map(groupPurchase -> groupPurchase.toGroupPurchaseDto(groupPurchase))
-				.collect(Collectors.toList());
-	}
-
 	// 유효성 체크
 	public Map<String, String> validateHandling(BindingResult result) {
 		Map<String, String> validatorResult = new HashMap<>();
@@ -169,11 +160,10 @@ public class GroupPurchaseService {
 	}
 
 	// 검색
-	public List<GroupPurchaseDto> searchGroupPurchase(String query) {
-		List<GroupPurchase> groupPurchases = groupPurchaseRepository.findByItemNameContaining(query);
-		return groupPurchases.stream()
-				.map(GroupPurchaseDto::toDTO)
-				.collect(Collectors.toList());
-	}
-
+	 public List<GroupPurchaseDto> searchGroupPurchase(String query) {
+	        List<GroupPurchase> groupPurchases = groupPurchaseRepository.findByItemNameContaining(query);
+	        return groupPurchases.stream()
+	                .map(GroupPurchaseDto::toDTO)
+	                .collect(Collectors.toList());
+	    }
 }
