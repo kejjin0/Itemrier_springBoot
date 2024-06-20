@@ -23,33 +23,32 @@ table {
 	<center>
 		<br>
 		<table>
-			<tr>
-				<c:choose>
-					<c:when test="${promise eq 0.0}">
-						<p>작성된 리뷰가 없습니다.</p>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<th>만족도</th>
-							<td>${review.satisfactionRate}</td>
-						</tr>
-						<tr>
-							<th>답장 속도</th>
-							<td>${review.speedOfAnswer}</td>
-						</tr>
-						<tr>
-							<th>약속</th>
-							<td>${review.promise}</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-			</tr>
+			<c:choose>
+				<c:when test="${review.satisfactionRate <= 0.0}">
+					<tr>
+						<td colspan="2"><b>작성된 리뷰가 없습니다.</b></td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<th>만족도</th>
+						<td>${review.satisfactionRate}</td>
+					</tr>
+					<tr>
+						<th>답장 속도</th>
+						<td>${review.speedOfAnswer}</td>
+					</tr>
+					<tr>
+						<th>약속</th>
+						<td>${review.promise}</td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
 			<tr>
 				<td rowspan="2"><center>
 						<br>
 						<button onclick="refreshInfoAndClose()">닫기</button>
 					</center></td>
-			</tr>
 		</table>
 	</center>
 </body>

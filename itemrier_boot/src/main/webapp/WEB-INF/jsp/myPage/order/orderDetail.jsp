@@ -125,19 +125,19 @@ td {
 
 		window.open(url, "리뷰 작성", "width=600, height=500")
 	}
-	
-	function openSellerReview(sellerId){
+
+	function openSellerReview(sellerId) {
 		var url = "/view/userReview";
 		url += '?userId=' + encodeURIComponent(sellerId);
-		
+
 		window.open(url, "판매자 리뷰", "width=600, height=500")
 	}
-	
-	function openItemReview(itemId){
+
+	function openItemReview(itemId) {
 		var url = "/view/itemReview";
 		url += '?itemId=' + encodeURIComponent(itemId);
-		
-		window.open(url, "판매자 리뷰", "width=600, height=500")
+
+		window.open(url, "상품 리뷰", "width=600, height=500")
 	}
 
 	function refreshWindow() {
@@ -146,8 +146,8 @@ td {
 </script>
 
 <body>
+	<jsp:include page="../myPage.jsp" />
 	<div class="myPageIndex">
-		<jsp:include page="../myPage.jsp" />
 
 		<div class="itemList">
 			<div class="title">
@@ -211,11 +211,11 @@ td {
 								<td rowspan="3"><img src="https://placehold.co/130" /></td>
 								<td><br> <b>${i.itemInfo.itemName}</b> <br> <br>
 									${i.orderPrice}₩ <br> <br> ${i.amount}개</td>
+							<tr>
+								<td><button class="reviewWriteBtn"
+										onclick="openWriteReview('${i.itemInfo.itemId}', '${i.itemInfo.seller.userId}')">리뷰
+										작성하기</button></td>
 							</tr>
-							<tr><td><button class="reviewWriteBtn" onclick="openSellerReview('${i.itemInfo.seller.userId}')">판매자 리뷰 확인</button></td></tr>
-							<tr><td><button class="reviewWriteBtn" onclick="openItemReview('${i.itemInfo.itemId}')">상품 리뷰 확인</button></td></tr>
-							<tr><td><button class="reviewWriteBtn" onclick="openWriteReview('${i.itemInfo.itemId}', '${i.itemInfo.seller.userId}')">리뷰
-										작성하기</button></td></tr>
 						</table>
 					</c:forEach>
 				</div>
