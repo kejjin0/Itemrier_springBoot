@@ -138,9 +138,22 @@ public class AuctionController {
 		int sellerId = user.getUserId();
 //		int sellerId = 2953; // test용
 		model.addAttribute("loginUserId", sellerId);
-		
+
+		 // 추천 상품 추가
+		List<AuctionDto> recommendations = auctionService.recommend(auctionDto.getCategory().getCatId(), itemId);
+       model.addAttribute("recommendedItems", recommendations);
+       
 		return "thymeleaf/item/auction/view";
 	}
+	
+
+	//검색한 상품만
+    @GetMapping("/search")
+    public String searchAuction(@RequestParam("query") String query, Model model) {
+        List<AuctionDto> searchResults = auctionService.searchAuction(query);
+        model.addAttribute("auctionDtoList", searchResults);
+        return "thymeleaf/item/auction/list";
+    }
 	
 	// 입찰 폼 열기
 	@GetMapping("/bid/{itemId}")

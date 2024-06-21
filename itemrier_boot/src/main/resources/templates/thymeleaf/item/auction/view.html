@@ -112,6 +112,20 @@ hr {
 	background-color: #add8e6;
 	font-size: 13px;
 }
+#rec {
+	width: 900px;
+	border-collapse: collapse;
+	border: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#rec li {
+	list-style: none;
+	display: inline-block;
+	margin-right : 20px;
+}
+
 </style>
 </head>
 <body>
@@ -239,6 +253,28 @@ hr {
 			</th:block>
 		</div>
 	</div>
+	
+		<hr />
+		
+		<!-- 추천 상품 목록 추가 -->
+		<div th:fragment="recommendedItems" id="rec">
+		<h2>추천 상품 목록</h2>
+		<ul>
+			<li th:each="item : ${recommendedItems}"><a
+				th:href="@{/auction/view/{itemId}(itemId=${item.itemId})}">
+				
+					<img th:src="@{${item.filePath}}" alt="상품 이미지" width="200"
+					height="200" />
+					<h3 th:text="${item.itemName}"></h3>
+					<p>
+						가격: <span th:text="${item.price}"></span>원
+					</p>
+					<p>
+				</a>
+				</p></li>
+		</ul>
+	</div>
+	
 
 	<script>
 		function openBidForm(itemId) {
