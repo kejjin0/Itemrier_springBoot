@@ -81,7 +81,7 @@
 	<table>
 		 <tr th:each="row : ${auctionList}">
             <td th:each="auction : ${row}">
-                <img th:src="@{${auction.getFilePath()}}" alt="상품사진" class="imgSize">
+                <img th:src="${auction.filePath != null ? auction.filePath : '/files/defaultImage.png'}" alt="상품사진" class="imgSize">
                 <p>
                 <a th:href="@{/auction/view/{itemId} (itemId=${auction.itemId})}" th:text="${auction.itemName}" class="title">상품명</a>
                 <p>

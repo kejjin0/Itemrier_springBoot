@@ -138,8 +138,7 @@ hr {
 	<hr>
 	<table th:object="${groupPurchase}">
 		<tr>
-			<td rowspan="11"><img th:src="@{*{getFilePath()}}" alt="상품사진"
-				class="imgSize"></td>
+			<td rowspan="11"><img th:src="${groupPurchase.filePath != null ? groupPurchase.filePath : '/files/defaultImage.png'}" alt="상품사진" class="imgSize"></td>
 		</tr>
 		<tr>
 			<td th:text="*{itemName}" class="boldText">제목</td>
