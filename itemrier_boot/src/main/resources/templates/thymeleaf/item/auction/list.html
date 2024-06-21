@@ -96,7 +96,7 @@
 </head>
 <body>
 	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
-	<h2>경매 상품 목록</h2>
+	<a href="/auction/list"><h2>경매 상품 목록</h2></a>
 	<form th:action="@{/auction/search}" method="get" id="search">
         <input type="text" name="query" placeholder="상품명을 입력해보세요">
         <button type="submit">검색</button>
@@ -104,7 +104,9 @@
 	<div class="button-container">
    		<button type="button" th:onclick="|location.href='@{/auction/create}'|" class="createBtn">경매 상품 등록</button>
    	</div>
-	<table>
+	<table><tr th:if="${auctionList == null or auctionList.empty}">
+            <td colspan="3">검색 결과가 없습니다.</td>
+        </tr>
 		 <tr th:each="row : ${auctionList}">
             <td th:each="auction : ${row}">
                 <img th:src="${auction.filePath != null ? auction.filePath : '/files/defaultImage.png'}" alt="상품사진" class="imgSize">
