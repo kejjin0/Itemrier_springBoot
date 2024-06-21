@@ -71,13 +71,35 @@
         color: black;
         z-index: 1000; 
     }
+    #search{
+        width: 1000px;
+		border-collapse: collapse;
+	    margin-left: auto;
+	    margin-right: auto;   
+    }
+    #search input {
+    	padding-left : 20px;
+        width: 500px;
+        height: 30px;
+        border-radius: 40px;
+        border: 1px solid #584a51;
+    }
+    #search button {
+        padding-top: 2px;
+        width: 50px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 100px;
+        border: 1px solid #584a51;
+
+    }
 </style>
 </head>
 <body>
 	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
 	<h2>공동구매 상품 목록</h2>
-	<form th:action="@{/groupPurchase/search}" method="get">
-        <input type="text" name="query" placeholder="상품명 검색">
+	<form th:action="@{/groupPurchase/search}" method="get" id="search">
+        <input type="text" name="query" placeholder="  상품명을 입력해보세요">
         <button type="submit">검색</button>
     </form>
     <div class="button-container">
