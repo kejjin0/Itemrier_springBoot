@@ -31,6 +31,76 @@ footer {height: 300px; background-color: gray;}
         
     }
 }
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    max-width: 1600px; 
+    margin: 0 auto;
+}
+
+.container > div {
+    flex: 1;
+    padding: 50px; 
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+    height: 500px; 
+}
+
+.container > div:hover {
+    transform: translateY(-5px);
+}
+
+.container img {
+    width: 100%;
+    max-width: 500px; 
+    height: auto;
+    border-radius: 10px;
+}
+
+.container p {
+    font-size: 24px;
+    color: #333;
+    margin: 20px 0;
+}
+
+.container .used {
+    background-color: #fffbf2;
+}
+
+.container .group {
+    background-color: #f2f7ff;
+}
+
+.used img{
+    padding-bottom: 100px;
+}
+
+footer p {
+	padding : 10px 5px;
+}
+
 /* 
 @media screen and (max-width: 640px) {
     main > div.product-card {
