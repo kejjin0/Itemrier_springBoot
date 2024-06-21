@@ -156,10 +156,20 @@ td {
 
 		window.open(url, "상품 리뷰", "width=600, height=500")
 	}
+	
+	function orderCancel(orderId){
+		if (confirm("정말 취소하시겠습니까?")==true){
+			var url = "/order/cancel";
+			url += '?orderId=' + encodeURIComponent(orderId);
+			
+			window.open(url, "결제 취소", "width=600, height=500")
+		}
+	}
 
 	function refreshWindow() {
 		window.location.reload();
 	}
+
 </script>
 
 <body>
@@ -179,7 +189,7 @@ td {
 						onclick="openDeliveryInfoEditForm('${order.orderId}', '${order.deliveryInfo.zipCode}',  '${order.deliveryInfo.addStreet}', '${order.deliveryInfo.addDetail}',
 			'${order.deliveryInfo.deliveryLocation}', '${order.deliveryInfo.deliveryRequest}')">배송지
 						변경</button>
-					<button>주문 취소</button>
+					<button onclick="orderCancel('${order.orderId}')">주문 취소</button>
 					<br>
 					<p />
 					<table class="orderForm">

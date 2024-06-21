@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hotSix.itemrier_boot.domain.order.BuyerInfo;
 import com.hotSix.itemrier_boot.domain.order.DeliveryInfo;
 import com.hotSix.itemrier_boot.domain.order.Order;
+import com.hotSix.itemrier_boot.domain.order.OrderItem;
 import com.hotSix.itemrier_boot.domain.order.OrderStatus;
 import com.hotSix.itemrier_boot.repository.order.OrderRepository;
 
@@ -70,6 +71,11 @@ public class OrderService {
 	public void modifyStatus(String orderId) {
 		Order order = orderRepository.findOrderByOrderId(orderId);
 		order.setStatus(OrderStatus.Cancel);
+		List<OrderItem> items = order.getOrderItems();
+		for(OrderItem i : items) {
+			i.setStatus(OrderStatus.Cancel);
+		}
+		
 		orderRepository.save(order);
 	}
 
