@@ -122,7 +122,9 @@ hr {
 	<hr>
 	<table th:object="${auction}">
 		<tr>
-			<td rowspan="11"><img th:src="${auction.filePath != null ? auction.filePath : '/files/defaultImage.png'}" alt="상품사진" class="imgSize"></td>
+			<td rowspan="11"><img
+				th:src="${auction.filePath != null ? auction.filePath : '/files/defaultImage.png'}"
+				alt="상품사진" class="imgSize"></td>
 		</tr>
 		<tr>
 			<td th:text="*{itemName}" class="boldText">제목</td>
@@ -171,17 +173,22 @@ hr {
 		</tr>
 		<tr>
 			<td><button class="reviewWriteBtn"
-					th:onclick="openItemReview(/*[[${auction.itemId}]]*/)">상품 리뷰 확인</button></td>
+					th:onclick="openItemReview(/*[[${auction.itemId}]]*/)">상품
+					리뷰 확인</button></td>
 		</tr>
 	</table>
 
 	<hr>
+	
+	<button class="reviewWriteBtn"
+					th:onclick="viewOrderForm(/*[[${auction.itemId}]]*/, /*[[${auction.itemName}]]*/, /*[[${auction.currentBid}]]*/ , /*[[${auction.filePath}]]*/)">결제하기</button>
 
 	<div class="winner">
 		<div th:if="${auction.winner != null}">
 			축하합니다. <span th:text="${winner.nickname}"></span>님이 낙찰되었습니다.
 			<div th:if="${winner.userId == loginUserId}">
-				<button th:onclick="viewOrderForm(/*[[${groupPurchase.itemId}]]*/, /*[[${groupPurchase.itemName}]]*/, /*[[${groupPurchase.price}]]*/, /*[[${groupPurchase.filePath}]]*/)" id="btn3">결제하기</button>
+				<button id="btn2" class="reviewWriteBtn"
+					th:onclick="viewOrderForm(/*[[${auction.itemId}]]*/, /*[[${auction.itemName}]]*/, /*[[${auction.currentBid}]]*/ , /*[[${auction.filePath}]]*/)">결제하기</button>
 			</div>
 
 		</div>
@@ -232,7 +239,8 @@ hr {
 						<td th:text="|${bid.amount}원|"></td>
 						<td
 							th:text="|${#temporals.format(bid.bidTime, 'yyyy년 MM월 dd일 HH:mm:ss')}|"></td>
-						<td th:if="${currentUserId == bid.user.userId} and ${#strings.equals(bid.item.status, 'Available')}"><button
+						<td
+							th:if="${currentUserId == bid.user.userId} and ${#strings.equals(bid.item.status, 'Available')}"><button
 								th:onclick="|location.href='@{/bid/delete/}' + ${bid.bidId}|">입찰취소</button></td>
 					</tr>
 				</table>
@@ -276,16 +284,15 @@ hr {
 
 			window.open(url, "상품 리뷰", "width=600, height=500")
 		}
-		
+
 		// 주문하기
-		function viewOrderForm(itemId,itemName,price){
+		function viewOrderForm(itemId, itemName, currentBid, filePath) {
 			var url = "/orderForm";
 			url += '?itemId=' + encodeURIComponent(itemId);
 			url += '&itemName=' + encodeURIComponent(itemName);
-			url += '&price=' + encodeURIComponent(price);
+			url += '&price=' + encodeURIComponent(currentBid);
 			url += '&type=' + encodeURIComponent("auction");
 			url += '&filePath=' + encodeURIComponent(filePath);
-			
 			window.location.href = url;
 		}
 	</script>
