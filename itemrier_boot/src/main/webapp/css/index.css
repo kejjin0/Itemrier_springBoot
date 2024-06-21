@@ -1,13 +1,13 @@
 /* 홈페이지 */
 @charset "utf-8";
 
-#header {padding: 10px 30px; display:flex; height: 130px; line-height: 60px; width:100%;}
+#header {padding: 10px 30px; display:flex; height: 80px; line-height: 60px; width:100%;}
 
 nav.headerItem li, nav.log li{
     float: left; margin-right: 10px; ;
 }
 header > h1 {float: left; margin-right: 20px; line-height: 60px;}
-header > nav.itemTop {float: left; width: 80%}
+header > nav.itemTop {float: left; width: 80%; line-height: 60px;}
 header > nav.logTop {float: right; } 
 #header li {
             list-style: none;      
@@ -48,7 +48,7 @@ main {
     background-color: #fff;
 }
 
-.container {
+.contain {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,7 +57,7 @@ main {
     margin: 0 auto;
 }
 
-.container > div {
+.contain > div {
     flex: 1;
     padding: 50px; 
     border-radius: 10px;
@@ -68,28 +68,28 @@ main {
     height: 500px; 
 }
 
-.container > div:hover {
+.contain > div:hover {
     transform: translateY(-5px);
 }
 
-.container img {
+.contain img {
     width: 100%;
     max-width: 500px; 
     height: auto;
     border-radius: 10px;
 }
 
-.container p {
+.contain p {
     font-size: 24px;
     color: #333;
     margin: 20px 0;
 }
 
-.container .used {
+.contain .used {
     background-color: #fffbf2;
 }
 
-.container .group {
+.contain .group {
     background-color: #f2f7ff;
 }
 

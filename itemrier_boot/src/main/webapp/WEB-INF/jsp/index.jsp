@@ -15,9 +15,8 @@
 <body>
 <%@ include file="header.jsp" %>
 	<div>
-    <hr>
     <main>
-        <div class="container">
+        <div class="contain">
             <div class="used">
                 <img src="https://cdn.pixabay.com/photo/2017/03/13/17/26/ecommerce-2140603_1280.jpg" alt="중고거래">
                 <p>더 이상 쓰지 않는 물건들을</p>
