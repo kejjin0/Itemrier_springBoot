@@ -108,7 +108,7 @@
     <table>
 		 <tr th:each="row : ${gpDtoList}">
             <td th:each="gp : ${row}">
-                <img th:src="@{${gp.getFilePath()}}" alt="상품사진" class="imgSize">
+                <img th:src="${gp.filePath != null ? gp.filePath : '/files/defaultImage.png'}" alt="상품사진" class="imgSize">
                 <p>
                 <a th:href="@{/groupPurchase/view/{itemId} (itemId=${gp.itemId})}" th:text="${gp.itemName}">상품명</a>
                 <p>

@@ -129,8 +129,7 @@ hr {
 	<hr>
 	<table th:object="${usedGoods}">
 		<tr>
-			<td rowspan="9"><img th:src="@{*{getFilePath()}}" alt="상품사진"
-				class="imgSize"></td>
+			<td rowspan="9"><img th:src="${usedGoods.filePath != null ? usedGoods.filePath : '/files/defaultImage.png'}" alt="상품사진" class="imgSize"></td>
 		</tr>
 		<tr>
 			<td th:text="*{itemName}" class="boldText">제목</td>

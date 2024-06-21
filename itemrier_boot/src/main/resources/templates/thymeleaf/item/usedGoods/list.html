@@ -111,7 +111,7 @@
 	<table>
 		 <tr th:each="row : ${usedGoodsList}">
             <td th:each="ug : ${row}">
-                <img th:src="@{${ug.getFilePath()}}" alt="상품사진" class="imgSize">
+                <img th:src="${ug.filePath != null ? ug.filePath : '/files/defaultImage.png'}" alt="상품사진" class="imgSize">
                 <p>
                 <a th:href="@{/usedGoods/view/{itemId} (itemId=${ug.itemId})}" th:text="${ug.itemName}" class="title">상품명</a>
                 <p>
