@@ -191,9 +191,8 @@ public class OrderController {
 			@RequestParam("deliveryLocation") String deliveryLocation,
 			@RequestParam("deliveryRequest") String deliveryRequest, Model model) {
 		DeliveryInfo deliveryInfo = new DeliveryInfo(zipCode, addStreet, addDetail, deliveryLocation, deliveryRequest);
-		this.orderService.modifyDeliveryInfo(orderId, deliveryInfo);
+		model.addAttribute("deliveryInfo", deliveryInfo);
 		model.addAttribute("orderId", orderId);
-
 		return "myPage/order/deliveryInfoForm";
 	}
 
