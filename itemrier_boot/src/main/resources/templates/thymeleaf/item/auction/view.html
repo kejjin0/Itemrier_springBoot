@@ -232,7 +232,7 @@ hr {
 						<td th:text="|${bid.amount}원|"></td>
 						<td
 							th:text="|${#temporals.format(bid.bidTime, 'yyyy년 MM월 dd일 HH:mm:ss')}|"></td>
-						<td th:if="${currentUserId == bid.user.userId}"><button
+						<td th:if="${currentUserId == bid.user.userId} and ${#strings.equals(bid.item.status, 'Available')}"><button
 								th:onclick="|location.href='@{/bid/delete/}' + ${bid.bidId}|">입찰취소</button></td>
 					</tr>
 				</table>
