@@ -25,7 +25,9 @@ public class SercurityConfig {
 				.httpBasic(AbstractHttpConfigurer::disable)
 				.formLogin(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests((authorize) -> authorize
-						.requestMatchers("/myPage/**").authenticated()
+						.requestMatchers("/myPage/**", "/groupPurchase/create",
+								"/usedGoods/create","/auction/create",
+								"/usedGoods/view/**", "/groupPurchase/view/**", "/auction/view/**").authenticated()
 						.anyRequest().permitAll())
 				
 				// 폼 로그인은 현재 사용하지 않음         
