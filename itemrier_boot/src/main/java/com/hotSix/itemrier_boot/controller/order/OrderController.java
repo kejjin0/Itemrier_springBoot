@@ -112,6 +112,7 @@ public class OrderController {
 		List<OrderItem> items = new ArrayList<>();
 		OrderItem item = new OrderItem();
 		item.setLineNum(1);
+		item.setAmount(1);
 		item.setOrderId(order.getOrderId());
 		item.setItemId(orderDto.getItemId());
 		item.setOrderPrice(orderDto.getPrice());
