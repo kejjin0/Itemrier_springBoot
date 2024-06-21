@@ -66,12 +66,6 @@ ul {
 		<li><a href="/myPage/auction/ended">판매 완료 상품</a></li>
 	</ul>
 
-		<hr>
-		<h3>찜</h3>
-		<ul>
-			<li>찜한 상품</li>
-		</ul>
-
 	</div>
 
 </body>
