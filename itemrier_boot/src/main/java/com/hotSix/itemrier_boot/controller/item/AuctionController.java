@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hotSix.itemrier_boot.domain.category.Category;
+import com.hotSix.itemrier_boot.domain.item.Auction;
 import com.hotSix.itemrier_boot.domain.item.Bid;
 import com.hotSix.itemrier_boot.domain.user.UserEntity;
 import com.hotSix.itemrier_boot.dto.item.AuctionDto;
@@ -147,12 +148,12 @@ public class AuctionController {
 	}
 	
 
-	//검색한 상품만
+	// 경매 검색 기능
     @GetMapping("/search")
     public String searchAuction(@RequestParam("query") String query, Model model) {
-        List<AuctionDto> searchResults = auctionService.searchAuction(query);
-        model.addAttribute("auctionDtoList", searchResults);
-        return "thymeleaf/item/auction/list";
+        List<Auction> searchResults = auctionService.searchAuctionByItemName(query);
+        model.addAttribute("auctionList", searchResults);
+        return "thymeleaf/item/auction/list"; // Thymeleaf 템플릿 경로
     }
 	
 	// 입찰 폼 열기

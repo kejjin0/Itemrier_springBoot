@@ -15,8 +15,4 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/home")
-    public String userHome(Model model) {
-        return "home";
-    }
 }

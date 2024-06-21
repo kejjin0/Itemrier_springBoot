@@ -131,12 +131,9 @@ public class AuctionService {
 	}
 
 	// 검색
-	public List<AuctionDto> searchAuction(String query) {
-        List<Auction> searchResults = auctionRepository.findByItemNameContaining(query);
-        return searchResults.stream()
-				.map(auction -> auction.toDTO(auction))
-                            .collect(Collectors.toList());
-    }
+	 public List<Auction> searchAuctionByItemName(String itemName) {
+	        return auctionRepository.findByItemNameContaining(itemName);
+	 }
 
 	//	추천
 	public List<AuctionDto> recommend(int categoryId, int itemId) {

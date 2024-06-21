@@ -100,15 +100,17 @@
 </head>
 <body>
 	<h1><a href="/" style="color: #FFB0D9;">Itemrior</a></h1>
-	<h2>중고거래 상품</h2>
+	<a href="/usedGoods/list"><h2>중고거래 상품</h2></a>
 	<form th:action="@{/usedGoods/search}" method="get" id="search">
-        <input type="text" name="query" placeholder="상품명 검색" >
+        <input type="text" name="query" placeholder="상품명을 입력해보세요" >
         <button type="submit">검색</button>
     </form>
      <div class="button-container">
    		<button type="button" th:onclick="|location.href='@{/usedGoods/create}'|" class="createBtn">중고거래 상품 등록</button>
    	</div>
-	<table>
+	<table><tr th:if="${usedGoodsList == null or usedGoodsList.empty}">
+            <td colspan="3">검색 결과가 없습니다.</td>
+        </tr>
 		 <tr th:each="row : ${usedGoodsList}">
             <td th:each="ug : ${row}">
                 <img th:src="${ug.filePath != null ? ug.filePath : '/files/defaultImage.png'}" alt="상품사진" class="imgSize">
